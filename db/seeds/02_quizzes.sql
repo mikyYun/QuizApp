@@ -13,3 +13,5 @@ INSERT INTO quizzes (quiz) VALUES ('who always stays in the voice channel alone'
 INSERT INTO quizzes (quiz) VALUES ('who is a rock climber in the cohort?');
 INSERT INTO quizzes (quiz) VALUES ('who is the Einstein in the cohort?');
 INSERT INTO quizzes (quiz) VALUES ('who was modelling for a Korean dashcam company before?');
+INSERT INTO quizzes (quiz) VALUES ('who worked as a QA before?');
+INSERT INTO quizzes (quiz) VALUES ('which instructor supervises our friday exams?');
