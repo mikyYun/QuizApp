@@ -54,6 +54,15 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
+// GET /login/2
+app.get("/login/:user_id", (req, res) => {
+  // set encrypted cookie
+  // req.session.user_id = req.pararms.user_id; // if we use cookies.
+  // set plain-text cookie
+  //res.cookie('user_id', req.params.user_id)
+  res.redirect("/");
+});
+
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
