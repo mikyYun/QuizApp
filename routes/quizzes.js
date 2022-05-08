@@ -14,7 +14,7 @@ const {
   generateRandomString,
   userExistsByID,
   urlsForUser,
-} = require("./helpers.js");
+} = require("../helpers.js");
 
 module.exports = (db) => {
 
