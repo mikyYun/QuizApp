@@ -16,21 +16,21 @@ module.exports = (db) => {
   //   res.render("quizzes");
 
 
-    // res.render("quizzes", {}); //templateVars
+  // res.render("quizzes", {}); //templateVars
 
-    // let query = `SELECT * FROM quizzes`;
-    // console.log(query);
-    // db.query(query)
-    //   .then(data => {
-    //     const quizzes = data.rows;
-    //     ///template vars and render instead of res.render
-    //     // res.render("", {res.row})
-    //   })
-    //   .catch(err => {
-    //     res
-    //       .status(500)
-    //       .json({ error: err.message });
-    //   });
+  // let query = `SELECT * FROM quizzes`;
+  // console.log(query);
+  // db.query(query)
+  //   .then(data => {
+  //     const quizzes = data.rows;
+  //     ///template vars and render instead of res.render
+  //     // res.render("", {res.row})
+  //   })
+  //   .catch(err => {
+  //     res
+  //       .status(500)
+  //       .json({ error: err.message });
+  //   });
 
 
   // });
@@ -39,16 +39,15 @@ module.exports = (db) => {
   router.get("/", (req, res) => {
 
     res
-      .render("index1", )
-      // .redirect()
+      .render("quizzes",);
+    // .redirect()
   });
 
   // handling create quiz page
   router.get("/create", (req, res) => {
 
-    res
-      .render("quiz_create", )
-      // .redirect(`/result`)
+    res.render("quiz_create",);
+    // .redirect(`/result`)
   });
 
   router.get("/result", (req, res) => {
