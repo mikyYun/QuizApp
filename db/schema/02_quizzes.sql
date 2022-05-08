@@ -1,5 +1,5 @@
-DROP TABLE IF EXISTS quizzes_and_answers CASCADE;
-CREATE TABLE quizzes_and_answers (
+DROP TABLE IF EXISTS quizzes CASCADE;
+CREATE TABLE quizzes (
   id SERIAL PRIMARY KEY NOT NULL,
   -- user_id REFERENCES users(id),
   quiz TEXT NOT NULL,
