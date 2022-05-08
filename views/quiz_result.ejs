@@ -1,87 +1,189 @@
 <!-- mike -->
 <!DOCTYPE html>
 <html lang="en">
-  <head>
 
-    <title>Welcome to MWM Quiz</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<head>
 
-    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/main.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+  <title>RESULT</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-    <script type="text/javascript" src="/scripts/app.js"></script>
-    <style>
-      .conditional {
-        display: none;
-      };
-      .result_main {
-        width: 100vw;
-      };
-      .title {
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+  <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/main.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
 
-      }
-      .result_title {
-        background-color: red;
-      }
-      .greeting_user {
-        background-color: orange;
-      }
-
-    </style>
-  </head>
-  <body>
-    <%- include('partials/_header') %>
-    <div class="conditional">
-      if (user)
-    } else {
+  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+  <script type="text/javascript" src="/scripts/app.js"></script>
+  <style>
+    .conditional {
+      display: none;
     }
-    if the answer is correct
-    if the answer is incorrect
+
+    .result_main {
+      margin: auto;
+      margin-top: 20vh;
+      width: 90vw;
+      height: 30vh;
+      background-color: rgb(123, 41, 253);
+    }
+
+    .result_title {
+      background-color: rgb(29, 21, 255);
+    }
+
+    .result_title_greeting {
+      background-color: orange;
+      text-align: center;
+      font-size: 1.5rem;
+      padding: 0.3rem 0;
+    }
+
+    .result_box {
+      background-color: blue;
+    }
+
+    .result {
+      background-color: white;
+    }
+
+    .result_correct {
+      background-color: lightblue;
+      border-radius: 0.5rem;
+      width: 50vw;
+      align-items: center;
+      margin: auto;
+      padding: 0.3rem 0;
+    }
+
+    .result_incorrect {
+      display: none;
+      background-color: yellow;
+    }
+
+    footer {
+      width: 90vw;
+      height: 20vh;
+    }
+
+    .user_answer_rate_box {
+      background-color: rgb(0, 87, 0);
+    }
+
+    .user_answer_rate {
+      background-color: rgb(179, 255, 179);
+      display: flex;
+      justify-content: space-around;
+    }
+
+    .user_answer_rate_label {
+      background-color: rgb(57, 35, 255);
+      border-radius: 1rem;
+      width: 10rem;
+      height: 5rem;
+      /* text-align: center;
+      display: table-cell;
+      vertical-align: middle; */
+    }
+
+    .rate_box {
+      width: 50%;
+      display: flex;
+      justify-content: space-around;
+    }
+
+    .correct_rate_box, .incorrect_rate_box {
+      background-color: rgb(167, 0, 78);
+    }
+
+    .accuracy_icon {
+      border-radius: 50%;
+      width: 5rem;
+      height: 5rem;
+      text-align: center;
+      display: table-cell;
+      vertical-align: middle;
+    }
+
+    .correct_icon {
+      background-color: rgb(255, 255, 255);
+
+    }
+
+    .correct_rate .incorrect_rate {
+      background-color: rgb(215, 255, 140);
+    }
+
+    /* .incorrect_rate_box {
+      background-color: rgb(109, 139, 109);
+
+    } */
+
+    .incorrect_icon {
+      background-color: rgb(0, 0, 0);
+
+    }
+/* 
+    .incorrect_rate {
+      background-color: rgb(250, 6, 230);
+
+    } */
+
+
+  </style>
+</head>
+<!-- %- include('partials/_header') %> -->
+
+<body>
+  <div class="conditional">
+      if (user)
+      } else {
+      }
+      if the answer is correct
+      if the answer is incorrect
     </div>
     <main class="result_main">
-      <h1>This is the RESULT PAGE</h1>
+      <h1>Your Result</h1>
       <div class="result_title">
-          <p class="greeting_user">Hello (username)</p>
-          <p class="greeting_user">Hello (visitor)</p>
+        <p class="result_title_greeting">Hello (username)</p>
+        <!-- <p class="result_title_greeting">Hello (visitor)</p> -->
       </div>
       <div class="result_box">
-        <p class="result_correct">
+        <p class="result result_correct">
           You have answered these correctly. Keep it up!
         </p>
-        <p class="result_incorrect">
+        <p class="result result_incorrect">
           You have answered wrong. Try again!
         </p>
       </div>
-    </main>
-    <footer>
+   
       <div class="user_answer_rate_box">
         <div class="user_answer_rate">
           <!-- if a visitor, don't need to check rate.
           if corrects 100%, not 0% -->
           <p class="user_answer_rate_label">
-            Your Answer Rate
+            Your Answer Rate : 
           </p>
-          <div class="correct_rate_box">
-            <p class="correct_icon">
-              Correct
-            </p>
-            <p class="correct_rate">
-              cooooorect
-            </p>
-          </div>
-          <div class="incorrect_rate_box">
-            <p class="incorrect_icon">
-              Wrong
-            </p>
-            <p class="incorre_rate">
-              wrrrrrong
-            </p>
+          <div class="rate_box">
+            <div class="correct_rate_box">
+              <p class="correct_rate">
+                <p class="accuracy_icon correct_icon">
+                  3/10
+                </p>
+                Correct
+              </p>
+            </div>
+            <div class="incorrect_rate_box">
+              <p class="incorre_rate">
+                <p class="accuracy_icon incorrect_icon">
+                  7/10
+                </p>
+                Wrong
+              </p>
+            </div>
           </div>
         </div>
       </div>
-    </footer>
+    </main>
+
 </html>
