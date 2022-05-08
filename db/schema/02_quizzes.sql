@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS quizzes CASCADE;
 CREATE TABLE quizzes (
   id SERIAL PRIMARY KEY NOT NULL,
-  -- user_id REFERENCES users(id),
+  user_id INTEGER REFERENCES users(id),
   quiz TEXT NOT NULL,
   answer TEXT NOT NULL,
   is_public BOOLEAN NOT NULL
