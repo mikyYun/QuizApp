@@ -1,9 +1,12 @@
-
+<!-- moon   -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
 
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
@@ -12,25 +15,39 @@
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
-
   </head>
 
   <%- include('partials/_header') %>
 
   <body>
-    <h1>Q1. What is your favorite color ?</h1>
+    <h1>Create a new quiz!</h1>
 
-
-
-    <form action="/result/" method="POST">
+    <!-- <form action="/result/" method="POST">
       <input type="answer" name="answer" placeholder="Fill out your answer" style="width: 300px; margin: auto">
       <button type="submit" class="btn btn-primary">Submit</button>
+    </form> -->
 
+    <form class="form-inline" action="/quizzes/create" method="POST">
+      <div class="form-group mb-2">
+        <label for="longURL">Enter a URL:</label>
+        <input
+          class="form-control"
+          type="text"
+          name="quiz-input"
+          placeholder="http://"
+          style="width: 300px; margin: 1em"
+        />
+        <input
+          class="form-control"
+          type="text"
+          name="answer-input"
+          placeholder="http://"
+          style="width: 300px; margin: 1em"
+        />
 
-    <tbody>
-
-    </tbody>
-
-
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <!-- presses submit.Our browser sends a POST request to our server. -->
+      </div>
+    </form>
   </body>
 </html>
