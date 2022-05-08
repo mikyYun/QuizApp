@@ -5,7 +5,7 @@ require("dotenv").config();
 const PORT = process.env.PORT || 8080;
 const sassMiddleware = require("./lib/sass-middleware");
 const express = require("express");
-const app = express();
+const app = express(); //HAS NOTHING TO DO WITH app.js
 const morgan = require("morgan");
 // const cookieSession = require("cookie-session");
 // const bodyParser = require("body-parser");
@@ -33,7 +33,7 @@ app.use(express.urlencoded({ extended: true }));
 //   })
 // );
 
-app.use(express.static("public"));
+app.use(express.static("public")); // SHOWS STYLING IN EJS
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
@@ -41,7 +41,7 @@ app.use(express.static("public"));
 // MODULARIZE
 const createUserRouter = require("./routes/users");
 const { port } = require("pg/lib/defaults");
-const quizzesRoutes = require("./routes/quizzes");
+const quizzesRoutes = require("./routes/quizzes"); // IMPORTING ROUTES
 const userRouter = createUserRouter(db);
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -84,6 +84,7 @@ app.get("/api/test", (req, res) => {
   res.json({ text: "hello from server" });
 });
 
+//THIS IS THE ENTRY POINT
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });

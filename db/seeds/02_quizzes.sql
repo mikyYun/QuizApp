@@ -1,24 +1,5 @@
 INSERT INTO quizzes (user_id, quiz, answer, is_public) VALUES (1, 'who lives in victoria?', 'amy', 'true');
 INSERT INTO quizzes (user_id, quiz, answer, is_public) VALUES (1, 'which day did this cohort kick-off?', '0404', 'true');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 INSERT INTO quizzes (user_id, quiz, answer, is_public) VALUES (1, 'who is the most handsome guy at LHL?', 'andy', 'true');
 INSERT INTO quizzes (user_id, quiz, answer, is_public) VALUES (1, 'which guy has the longest hair in the cohort?', 'robbie', 'true');
 INSERT INTO quizzes (user_id, quiz, answer, is_public) VALUES (1, 'who was a commercial truck driver before the course?', 'jason', 'true');

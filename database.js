@@ -8,7 +8,7 @@ const pool = new Pool({
   database: "template1",
 });
 
-const addPrivateQuiz = function (quiz) {
+const addPrivateQuiz = (quiz) => {
   return pool
     // HOW DO I GRAB THE USER INPUT FROM THE SITE AND USE THAT IN THE SQL?
     .query(
@@ -26,17 +26,24 @@ const addPrivateQuiz = function (quiz) {
       console.log(err.message);
     });
 };
-exports.addPrivateQuiz = addPrivateQuiz;
 
-
-const getAllPrivateQuiz = function (options, limit) {
-
+const getAllPublicQuiz = (options) => {
   let queryString = `
-  SELECT quizzes.*,
+  SELECT quizzes.*
+  FROM quizzes
+  WHERE is_public IS true;
+  `;
+  return pool.query(queryString).then((res) => res.rows);
+};
+
+const getAllPrivateQuiz = (options) => {
+  let queryString = `
+  SELECT quizzes.*
   FROM quizzes
   WHERE is_public IS false;
   `;
   return pool.query(queryString).then((res) => res.rows);
 };
 
-exports.getAllPrivateQuiz = getAllPrivateQuiz
+
+module.exports = { getAllPrivateQuiz, getAllPublicQuiz, addPrivateQuiz };

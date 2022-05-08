@@ -16,6 +16,9 @@ const {
   urlsForUser,
 } = require("../helpers.js");
 
+const { addPrivateQuiz, getAllPrivateQuiz, getAllPublicQuiz } = require("../database.js");
+const { Pool } = require('pg/lib');
+
 //=============GLOBAL OBJECTS================//
 
 // const quizDB = res.rows
@@ -28,8 +31,18 @@ module.exports = (db) => {
 
   // handling main/home page
   router.get("/", (req, res) => {
-    res.render("quizzes",);
     // .redirect()
+    getAllPublicQuiz()
+      .then((quizzes) => { // quiz == res.rows
+        const templateVars = {
+          quizzes
+        };
+        res.render("quizzes", templateVars);
+      })
+      .catch((e) => {
+        console.error(e);
+        res.send(e);
+      });
   });
 
   // handling create quiz page
@@ -47,25 +60,25 @@ module.exports = (db) => {
     const quizURL = req.params.shortURL;
     const userID = req.session.user_id;
 
-    if (!userID) {
-      return res.status(401).send("Please login first.");
-    }
-    const currentUser = users[userID];
-    // const currentUserID = currentUser["id"];
-    const userURLs = urlsForUser(currentUserID, urlDB);
+    // if (!userID) {
+    //   return res.status(401).send("Please login first.");
+    // }
+    // const currentUser = users[userID];
+    // // const currentUserID = currentUser["id"];
+    // const userURLs = urlsForUser(currentUserID, urlDB);
 
-    const templateVars = {
-      //need to be below if statement.
-      shortURL: shortURL,
-      longURL: urlDB[shortURL].longURL,
-      user: currentUser,
-      urls: userURLs,
-    };
+    // const templateVars = {
+    //   //need to be below if statement.
+    //   shortURL: shortURL,
+    //   longURL: urlDB[shortURL].longURL,
+    //   user: currentUser,
+    //   urls: userURLs,
+    // };
 
-    if (userID !== urlDB[quizURL]["userID"]) {
-      res.status(401).send("This page does not belong to you.");
-    }
-    res.render("quiz_show", templateVars);
+    // if (userID !== urlDB[quizURL]["userID"]) {
+    //   res.status(401).send("This page does not belong to you.");
+    // }
+    // res.render("quiz_show", templateVars);
   });
 
   // ================== POST ==================== //
