@@ -45,35 +45,31 @@ module.exports = (db) => {
 
   // handling main/home page
   router.get("/", (req, res) => {
-
-    res
-      .render("quizzes",);
+    res.render("quizzes",);
     // .redirect()
   });
 
   // handling create quiz page
   router.get("/create", (req, res) => {
-
     res.render("quiz_create",);
     // .redirect(`/result`)
   });
 
   router.get("/result", (req, res) => {
-
     res.render("quiz_result");
-
   });
 
+  // handling individual quiz page
   router.get("/show", (req, res) => {
     const quizURL = req.params.shortURL;
-    // const userID = req.session.user_id;
+    const userID = req.session.user_id;
 
-    // if (!userID) {
-    //   return res.status(401).send("Please login first.");
-    // }
-    // const currentUser = users[userID];
+    if (!userID) {
+      return res.status(401).send("Please login first.");
+    }
+    const currentUser = users[userID];
     // const currentUserID = currentUser["id"];
-    // const userURLs = urlsForUser(currentUserID, urlDB);
+    const userURLs = urlsForUser(currentUserID, urlDB);
 
     const templateVars = {
       //need to be below if statement.
@@ -83,41 +79,42 @@ module.exports = (db) => {
       urls: userURLs,
     };
 
-    if (userID !== urlDB[shortURL]["userID"]) {
+    if (userID !== urlDB[quizURL]["userID"]) {
       res.status(401).send("This page does not belong to you.");
     }
-    res.render("urls_show", templateVars);
+    res.render("quiz_show", templateVars);
   });
 
   // ================== POST ==================== //
 
-  app.post("/urls", (req, res) => {
-    const longURL = req.body.longURL; //body inside the post request, pull the 'longURL' info.
-    const shortURL = generateRandomString(); //abcde.
+  router.post("/create", (req, res) => {
+    const quizURL = generateRandomString();
     const userID = req.session.user_id;
     const currentUser = users[userID];
-    urlDB[shortURL] = { longURL: longURL, userID: userID };
+    urlDB[quizURL] = { userID: userID };
 
     const templateVars = {
       //we need to pass it to 69.
-      shortURL: shortURL,
-      longURL: urlDB[shortURL].longURL, //saving it to the DB.
+      quizURL: quizURL,
+      // longURL: urlDB[shortURL].longURL, //saving it to the DB.
       user: currentUser,
     };
 
     if (!userExistsByID(userID, users)) {
       res.send("You have to login first to acces this page.");
     }
-    //JC did redirect.
-    res.render("urls_show", templateVars); //after mathching keys are found in the .ejs file, then it shows the values. (Rendering)
+    res.render("quiz_show", templateVars); //after mathching keys are found in the .ejs file, then it shows the values. (Rendering)
     //rendering means getting the page displayed with the values.
     // alligator: interpretes dynamic values.
   });
 
 
-  router.post(  const shortURL = generateRandomString(); //abcde.
-)
-  return router;
 
+
+
+
+  //=========== DO NOT TOUCH THIS==========//
+  return router;
+  //=========== DO NOT TOUCH THIS==========//
 };
 
