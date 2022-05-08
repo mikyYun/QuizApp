@@ -84,11 +84,6 @@ app.get("/api/test", (req, res) => {
   res.json({ text: "hello from server" });
 });
 
-
-
-
-
-
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
