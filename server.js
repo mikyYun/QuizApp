@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 // load .env data into process.env
 require("dotenv").config();
 
@@ -46,17 +47,18 @@ const userRouter = createUserRouter(db);
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/api/hello", userRouter); //prefix for userRouter
+
 app.use("/quizzes", quizzesRoutes(db));
 // Note: mount other resources here, using the same pattern above
-
+app.use("/user", userRouter);
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 
-app.get("/", (req, res) => {
-  // res.render("index");
-  res.redirect("/quizzes");
-});
+// app.get("/", (req, res) => {
+//   // res.render("index");
+//   res.redirect("/quizzes");
+// });
 
 
 app.get("/create", (req, res) => {
@@ -65,18 +67,18 @@ app.get("/create", (req, res) => {
 });
 
 
-app.get("/result", (req, res) => {
-  res.render("quiz_result");
-  // res.redirect();
-});
+// app.get("/result", (req, res) => {
+//   res.render("quiz_result");
+//   // res.redirect();
+// });
 
 // GET /login/2
 
 app.get("/login/:user_id", (req, res) => {
-  // set encrypted cookie
+  // // set encrypted cookie
   // req.session.user_id = req.pararms.user_id; // if we use cookies.
-  // set plain-text cookie
-  //res.cookie('user_id', req.params.user_id)
+  // set plain - text cookie
+  res.cookie('user_id', req.params.user_id);
   res.redirect("/");
 });
 
