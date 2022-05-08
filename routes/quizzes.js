@@ -16,6 +16,10 @@ const {
   urlsForUser,
 } = require("../helpers.js");
 
+//=============GLOBAL OBJECTS================//
+
+const quizDB = res.rows
+const userDB = 
 module.exports = (db) => {
 
   // ================== GET ==================== //
@@ -70,7 +74,8 @@ module.exports = (db) => {
     if (!userExistsByID(userID, users)) {
       res.send("You have to login first to shorten URLS.");
     }
-    urlDB[shortURL] = { longURL: longURL, userID: userID };
+    urlDB[quizURL] = { userID: userID };
+    //how do i grab the data from the database?
 
     const currentUser = users[userID];
     const currentUserID = currentUser["id"];
