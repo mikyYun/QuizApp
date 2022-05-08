@@ -1,8 +1,6 @@
 INSERT INTO quizzes (user_id, quiz, answer, is_public) VALUES (1, 'who lives in victoria?', 'amy', 'true');
 INSERT INTO quizzes (user_id, quiz, answer, is_public) VALUES (1, 'which day did this cohort kick-off?', '0404', 'true');
 
-/attachments/972575897435664427/972641359607517194/unknown.png
-
 
 
 
