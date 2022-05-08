@@ -8,22 +8,20 @@
 const express = require('express');
 const router = express.Router();
 
-
-
-
-
 //answers route too
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    res.render("quizzes", {}); //templateVars
+    res.render("quizzes");
+    // res.render("quizzes", {}); //templateVars
 
-    // let query = `SELECT * FROM quizzets`;
+    // let query = `SELECT * FROM quizzes`;
     // console.log(query);
     // db.query(query)
     //   .then(data => {
     //     const quizzes = data.rows;
     //     ///template vars and render instead of res.render
+    //     // res.render("", {res.row})
     //   })
     //   .catch(err => {
     //     res
