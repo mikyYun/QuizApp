@@ -90,12 +90,12 @@ module.exports = (db) => {
   });
 
   router.post('/quizzes', (req, res) => {
-    console.log('quizzes test')
-  })
+    console.log('quizzes test');
+  });
 
   router.post('/login', (req, res) => {
-    console.log(req.body)
-  })
+    console.log(req.body);
+  });
 
 
 

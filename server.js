@@ -65,6 +65,10 @@ app.get("/create", (req, res) => {
   // res.redirect();
 });
 
+app.get("/u/:quizURL", (req, res) => {
+  const quizURL = req.params.quizURL;
+  res.render("/quiz_private");
+});
 
 app.get("/result", (req, res) => {
   res.render("quiz_result");

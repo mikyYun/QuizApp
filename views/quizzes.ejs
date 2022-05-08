@@ -46,7 +46,7 @@
       </thead>
       <tbody>
         <% for (let i = 0; i < quizzes.length; i++) { %>
-        <tr><td><%= quizzes[i].quiz %></td></tr>
+        <tr><td><a href="/u/<%= quizURL %>"><%= quizzes[i].quiz %></td></a></tr>
         <% }%>
       </tbody>
     </table>
