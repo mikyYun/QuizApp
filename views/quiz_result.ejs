@@ -14,25 +14,44 @@
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
-  </head>
+    <style>
+      .conditional {
+        display: none;
+      };
+      .result_main {
+        width: 100vw;
+      };
+      .title {
 
+      }
+      .result_title {
+        background-color: red;
+      }
+      .greeting_user {
+        background-color: orange;
+      }
+
+    </style>
+  </head>
   <body>
     <%- include('partials/_header') %>
+    <div class="conditional">
+      if (user)
+    } else {
+    }
+    if the answer is correct
+    if the answer is incorrect
+    </div>
     <main class="result_main">
       <h1>This is the RESULT PAGE</h1>
       <div class="result_title">
-        <!-- <% if (user) {%> -->
           <p class="greeting_user">Hello (username)</p>
-          <!-- <% } else { %> -->
           <p class="greeting_user">Hello (visitor)</p>
-          <!-- <% } %> -->
       </div>
       <div class="result_box">
-        <!-- if the answer is correct -->
         <p class="result_correct">
           You have answered these correctly. Keep it up!
         </p>
-        <!-- if the answer is incorrect -->
         <p class="result_incorrect">
           You have answered wrong. Try again!
         </p>
