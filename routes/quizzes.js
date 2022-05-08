@@ -10,36 +10,13 @@ const router = express.Router();
 
 //answers route too
 
+const {
+  generateRandomString,
+  userExistsByID,
+  urlsForUser,
+} = require("./helpers.js");
 
 module.exports = (db) => {
-
-
-  // ================== GARY ==================== //
-  /*
-  router.get("/", (req, res) => {
-    res.render("quizzes");
-
-
-  res.render("quizzes", {}); //templateVars
-
-  let query = `SELECT * FROM quizzes`;
-  console.log(query);
-  db.query(query)
-    .then(data => {
-      const quizzes = data.rows;
-      ///template vars and render instead of res.render
-      // res.render("", {res.row})
-    })
-    .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message });
-    });
-
-
-  });
-  */
-
 
   // ================== GET ==================== //
 
@@ -88,24 +65,26 @@ module.exports = (db) => {
   // ================== POST ==================== //
 
   router.post("/create", (req, res) => {
-    const quizURL = generateRandomString();
     const userID = req.session.user_id;
+    const quizURL = generateRandomString(); //abcde.
+    if (!userExistsByID(userID, users)) {
+      res.send("You have to login first to shorten URLS.");
+    }
+    urlDB[shortURL] = { longURL: longURL, userID: userID };
+
     const currentUser = users[userID];
-    urlDB[quizURL] = { userID: userID };
+    const currentUserID = currentUser["id"];
+    const userURLs = urlsForUser(currentUserID, urlDB);
 
     const templateVars = {
-      //we need to pass it to 69.
-      quizURL: quizURL,
-      // longURL: urlDB[shortURL].longURL, //saving it to the DB.
+      //need to be below if statement.
+      shortURL: shortURL,
+      longURL: urlDB[shortURL].longURL,
       user: currentUser,
+      urls: userURLs,
     };
-
-    if (!userExistsByID(userID, users)) {
-      res.send("You have to login first to acces this page.");
-    }
-    res.render("quiz_show", templateVars); //after mathching keys are found in the .ejs file, then it shows the values. (Rendering)
-    //rendering means getting the page displayed with the values.
-    // alligator: interpretes dynamic values.
+    //****** adding the short url, long url, and user id to the data base
+    res.render("urls_show", templateVars);
   });
 
 
@@ -113,8 +92,34 @@ module.exports = (db) => {
 
 
 
-  //=========== DO NOT TOUCH THIS==========//
+  //  ================== DO NOT TOUCH BELOW  ==================//
   return router;
-  //=========== DO NOT TOUCH THIS==========//
+
+  // ================== GARY ==================== //
+  /*
+  router.get("/", (req, res) => {
+    res.render("quizzes");
+
+
+  res.render("quizzes", {}); //templateVars
+
+  let query = `SELECT * FROM quizzes`;
+  console.log(query);
+  db.query(query)
+    .then(data => {
+      const quizzes = data.rows;
+      ///template vars and render instead of res.render
+      // res.render("", {res.row})
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+
+
+  });
+  */
+
 };
 
