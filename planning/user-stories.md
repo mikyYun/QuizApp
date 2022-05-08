@@ -36,5 +36,3 @@
 - As a visitor, I shouldn't be able to create a quiz. (?)
 - As a visitor, I shouldn't be able to see a list of public quizzes
 - As a visitor, I can visit an unlisted quiz URL and take the quiz.
-
-# Edge cases
