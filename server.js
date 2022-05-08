@@ -66,10 +66,16 @@ app.get("/create", (req, res) => {
 });
 
 
-// app.get("/result", (req, res) => {
-//   res.render("quiz_result");
-//   // res.redirect();
-// });
+app.get("/result", (req, res) => {
+  res.render("quiz_result");
+  // res.redirect();
+});
+
+
+// GET /login
+app.get('/login', (req, res) => {
+  res.render('login');
+})
 
 // GET /login/2
 

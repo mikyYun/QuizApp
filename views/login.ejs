@@ -1,0 +1,49 @@
+<!-- mike   -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/main.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+
+    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+    <script type="text/javascript" src="/scripts/app.js"></script>
+  </head>
+
+  <body>
+    <%- include('partials/_header') %>
+
+    <h1>Create a new quiz!</h1>
+
+    <form class="form-inline" action="/" method="POST">
+      <div class="form-group mb-2">
+        <label for="login_name">Login Name</label>
+        <input
+          class="login_name"
+          type="text"
+          name="login_name"
+          placeholder="login_name"
+          style="width: 300px; margin: 1em"
+        />
+        <label for="login_password">Password</label>
+        <input
+          class="login_password"
+          type="password"
+          name="login_password"
+          placeholder="Password"
+          style="width: 300px; margin: 1em"
+        />
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <!-- presses submit.Our browser sends a POST request to our server. -->
+      </div>
+    </form>
+  </body>
+</html>

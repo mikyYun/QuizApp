@@ -48,7 +48,7 @@ module.exports = (db) => {
 
   // handling create quiz page
   router.get("/create", (req, res) => {
-    res.render("quiz_create",);
+    res.render("quiz_create");
     // .redirect(`/result`)
   });
 
@@ -62,6 +62,11 @@ module.exports = (db) => {
     const userID = req.session.user_id;
 
   });
+
+  // use app.get instead router.get (in server.js)
+  // router.get("/login", (req, res) => {
+  //   res.render('login')
+  // })
 
   // ================== POST ==================== //
 
@@ -83,6 +88,12 @@ module.exports = (db) => {
         res.send(e);
       });
   });
+
+  router.post('/login', (req, res) => {
+    console.log(req.body)
+  })
+
+
 
   //  ================== DO NOT TOUCH BELOW  ==================//
 
