@@ -39,13 +39,13 @@ app.use(express.static("public"));
 // Note: Feel free to replace the example routes below with your own
 
 // MODULARIZE
-const usersRoutes = require("./routes/users");
-const widgetsRoutes = require("./routes/widgets");
-
+const createUserRouter = require("./routes/users");
+// const widgetsRoutes = require("./routes/widgets");
+const userRouter = createUserRouter(db);
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
-app.use("/api/users", usersRoutes(db));
-app.use("/api/widgets", widgetsRoutes(db));
+app.use("/api/hello", userRouter); //prefix for userRouter
+// app.use("/api/widgets", widgetsRoutes(db));
 // Note: mount other resources here, using the same pattern above
 
 // Home page
@@ -57,6 +57,7 @@ app.get("/", (req, res) => {
 });
 
 // GET /login/2
+
 app.get("/login/:user_id", (req, res) => {
   // set encrypted cookie
   // req.session.user_id = req.pararms.user_id; // if we use cookies.
@@ -68,3 +69,9 @@ app.get("/login/:user_id", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
+
+//submit
+
+// app.post() <- will check if the answer is correct or not.
+// store users answers.
+// only if you want to refer to the users' answer.
