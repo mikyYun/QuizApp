@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 /*
  * All routes for Widgets are defined here
  * Since this file is loaded in server.js into api/widgets,
@@ -16,6 +17,9 @@ const {
   urlsForUser,
 } = require("../helpers.js");
 
+const { addPrivateQuiz, getAllPrivateQuiz, getAllPublicQuiz, getUserByName } = require("../database.js");
+const { Pool } = require('pg/lib');
+
 //=============GLOBAL OBJECTS================//
 
 // const quizDB = res.rows
@@ -28,8 +32,18 @@ module.exports = (db) => {
 
   // handling main/home page
   router.get("/", (req, res) => {
-    res.render("quizzes",);
     // .redirect()
+    getAllPublicQuiz()
+      .then((quizzes) => { // quiz == res.rows
+        const templateVars = {
+          quizzes
+        };
+        res.render("quizzes", templateVars);
+      })
+      .catch((e) => {
+        console.error(e);
+        res.send(e);
+      });
   });
 
   // handling create quiz page
@@ -47,33 +61,20 @@ module.exports = (db) => {
     const quizURL = req.params.shortURL;
     const userID = req.session.user_id;
 
-    if (!userID) {
-      return res.status(401).send("Please login first.");
-    }
-    const currentUser = users[userID];
-    // const currentUserID = currentUser["id"];
-    const userURLs = urlsForUser(currentUserID, urlDB);
-
-    const templateVars = {
-      //need to be below if statement.
-      shortURL: shortURL,
-      longURL: urlDB[shortURL].longURL,
-      user: currentUser,
-      urls: userURLs,
-    };
-
-    if (userID !== urlDB[quizURL]["userID"]) {
-      res.status(401).send("This page does not belong to you.");
-    }
-    res.render("quiz_show", templateVars);
   });
 
   // ================== POST ==================== //
 
-  router.post("/quizzes/create", (req, res) => {
-    const userId = req.session.userId;
-    db
-      .addPrivateQuiz({ ...req.body, user_id: userId })
+  router.post("/create", (req, res) => {
+    // const userId = req.session.userId;
+    // if (!userId) {
+    //   res.redirect("/urls");
+    //   return; //END
+    // }
+    console.log(req.body);
+    const question = req.body.quizInput;
+    const answer = req.body.answerInput;
+    addPrivateQuiz({ question, answer, user_id: 1 })
       .then((quiz) => {
         res.send(quiz);
       })
@@ -84,7 +85,6 @@ module.exports = (db) => {
   });
 
   //  ================== DO NOT TOUCH BELOW  ==================//
-  return router;
 
   // ================== GARY ==================== //
   /*
@@ -111,6 +111,7 @@ module.exports = (db) => {
 
   });
   */
+  return router;
 
 };
 

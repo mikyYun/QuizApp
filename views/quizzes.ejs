@@ -37,22 +37,20 @@
       congue id.
     </p>
     <div id="belowbtn"></div>
-    <thead>
-      <tr>
-        <th scope="col">Home</th>
-        <th scope="col">Select User</th>
-        <th scope="col">Public Quiz</th>
-      </tr>
-    </thead>
-    <div>
-      <ul>
-        QUIZ:
-        <li>What is the capital of China?</li>
-        <li>What is the capital of Indonesia?</li>
-        <li>What is the capital of Filipina?</li>
-        <li>What is the capital of Singapore?</li>
-      </ul>
+    <div class="public quiz">
+      <table>
+      <thead>
+        <tr>
+          <th scope="col">Question</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for (let i = 0; i < quizzes.length; i++) { %>
+        <tr><td><%= quizzes[i].quiz %></td></tr>
+        <% }%>
+      </tbody>
+    </table>
+      </div>
     </div>
-    <tbody></tbody>
   </body>
 </html>

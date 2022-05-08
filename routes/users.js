@@ -7,19 +7,17 @@
 
 const express = require("express");
 const router = express.Router();
+const { getUserByName } = require("../database.js");
 
 module.exports = (db) => {
-  router.get("/ping", (req, res) => {
-    res.send("pong!");
-  });
-  router.get("/", (req, res) => {
-    db.query(`SELECT * FROM users;`)
-      .then((data) => {
-        const users = data.rows;
-        res.json({ users });
-      })
-      .catch((err) => {
-        res.status(500).json({ error: err.message });
+  // router.get("/ping", (req, res) => {
+  //   res.send("pong!");
+  // });
+  router.post("/login", (req, res) => {
+    const { username, password } = req.body;
+    getUserByName(req.body)
+      .then((user) => {
+        res.cookie('user_id', user.id);
       });
   });
   return router;
