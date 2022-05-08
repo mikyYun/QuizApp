@@ -58,6 +58,18 @@ app.get("/", (req, res) => {
   res.redirect("/quizzes");
 });
 
+
+app.get("/create", (req, res) => {
+  res.render("quiz_create");
+  // res.redirect();
+});
+
+
+app.get("/result", (req, res) => {
+  res.render("quiz_result");
+  // res.redirect();
+});
+
 // GET /login/2
 
 app.get("/login/:user_id", (req, res) => {
@@ -71,6 +83,11 @@ app.get("/login/:user_id", (req, res) => {
 app.get("/api/test", (req, res) => {
   res.json({ text: "hello from server" });
 });
+
+
+
+
+
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);

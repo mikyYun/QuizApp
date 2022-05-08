@@ -2,8 +2,8 @@
 
 <header>
   <nav class="navbar navbar-expand-md navbar-dark bg-success">
-    <a class="navbar-brand" href="/">Quiz MWM</a>
-    <button
+    <a class="navbar-brand" href="/create">Create Quiz</a>
+    <!-- <button
       class="navbar-toggler"
       type="button"
       data-toggle="collapse"
@@ -13,23 +13,21 @@
       aria-label="Toggle navigation"
     >
       <span class="navbar-toggler-icon"></span>
-    </button>
+    </button> -->
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-item nav-link" href="/list">My quiz</a>
-        <a class="nav-item nav-link" href="/create">Create quiz</a>
+        <a class="nav-item nav-link" href="/quiz_show">My Quiz</a>
+        <a class="nav-item nav-link" href="/result">My Result</a>
       </div>
       <div class="navbar-login">
-        <!-- <% if (user) { %> -->
 
-        <!-- <% } else { %> -->
-        <form method="GET" action="/result">
-          <button type="submit" class="btn btn-primary">Result</button>
+        <form method="GET" action="/">
+          <button type="submit" class="btn btn-primary">Home</button>
         </form>
         <form method="GET" action="/myquiz">
-          <button type="submit" class="btn btn-primary">My quiz</button>
+          <button type="submit" class="btn btn-primary">Public Quiz</button>
         </form>
-        <!-- <% } %> -->
+
       </div>
     </div>
   </nav>
