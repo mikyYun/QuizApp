@@ -71,13 +71,10 @@ module.exports = (db) => {
   // ================== POST ==================== //
 
   router.post("/create", (req, res) => {
-    // const userId = req.session.userId;
-    // if (!userId) {
-    //   res.redirect("/urls");
-    //   return; //END
-    // }
+    const quizURL = generateRandomString(); //abcde.
+
     console.log(req.body);
-    const question = req.body.quizInput;
+    const question = req.body.questionInput;
     const answer = req.body.answerInput;
     addPrivateQuiz({ question, answer, user_id: 1 })
       .then((quiz) => {

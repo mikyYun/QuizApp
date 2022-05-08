@@ -65,9 +65,14 @@ app.get("/create", (req, res) => {
   // res.redirect();
 });
 
-app.get("/u/:quizURL", (req, res) => {
+app.get("/:quizURL", (req, res) => {
   const quizURL = req.params.quizURL;
-  res.render("/quiz_private");
+  const templateVars = {
+    //need to be below if statement.
+    quizURL: quizURL,
+  };
+
+  res.render("quiz_show", templateVars);
 });
 
 app.get("/result", (req, res) => {
