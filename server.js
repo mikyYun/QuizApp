@@ -24,14 +24,14 @@ app.use(morgan("dev"));
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
 
-app.use(
-  "/styles",
-  sassMiddleware({
-    source: __dirname + "/styles",
-    destination: __dirname + "/public/styles",
-    isSass: false, // false => scss, true => sass
-  })
-);
+// app.use(
+//   "/styles",
+//   sassMiddleware({
+//     source: __dirname + "/styles",
+//     destination: __dirname + "/public/styles",
+//     isSass: false, // false => scss, true => sass
+//   })
+// );
 
 app.use(express.static("public"));
 
@@ -40,12 +40,13 @@ app.use(express.static("public"));
 
 // MODULARIZE
 const createUserRouter = require("./routes/users");
-// const widgetsRoutes = require("./routes/widgets");
+const { port } = require("pg/lib/defaults");
+const quizzesRoutes = require("./routes/quizzes");
 const userRouter = createUserRouter(db);
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/api/hello", userRouter); //prefix for userRouter
-// app.use("/api/widgets", widgetsRoutes(db));
+app.use("/quizzes", quizzesRoutes(db));
 // Note: mount other resources here, using the same pattern above
 
 // Home page
@@ -53,7 +54,8 @@ app.use("/api/hello", userRouter); //prefix for userRouter
 // Separate them into separate routes files (see above).
 
 app.get("/", (req, res) => {
-  res.render("index");
+  // res.render("index");
+  res.redirect("/quizzes");
 });
 
 // GET /login/2
@@ -66,6 +68,10 @@ app.get("/login/:user_id", (req, res) => {
   res.redirect("/");
 });
 
+app.get("/api/test", (req, res) => {
+  res.json({ text: "hello from server" });
+});
+
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
@@ -75,3 +81,5 @@ app.listen(PORT, () => {
 // app.post() <- will check if the answer is correct or not.
 // store users answers.
 // only if you want to refer to the users' answer.
+
+
