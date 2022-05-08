@@ -4,10 +4,3 @@ CREATE TABLE results (
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   quiz_id INTEGER REFERENCES quizzes(id) ON DELETE CASCADE,
 );
-
--- //
--- user anwered
-
--- IS
-
--- submit action if ( user answer !== real answer)

@@ -6,7 +6,3 @@ CREATE TABLE quizzes_and_answers (
   answer TEXT NOT NULL,
   is_public BOOLEAN NOT NULL
 );
-
-insert into quizzes_and_answers (creator)
-VALUES (userid = primary key)
-user id = 1 -> program creator
