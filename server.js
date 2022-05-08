@@ -76,7 +76,6 @@ app.get("/result", (req, res) => {
 app.get('/login', (req, res) => {
   res.render('login');
 })
-
 // GET /login/2
 
 app.get("/login/:user_id", (req, res) => {

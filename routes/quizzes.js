@@ -89,6 +89,10 @@ module.exports = (db) => {
       });
   });
 
+  router.post('/quizzes', (req, res) => {
+    console.log('quizzes test')
+  })
+
   router.post('/login', (req, res) => {
     console.log(req.body)
   })
