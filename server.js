@@ -58,12 +58,10 @@ app.get("/", (req, res) => {
   res.redirect("/quizzes");
 });
 
-
 app.get("/create", (req, res) => {
   res.render("quiz_create");
   // res.redirect();
 });
-
 
 app.get("/result", (req, res) => {
   res.render("quiz_result");
@@ -93,5 +91,3 @@ app.listen(PORT, () => {
 // app.post() <- will check if the answer is correct or not.
 // store users answers.
 // only if you want to refer to the users' answer.
-
-
