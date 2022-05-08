@@ -16,6 +16,12 @@ const {
   urlsForUser,
 } = require("../helpers.js");
 
+//=============GLOBAL OBJECTS================//
+
+// const quizDB = res.rows
+// const userDB =
+
+
 module.exports = (db) => {
 
   // ================== GET ==================== //
@@ -64,33 +70,18 @@ module.exports = (db) => {
 
   // ================== POST ==================== //
 
-  router.post("/create", (req, res) => {
-    const userID = req.session.user_id;
-    const quizURL = generateRandomString(); //abcde.
-    if (!userExistsByID(userID, users)) {
-      res.send("You have to login first to shorten URLS.");
-    }
-    urlDB[shortURL] = { longURL: longURL, userID: userID };
-
-    const currentUser = users[userID];
-    const currentUserID = currentUser["id"];
-    const userURLs = urlsForUser(currentUserID, urlDB);
-
-    const templateVars = {
-      //need to be below if statement.
-      shortURL: shortURL,
-      longURL: urlDB[shortURL].longURL,
-      user: currentUser,
-      urls: userURLs,
-    };
-    //****** adding the short url, long url, and user id to the data base
-    res.render("urls_show", templateVars);
+  router.post("/quizzes/create", (req, res) => {
+    const userId = req.session.userId;
+    db
+      .addPrivateQuiz({ ...req.body, user_id: userId })
+      .then((quiz) => {
+        res.send(quiz);
+      })
+      .catch((e) => {
+        console.error(e);
+        res.send(e);
+      });
   });
-
-
-
-
-
 
   //  ================== DO NOT TOUCH BELOW  ==================//
   return router;
