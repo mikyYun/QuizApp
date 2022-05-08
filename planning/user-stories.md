@@ -33,8 +33,6 @@
 - As a non-user, I shouldn't be able to see the results of others' attempts.
 - As a non-user, I shoudln't be able to share a link to the result of others' attempts.
 
-- As a visitor, I shouldn't be able to create a quiz. (?)
-- As a visitor, I shouldn't be able to see a list of public quizzes
-- As a visitor, I can visit an unlisted quiz URL and take the quiz.
+- As a non-user, I can visit an unlisted quiz URL and take the quiz.
 
 # Edge cases
