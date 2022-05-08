@@ -17,31 +17,27 @@
     <script type="text/javascript" src="/scripts/app.js"></script>
   </head>
 
-  <%- include('partials/_header') %>
-
   <body>
-    <h1>Create a new quiz!</h1>
+    <%- include('partials/_header') %>
 
-    <!-- <form action="/result/" method="POST">
-      <input type="answer" name="answer" placeholder="Fill out your answer" style="width: 300px; margin: auto">
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </form> -->
+    <h1>Create a new quiz!</h1>
 
     <form class="form-inline" action="/quizzes/create" method="POST">
       <div class="form-group mb-2">
-        <label for="longURL">Enter a URL:</label>
+        <label for="question-label">Question</label>
         <input
           class="form-control"
           type="text"
           name="quiz-input"
-          placeholder="http://"
+          placeholder="Enter your question."
           style="width: 300px; margin: 1em"
         />
+        <label for="answer-label">Answer</label>
         <input
           class="form-control"
           type="text"
           name="answer-input"
-          placeholder="http://"
+          placeholder="Enter your answer (all lower cases)."
           style="width: 300px; margin: 1em"
         />
 
