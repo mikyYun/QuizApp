@@ -2,7 +2,7 @@
 <!-- when you want to have this everywhere. -->
 
 <header>
-  <nav class="navbar navbar-expand-md navbar-dark bg-success">
+  <nav class="navbar1">
     <a class="navbar-brand" href="/">MWM Quiz Home</a>
     <!-- <button
       class="navbar-toggler"
@@ -15,20 +15,20 @@
     >
       <span class="navbar-toggler-icon"></span>
     </button> -->
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-items">
-        <a class="nav-item nav-link" href="/create">Create quiz</a>
-        <a class="nav-item nav-link" href="/private">My private quiz</a>
-        <a class="nav-item nav-link" href="/result">My result</a>
+    <div class="navbar2">
+      <div>
+        <a class="create" href="/create">Create quiz</a>
+        <a class="private" href="/private">My private quiz</a>
+        <a class="result" href="/result">My result</a>
+        <a class="login" href="/login">Login</a>
       </div>
       <div class="navbar-login">
-        <form method="GET" action="/login">
-        <!-- <a class="nav-login" href="/login"> -->
-          <!-- Login -->
-        <!-- </a> -->
-          <button type="submit" class="btn btn-primary">Log in</button>
-          </form>
-        </div>
+        <!-- <form method="GET" action="/login"> -->
+        <!-- <a class="nav-login" href="/login">Login
+        </a> -->
+        <!-- <button type="submit" class="btn btn-primary">Log in</button> -->
+      </div>
     </div>
   </nav>
+  <hr />
 </header>

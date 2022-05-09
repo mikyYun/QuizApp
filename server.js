@@ -96,8 +96,21 @@ app.get("/:quizURL", (req, res) => {
   res.render("quiz_show", templateVars);
 });
 
+// app.get("/result", (req, res) => {
+//   res.render("quiz_result");
+//   // res.redirect();
+// });
 
 
+// // GET /login
+// app.get('/login', (req, res) => {
+//   res.render('login');
+// });
+
+// app.get('/login', (req, res) => {
+// console.log('lOOOOOOGIN')
+// res.render('login');
+// })
 // GET /login/2
 
 app.get("/login/:user_id", (req, res) => {
