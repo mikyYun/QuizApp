@@ -10,12 +10,13 @@ body {
 
 #btn {
   transition-duration: 0.4s;
-  margin-bottom: 20px
+  margin-bottom: 20px;
+  color: lightblue;
 }
 
 #btn:hover {
-  background-color: lightskyblue;
-  color: white;
+  background-color: red;
+  color: palegreen;
 }
 
 .navbar1 {
@@ -38,15 +39,28 @@ th, td {
 .public_quiz {
   display: flex;
   width: 100%;
+  margin-left: 20px;
+}
+
+.home {
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+.public-list {
+  text-align: right;
+  margin-right: 100px;
+  margin-top: 0 px;
+  color: darkred
 }
 
 .quizes {
   width: 50%;
 }
-.users {
+/* .users {
   width: 50%;
   text-align: -webkit-center;
-}
+} */
 
 hr {
   border: 1px solid red;
