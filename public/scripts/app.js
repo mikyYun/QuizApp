@@ -106,4 +106,6 @@ $(document).ready(function () {
     }
     // have to reset inside .submit because evertime we trigger 'submit' we want this to be cleared. if I do it outside submit, it won't run.
   });
-  loadTweets(); // 하얀화면 트위터박스밑에
+
+  // loadTweets();
+})

@@ -68,7 +68,22 @@ app.get("/create", (req, res) => {
   // res.redirect();
 });
 
+app.get("/result", (req, res) => {
+  res.render("quiz_result");
+  // res.redirect();
+});
+
+
+// GET /login
+app.get('/login', (req, res) => {
+  console.log("TEST")
+  res.render('login');
+})
+
+// dinamic url must be last on the list
+// otherwise it will ignore all other url request below..
 app.get("/:quizURL", (req, res) => {
+  console.log("url")
   const quizURL = req.params.quizURL;
   const templateVars = {
     //need to be below if statement.
@@ -78,6 +93,7 @@ app.get("/:quizURL", (req, res) => {
   res.render("quiz_show", templateVars);
 });
 
+<<<<<<< HEAD
 app.get("/result", (req, res) => {
   res.render("quiz_result");
   // res.redirect();
@@ -94,6 +110,8 @@ app.get('/login', (req, res) => {
   // console.log('lOOOOOOGIN')
   // res.render('login');
 // })
+=======
+>>>>>>> 0ea7242d3a7145d01f8d41572829327b969cd92a
 
 
 >>>>>>> ebabcb9ef0952ccde6f0249c29304c70253fe13c
