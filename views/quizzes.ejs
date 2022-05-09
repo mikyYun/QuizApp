@@ -37,9 +37,13 @@
       <% for (let i = 0; i < quizzes.length; i++) { %>
       <tr>
         <td><%=quizzes[i].question%></td>
-        <td><a href="">quizzes/x1y2z3</a></td>
+        <td>
+          <a href="<%=`/quizzes/${quizzes[i].id}`%>"><%= quizzes[i].id %></a>
+        </td>
       </tr>
       <% }%>
     </table>
   </body>
 </html>
+
+

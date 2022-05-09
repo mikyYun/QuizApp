@@ -17,8 +17,9 @@ const {
   urlsForUser,
 } = require("../helpers.js");
 
-const { addPrivateQuiz, getAllPrivateQuiz, getAllPublicQuiz, getUserByName } = require("../database.js");
+const { getPublicQuizID, addPrivateQuiz, getAllPrivateQuiz, getAllPublicQuiz, getUserByName } = require("../database.js");
 const { Pool } = require('pg/lib');
+const { user } = require('pg/lib/defaults');
 
 //=============GLOBAL OBJECTS================//
 
@@ -33,25 +34,25 @@ module.exports = (db) => {
   router.get("/", (req, res) => {
     // .redirect()
     const user_name = req.session.user_name
-    // const user = 
-    getUserByName(user_name)
-    .then((user) => {
-      // res.cookie('user_id', user.id);
-      getAllPublicQuiz()
-      .then((quizzes) => { // quiz == res.rows
-        const templateVars = {
-          user,
-          quizzes
-        };
-        console.log('temp user is ', templateVars.user)
-        res.render('quizzes', templateVars)
-      })
-      .catch((e) => {
-        console.error(e);
-        res.send(e);
+    // const user =
+    getUserByName(user_name) //THIS IS A FUNCTION THAT RETURNS A PROMISE
+      .then((user) => {
+        // res.cookie('user_id', user.id);
+        getAllPublicQuiz()
+          .then((quizzes) => { // quiz == res.rows
+            const templateVars = {
+              user,
+              quizzes
+            };
+            console.log('temp user is ', templateVars.user)
+            res.render('quizzes', templateVars);
+          })
+          .catch((e) => {
+            console.error(e);
+            res.send(e);
+          });
       });
-    });
-    
+
     // getAllPublicQuiz()
     //   .then((quizzes) => { // quiz == res.rows
     //     const user = {}
@@ -96,16 +97,6 @@ module.exports = (db) => {
 
   });
 
-  router.get("/quizzes/:quizURL", (req, res) => {
-    const quizURL = req.params.shortURL;
-
-    const templateVars = {
-      quizURL: quizURL,
-    };
-
-    res.render("quiz_show", templateVars);
-  });
-
   router.get("/result", (req, res) => {
     console.log('ROUTER/GET/RESULT');
     const user = {};
@@ -116,19 +107,34 @@ module.exports = (db) => {
   });
 
   // handling individual quiz page
-  router.get("/show", (req, res) => {
-    console.log('ROUTER/GET/SHOW')
+  router.get("/:quizID", (req, res) => {
+    const quizID = req.params.quizID;
+    const user_name = req.session.user_name;
+    getUserByName(user_name)
+      .then((user) => {
+        getPublicQuizID(quizID)
+          .then((quiz) => {
+            const oneQuiz = quiz[0];
+            const oneQuestion = quiz[0].question;
 
-    const quizURL = req.params.shortURL;
-    const userID = req.session.user_id;
+            const templateVars = {
+              user,
+              oneQuiz: oneQuiz,
+              oneQuestion: oneQuestion
+            };
+
+            res.render("quiz_show", templateVars);
+          });
+      });
   });
+  // const userID = req.session.user_id;
+
 
   router.get("/create", (req, res) => {
     res.render("quiz_create");
   });
 
   // ================== POST ==================== //
-
   router.post("/create", (req, res) => {
     // const quizURL = generateRandomString(); //abcde.
     console.log(req.body);

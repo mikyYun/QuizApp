@@ -43,14 +43,14 @@ module.exports = (db) => {
         // res.cookie('user_id', user.id);
         getAllPublicQuiz()
           .then((quizzes) => { // quiz == res.rows
-        const templateVars = {
-          user,
-          quizzes
-        };
-        // console.log('temp user is ', templateVars.user)
-        res.render('quizzes', templateVars)
+            const templateVars = {
+              user,
+              quizzes
+            };
+            // console.log('temp user is ', templateVars.user)
+            res.render('quizzes', templateVars)
+          });
       });
-    });
   })
   return router;
 };
