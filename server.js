@@ -49,9 +49,12 @@ const userRouter = createUserRouter(db);
 // app.use("/api/hello", userRouter); //prefix for userRouter
 
 app.use("/quizzes", quizzesRoutes(db));
+app.use("/private", quizzesRoutes(db));
+
 // Note: mount other resources here, using the same pattern above
 // app.use("/user", userRouter);
 app.use("/users", userRouter);
+
 
 
 // Home page
