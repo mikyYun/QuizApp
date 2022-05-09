@@ -9,7 +9,7 @@ INSERT INTO quizzes (user_id, quiz, answer, is_public) VALUES (1, 'who is the se
 INSERT INTO quizzes (user_id, quiz, answer, is_public) VALUES (1, 'what was our first project?', 'tinyapp', 'true');
 INSERT INTO quizzes (user_id, quiz, answer, is_public) VALUES (1, 'how many girls do we have in the cohort?','5', 'true');
 INSERT INTO quizzes (user_id, quiz, answer, is_public) VALUES (1, 'who is a dad of 3 kids in the cohort?', 'darren', 'true');
-INSERT INTO quizzes (user_id, quiz, answer, is_public) VALUES (1, 'who always stays in the voice channel alone', 'aaron D', 'true');
+INSERT INTO quizzes (user_id, quiz, answer, is_public) VALUES (1, 'who always stays in the voice channel alone', 'aaron', 'true');
 INSERT INTO quizzes (user_id, quiz, answer, is_public) VALUES (1, 'who is a rock climber in the cohort?', 'nicolas', 'true');
 INSERT INTO quizzes (user_id, quiz, answer, is_public) VALUES (1, 'who is the Einstein in the cohort?', 'jc', 'true');
 INSERT INTO quizzes (user_id, quiz, answer, is_public) VALUES (1, 'who was modelling for a Korean dashcam company before?', 'aidan', 'true');

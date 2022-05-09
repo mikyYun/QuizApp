@@ -33,7 +33,7 @@ module.exports = (db) => {
   router.get("/", (req, res) => {
     // .redirect()
     getAllPublicQuiz()
-      .then((quizzes) => { // quiz == res.rows
+      .then((quizzes) => { // quizzes == res.rows
         const user = {};
         const templateVars = {
           user,
