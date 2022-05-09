@@ -26,24 +26,25 @@
 
     <form class="form-inline" action="quizzes/create" method="POST">
       <div class="form-group mb-2">
-        <label for="question-label">Question</label>
+        <label class="question" for="question-label">Question</label>
         <input
-          class="form-control"
+          class="form-control-1"
           type="text"
           name="questionInput"
           placeholder="Enter your question."
-          style="width: 300px; margin: 1em"
+
         />
         <label for="answer-label">Answer</label>
         <input
-          class="form-control"
+          class="form-control-2"
           type="text"
           name="answerInput"
           placeholder="Enter your answer (all lower cases)."
-          style="width: 300px; margin: 1em"
-        />
 
-        <button type="submit" class="btn">Submit</button>
+        />
+        <div class="btn">
+          <button type="submit" class="submit">Submit</button>
+        </div>
         <!-- presses submit.Our browser sends a POST request to our server. -->
       </div>
     </form>

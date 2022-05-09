@@ -62,6 +62,7 @@ app.use("/users", userRouter);
 
 // THIS WORKS
 app.get("/", (req, res) => {
+<<<<<<< HEAD
   res.redirect("/quizzes");
 });
 
@@ -80,18 +81,44 @@ app.get("/", (req, res) => {
 //   res.render("quiz_result");
 //   // res.redirect();
 // });
+=======
+  console.log("APP/GET/")
+  // res.render("index");
+  res.redirect("/quizzes");
+});
+
+app.get("/create", (req, res) => {
+  console.log("APP/GET/CREATE")
+  res.render("quiz_create");
+  // res.redirect();
+});
+
+app.get("/result", (req, res) => {
+  console.log("APP/GET/RESULT")
+  res.render("quiz_result");
+  // res.redirect();
+});
+>>>>>>> c9e9646074c7124828f1f6bebd392b8cfbd1ce02
 
 
 // GET /login
 app.get('/login', (req, res) => {
+<<<<<<< HEAD
   console.log("TEST");
+=======
+  console.log("APP/GET/LOGIN")
+>>>>>>> c9e9646074c7124828f1f6bebd392b8cfbd1ce02
   res.render('login');
 });
 
 // dinamic url must be last on the list
 // otherwise it will ignore all other url request below..
 app.get("/:quizURL", (req, res) => {
+<<<<<<< HEAD
   console.log("url");
+=======
+  console.log("APP/GET/:quizURL")
+>>>>>>> c9e9646074c7124828f1f6bebd392b8cfbd1ce02
   const quizURL = req.params.quizURL;
   const templateVars = {
     //need to be below if statement.
@@ -101,10 +128,23 @@ app.get("/:quizURL", (req, res) => {
   res.render("quiz_show", templateVars);
 });
 
+<<<<<<< HEAD
 // GET /login
 app.get('/login', (req, res) => {
   res.render('login');
 });
+=======
+// app.get("/result", (req, res) => {
+//   res.render("quiz_result");
+//   // res.redirect();
+// });
+
+
+// // GET /login
+// app.get('/login', (req, res) => {
+//   res.render('login');
+// });
+>>>>>>> c9e9646074c7124828f1f6bebd392b8cfbd1ce02
 
 app.get("/login/:user_id", (req, res) => {
   // // set encrypted cookie
@@ -119,6 +159,8 @@ app.get('/logout', (req, res) => {
 });
 
 app.get("/login/:user_id", (req, res) => {
+  console.log("APP/GET/:USER_ID")
+
   // // set encrypted cookie
   // req.session.user_id = req.pararms.user_id; // if we use cookies.
   // set plain - text cookie
@@ -127,6 +169,8 @@ app.get("/login/:user_id", (req, res) => {
 });
 
 app.get("/api/test", (req, res) => {
+  console.log("APP/GET/API/TEST")
+
   res.json({ text: "hello from server" });
 });
 

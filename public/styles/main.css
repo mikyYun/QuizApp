@@ -74,19 +74,44 @@ hr {
 /* handling create page */
 
 .create {
-  color: darkred
+  color: darkred;
+  margin-left: 25px;
 }
 
-.btn {
+.submit {
   transition-duration: 0.4s;
   margin-bottom: 20px;
   color: lightblue;
+  text-align: right;
+  margin-right: 70px;
+  margin-top: 30px;
 }
 
-.btn:hover {
+.submit:hover {
   background-color: red;
   color: palegreen;
 }
+
+.btn {
+  text-align: right;
+
+
+}
+
+.question {
+  margin-left: 25px;
+}
+
+.form-control-1, .form-control-2 {
+  width: 30em;
+  margin: 1em;
+  overflow: auto;
+  overflow-wrap: break-word;
+  padding: 2em;
+  line-break: auto
+}
+
+
 
 
 /* handling result page */
@@ -196,7 +221,6 @@ hr {
 
     .incorrect_icon {
       background-color: rgb(0, 0, 0);
-
     }
 
     .incorrect_rate {
