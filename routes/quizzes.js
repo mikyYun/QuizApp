@@ -31,7 +31,6 @@ module.exports = (db) => {
   // ================== GET ==================== //
 
   router.get("/", (req, res) => {
-    console.log('ROUTER/GET/')
     // .redirect()
     getAllPublicQuiz()
       .then((quizzes) => { // quizzes == res.rows
@@ -64,10 +63,9 @@ module.exports = (db) => {
       });
 
   });
-  // handling create quiz page
+
   router.get("/create", (req, res) => {
-    console.log('ROUTER/GET/CREATE')
-    const user = {}
+    const user = {};
     const templateVars = {
       user
     };
@@ -76,16 +74,24 @@ module.exports = (db) => {
 
   });
 
+  router.get("/quizzes/:quizURL", (req, res) => {
+    const quizURL = req.params.shortURL;
+
+    const templateVars = {
+      quizURL: quizURL,
+    };
+
+    res.render("quiz_show", templateVars);
+  });
+
   router.get("/result", (req, res) => {
-    console.log('ROUTER/GET/RESULT')
-    const user = {}
+    console.log('ROUTER/GET/RESULT');
+    const user = {};
     const templateVars = {
       user
     };
     res.render("quiz_result", templateVars);
   });
-
-
 
   // handling individual quiz page
   router.get("/show", (req, res) => {
@@ -95,23 +101,14 @@ module.exports = (db) => {
     const userID = req.session.user_id;
   });
 
-  // use app.get instead router.get (in server.js)
-  // router.get("/login", (req, res) => {
-  //   res.render('login')
-  // })
-
   router.get("/create", (req, res) => {
     res.render("quiz_create");
-    // .redirect(`/result`)
   });
 
   // ================== POST ==================== //
 
   router.post("/create", (req, res) => {
-    console.log('ROUTER/POST/CREATE')
-
-    const quizURL = generateRandomString(); //abcde.
-
+    // const quizURL = generateRandomString(); //abcde.
     console.log(req.body);
     const question = req.body.questionInput;
     const answer = req.body.answerInput;
@@ -124,26 +121,6 @@ module.exports = (db) => {
         res.send(e);
       });
   });
-
-  // router.post('/quizzes', (req, res) => {
-  //   console.log('quizzes test')
-  // })
-
-  // router.post('/login', (req, res) => {
-  //   console.log(req.body)
-  //   const { username, password } = req.body;
-  //    getUserByName(req.body)
-  //     .then((user) => {
-  //       console.log('this is user', user)
-  //       res.cookie('user_id', user.id);
-  //       res.render('quizzes/')
-  //     });
-
-  // })
-
-
-
-  //  ================== DO NOT TOUCH BELOW  ==================//
 
   // ================== GARY ==================== //
   /*
@@ -166,10 +143,7 @@ module.exports = (db) => {
         .status(500)
         .json({ error: err.message });
     });
-
-
   });
   */
   return router;
-
 };
