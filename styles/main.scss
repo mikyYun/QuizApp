@@ -1,6 +1,6 @@
 body {
-  display: flex;
-  justify-content: center;
+  // display: flex;
+  // justify-content: center;
   align-items: center;
   min-height: 100vh;
 
@@ -14,4 +14,28 @@ body {
     rgba(163, 208, 219, 1) 74%,
     rgba(163, 208, 219, 1) 100%
   );
+}
+
+
+#btn {
+  transition-duration: 0.4s;
+  margin-bottom: 20px;
+  color: lightblue;
+}
+
+#btn:hover {
+  background-color: red;
+  color: palegreen;
+}
+
+.navbar1 {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 25px;
+}
+
+.navbar2 {
+  display: flex;
+  justify-content: space-evenly;
+
 }
