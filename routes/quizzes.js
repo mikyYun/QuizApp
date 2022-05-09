@@ -48,7 +48,6 @@ module.exports = (db) => {
       });
   });
 
-<<<<<<< HEAD
   router.get("/private", (req, res) => {
     getAllPrivateQuiz()
       .then((obj) => { // quizzes == res.rows [{quiz}, {quiz}, {quiz}, {} ] arr[0]
@@ -63,25 +62,26 @@ module.exports = (db) => {
         console.error(e);
         res.send(e);
       });
-=======
+
+  });
   // handling create quiz page
   router.get("/create", (req, res) => {
     console.log('ROUTER/GET/CREATE')
     const user = {}
-        const templateVars = {
-          user
-        };
+    const templateVars = {
+      user
+    };
     res.render("quiz_create", templateVars);
     // .redirect(`/result`)
->>>>>>> c9e9646074c7124828f1f6bebd392b8cfbd1ce02
+
   });
 
   router.get("/result", (req, res) => {
     console.log('ROUTER/GET/RESULT')
     const user = {}
-        const templateVars = {
-          user
-        };
+    const templateVars = {
+      user
+    };
     res.render("quiz_result", templateVars);
   });
 
@@ -173,4 +173,3 @@ module.exports = (db) => {
   return router;
 
 };
-
