@@ -76,7 +76,7 @@ hr {
 
 .create {
   color: darkred;
-  margin-left: 25px;
+  text-align: center;
 }
 
 .submit {
@@ -121,6 +121,26 @@ hr {
 }
 
 
+/* handling login page */
+
+.login_page {
+  text-align: center;
+  color: darkred;
+}
+
+.login_name, .login_password {
+  width: 28em;
+  margin: 1em;
+  overflow: auto;
+  overflow-wrap: break-word;
+  padding: 2em;
+  line-break: auto;
+  border: 10px solid rgb(174 247 174);
+}
+
+.login-name-label {
+  margin-left: 50px;
+}
 
 
 
