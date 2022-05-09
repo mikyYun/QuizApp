@@ -57,14 +57,11 @@ const getAllPublicQuiz = (options) => {
 };
 
 const getAllPrivateQuiz = (options) => {
-
   return pool.query(`
   SELECT quizzes.*
   FROM quizzes
   WHERE is_public IS false;
-  `
-  )
-    .then((res) => res.rows);
+  `).then((res) => res.rows); //res.rows === quizzes in users.js
 };
 // from line 64 in the where clause: AND user_id = $1
 // from line 65, [payload.user_id]

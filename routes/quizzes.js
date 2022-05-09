@@ -48,33 +48,19 @@ module.exports = (db) => {
   });
 
   router.get("/private", (req, res) => {
-    getAllPublicQuiz()
-      .then((quizzes) => { // quiz == res.rows
+    getAllPrivateQuiz()
+      .then((obj) => { // quizzes == res.rows [{quiz}, {quiz}, {quiz}, {} ] arr[0]
         const user = {};
         const templateVars = {
           user,
-          quizzes
+          obj
         };
-        res.render("quizzes", templateVars);
+        res.render("quiz_private", templateVars);
       })
       .catch((e) => {
         console.error(e);
         res.send(e);
       });
-
-    // getAllPrivateQuiz()
-    //   .then((quizzes) => { // quiz == res.rows
-    //     const user = {};
-    //     const templateVars = {
-    //       user,
-    //       quizzes
-    //     };
-    //     res.render("quiz_private", templateVars);
-    //   })
-    //   .catch((e) => {
-    //     console.error(e);
-    //     res.send(e);
-    //   });
   });
 
   router.get("/result", (req, res) => {

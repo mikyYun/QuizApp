@@ -39,7 +39,7 @@ module.exports = (db) => {
       .then((user) => {
         // res.cookie('user_id', user.id);
         getAllPublicQuiz()
-          .then((quizzes) => { // quizzes == res.rows
+          .then((quizzes) => { // quizzes == res.rows [{object}]
             const templateVars = {
               user,
               quizzes

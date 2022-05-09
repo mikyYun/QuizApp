@@ -49,6 +49,8 @@ const userRouter = createUserRouter(db);
 // app.use("/api/hello", userRouter); //prefix for userRouter
 
 app.use("/quizzes", quizzesRoutes(db));
+app.use("/private", quizzesRoutes(db));
+
 // Note: mount other resources here, using the same pattern above
 // app.use("/user", userRouter);
 app.use("/users", userRouter);
@@ -60,37 +62,36 @@ app.use("/users", userRouter);
 
 // THIS WORKS
 app.get("/", (req, res) => {
-  // res.render("index");
   res.redirect("/quizzes");
 });
 
 // THIS WORKS
-app.get("/create", (req, res) => {
-  res.render("quiz_create");
-  // res.redirect();
-});
+// app.get("/create", (req, res) => {
+//   res.render("quiz_create");
+//   // res.redirect();
+// });
 
-app.get("/private", (req, res) => {
-  res.render("quiz_private");
-  // res.redirect();
-});
+// app.get("/private", (req, res) => {
+//   res.render("quiz_private");
+//   // res.redirect();
+// });
 
-app.get("/result", (req, res) => {
-  res.render("quiz_result");
-  // res.redirect();
-});
+// app.get("/result", (req, res) => {
+//   res.render("quiz_result");
+//   // res.redirect();
+// });
 
 
 // GET /login
 app.get('/login', (req, res) => {
-  console.log("TEST")
+  console.log("TEST");
   res.render('login');
 });
 
 // dinamic url must be last on the list
 // otherwise it will ignore all other url request below..
 app.get("/:quizURL", (req, res) => {
-  console.log("url")
+  console.log("url");
   const quizURL = req.params.quizURL;
   const templateVars = {
     //need to be below if statement.
@@ -100,26 +101,22 @@ app.get("/:quizURL", (req, res) => {
   res.render("quiz_show", templateVars);
 });
 
-app.get("/result", (req, res) => {
-  res.render("quiz_result");
-  // res.redirect();
-});
-
-
 // GET /login
 app.get('/login', (req, res) => {
   res.render('login');
 });
 
-app.get('/private', (req, res) => {
-  res.render('private');
+app.get("/login/:user_id", (req, res) => {
+  // // set encrypted cookie
+  // req.session.user_id = req.pararms.user_id; // if we use cookies.
+  // set plain - text cookie
+  res.cookie('user_id', req.params.user_id);
+  res.redirect("/");
 });
 
-// app.get('/login', (req, res) => {
-// console.log('lOOOOOOGIN')
-// res.render('login');
-// })
-// GET /login/2
+app.get('/logout', (req, res) => {
+  //need to write
+});
 
 app.get("/login/:user_id", (req, res) => {
   // // set encrypted cookie
