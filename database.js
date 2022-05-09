@@ -9,17 +9,18 @@ const pool = new Pool({
   database: "template1",
 });
 
-const getUserByName = (user) => {
+const getUserByName = (user_name) => {
   return pool.query(
     `SELECT user_name
    FROM USERS
    WHERE user_name = $1;`
-    , [user.login_name])
+    , [user_name])
+    // , [user.login_name])
     // WHERE user_name = $1;`
     // , [user.username])
     // , [user.username])
     .then((result) => {
-      console.log(result.rows[0]);
+      console.log('database getUserByName',result.rows[0]);
       return result.rows[0];
     })
     .catch((err) => {

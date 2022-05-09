@@ -8,6 +8,7 @@ const sassMiddleware = require("./lib/sass-middleware");
 const express = require("express");
 const app = express(); //HAS NOTHING TO DO WITH app.js
 const morgan = require("morgan");
+const cookieSession = require('cookie-session');
 // const cookieSession = require("cookie-session");
 // const bodyParser = require("body-parser");
 
@@ -21,6 +22,11 @@ db.connect();
 // 'dev' = Concise output colored by response status for development use.
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
 app.use(morgan("dev"));
+
+app.use(cookieSession({
+  name: 'session',
+  keys: ['key1']
+}))
 
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
@@ -62,6 +68,9 @@ app.use("/users", userRouter);
 
 // THIS WORKS
 app.get("/", (req, res) => {
+  console.log("APP/GET/")
+  console.log('REQQUIZZES', req)
+  // res.render("index");
   res.redirect("/quizzes");
 });
 
@@ -97,14 +106,19 @@ app.get("/result", (req, res) => {
 app.get('/login', (req, res) => {
 
   console.log("APP/GET/LOGIN")
-  res.render('login');
-});
+  // console.log('REQREQREQ', req)
+  const templateVars = {
+    user: ''
+  }
+  res.render('login', templateVars);
+})
 
 app.post("/logout", (req, res) => {
   // res.clearCookie("user_id");
   req.session = null;
   res.redirect("/login"); // just redirecting WITHOUT data
 });
+
 
 // dinamic url must be last on the list
 // otherwise it will ignore all other url request below..
