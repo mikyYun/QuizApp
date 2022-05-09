@@ -17,16 +17,6 @@ body {
 }
 
 
-#btn {
-  transition-duration: 0.4s;
-  margin-bottom: 20px;
-  color: lightblue;
-}
-
-#btn:hover {
-  background-color: red;
-  color: palegreen;
-}
 
 .navbar1 {
   display: flex;
@@ -38,4 +28,47 @@ body {
   display: flex;
   justify-content: space-evenly;
 
+}
+
+
+th, td {
+  padding: 15px;
+}
+
+.public_quiz {
+  display: flex;
+  width: 100%;
+  margin-left: 20px;
+}
+
+.home {
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+.public-list {
+  text-align: right;
+  margin-right: 100px;
+  margin-top: 0 px;
+  color: darkred
+}
+
+.quizes {
+  width: 50%;
+}
+/* .users {
+  width: 50%;
+  text-align: -webkit-center;
+} */
+
+hr {
+  border: 1px solid red;
+  border-top-width: 1px;
+  margin-top: 25px;
+}
+
+.welcome123 {
+  text-align: right;
+  margin-right: 100px;
+  color: darkred;
 }

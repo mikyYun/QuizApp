@@ -13,7 +13,7 @@
 
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/main.css" type="text/css" />
+    <link rel="stylesheet" href="../styles/main.css" type="text/css" />
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
@@ -22,25 +22,23 @@
 
   <body>
     <%- include('partials/_header') %>
-    <h1>Public Quiz List</h1>
+    <hr>
+    <h1 class="welcome123">Welcome to the MWM Quiz</h1>
     <% if (user) {%>
     <h2><%= user.user_name %></h2>
     <% } %>
-    <button id="btn">button</button>
-
-    <div id="belowbtn"></div>
-    <div class="public quiz">
+    <!-- <button id="btn">button</button> -->
+    <div>
       <table>
       <thead>
-<!--
-    <button id="btn">button</button> -->
-    <!-- <div id="belowbtn"></div> -->
-    <div class="public-quiz">
-      <table class="public-quiz-table">
-        <tr>
-          <th scope="col">Question</th>
-          <th scope="col">Quiz URL</th>
-        </tr>
+      <div class="public-quiz">
+        <table>
+          <tr>
+            <div class="question-quiz">
+              <th scope="col">Question</th>
+              <th scope="col">Quiz URL</th>
+            </div>
+          </tr>
          <% for (let i = 0; i < quizzes.length; i++) { %>
         <tr>
           <td><%=quizzes[i].quiz%> </td>
@@ -49,37 +47,6 @@
         <% }%>
     </table>
       </div>
-    <!-- <hr>
-
-    <h1 class="public-list">Public Quiz List</h1>
-    <% if (user) {%>
-    <h2><%= user.user_name %></h2>
-    <% } %>
-
-    <button id="btn">button</button>
-    <hr>
-    <div class="home">
-      <span>Home</span>
-    </div>
-    <div>
-      <h1 class="public-list">Welcome to the MWM Quiz</h1>
-    </div>
-
-    <button id="btn">button</button>
-    <div class="public_quiz">
-        <div class="quizes">
-          <span scope="col">Public Quiz</span>
-          <% for (let i = 0; i < quizzes.length; i++) { %>
-            <p><%= quizzes[i].quiz %></p>
-          <% }%>
-        </div>
-        <div class="users">
-          <th scope="col">Select User</th>
-        </div>
-
-    <div>
-
-    </div> -->
     </div>
   </body>
 </html>
