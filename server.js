@@ -78,7 +78,7 @@ app.get("/result", (req, res) => {
 app.get('/login', (req, res) => {
   console.log("TEST")
   res.render('login');
-})
+});
 
 // dinamic url must be last on the list
 // otherwise it will ignore all other url request below..

@@ -29,25 +29,17 @@
     <h2><%= user.user_name %></h2>
     <% } %>
     <!-- <button id="btn">button</button> -->
-    <div>
-      <table>
-      <thead>
-      <div class="public-quiz">
-        <table>
-          <tr>
-            <div class="question-quiz">
-              <th scope="col">Question</th>
-              <th scope="col">Quiz URL</th>
-            </div>
-          </tr>
-         <% for (let i = 0; i < quizzes.length; i++) { %>
-        <tr>
-          <td><%=quizzes[i].quiz%> </td>
-          <td><a href="">quizzes/x1y2z3</a></td>
-        </tr>
-        <% }%>
+    <table class="public quiz">
+      <tr>
+        <th scope="col">Question</th>
+        <th scope="col">Quiz URL</th>
+      </tr>
+      <% for (let i = 0; i < quizzes.length; i++) { %>
+      <tr>
+        <td><%=quizzes[i].quiz%></td>
+        <td><a href="">quizzes/x1y2z3</a></td>
+      </tr>
+      <% }%>
     </table>
-      </div>
-    </div>
   </body>
 </html>

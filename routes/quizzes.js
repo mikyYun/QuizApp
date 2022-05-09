@@ -30,12 +30,11 @@ module.exports = (db) => {
 
   // ================== GET ==================== //
 
-  // handling main/home page
   router.get("/", (req, res) => {
     // .redirect()
     getAllPublicQuiz()
       .then((quizzes) => { // quiz == res.rows
-        const user = {}
+        const user = {};
         const templateVars = {
           user,
           quizzes
@@ -48,10 +47,20 @@ module.exports = (db) => {
       });
   });
 
-  // handling create quiz page
-  router.get("/create", (req, res) => {
-    res.render("quiz_create");
-    // .redirect(`/result`)
+  router.get("/private", (req, res) => {
+    getAllPrivateQuiz()
+      .then((quizzes) => { // quiz == res.rows
+        const user = {};
+        const templateVars = {
+          user,
+          quizzes
+        };
+        res.render("quiz_private", templateVars);
+      })
+      .catch((e) => {
+        console.error(e);
+        res.send(e);
+      });
   });
 
   router.get("/result", (req, res) => {
@@ -68,6 +77,11 @@ module.exports = (db) => {
   // router.get("/login", (req, res) => {
   //   res.render('login')
   // })
+
+  router.get("/create", (req, res) => {
+    res.render("quiz_create");
+    // .redirect(`/result`)
+  });
 
   // ================== POST ==================== //
 

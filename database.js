@@ -48,25 +48,23 @@ const addPrivateQuiz = (quiz) => {
     });
 };
 
+const getAllPublicQuiz = (options) => {
+  return pool.query(`
+  SELECT quizzes.*
+  FROM quizzes
+  WHERE is_public IS true;
+  `).then((res) => res.rows); //res.rows === quizzes in users.js
+};
+
 const getAllPrivateQuiz = (payload) => {
 
   return pool.query(`
   SELECT quizzes.*
-    FROM quizzes
+  FROM quizzes
   WHERE is_public IS false AND user_id = $1;
   `, [payload.user_id]
   )
     .then((res) => res.rows);
 };
-
-const getAllPublicQuiz = (options) => {
-  let queryString = `
-  SELECT quizzes.*
-  FROM quizzes
-  WHERE is_public IS true;
-  `;
-  return pool.query(queryString).then((res) => res.rows);
-};
-
 
 module.exports = { getAllPrivateQuiz, getAllPublicQuiz, addPrivateQuiz, getUserByName };

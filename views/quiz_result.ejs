@@ -14,10 +14,124 @@
 
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
+  <style>
+    .conditional {
+      display: none;
+    }
+
+    .result_main {
+      margin: auto;
+      margin-top: 20vh;
+      width: 90vw;
+      height: 30vh;
+      background-color: rgb(123, 41, 253);
+    }
+
+    .result_title {
+      background-color: rgb(29, 21, 255);
+    }
+
+    .result_title_greeting {
+      background-color: orange;
+      text-align: center;
+      font-size: 1.5rem;
+      padding: 0.3rem 0;
+    }
+
+    .result_box {
+      background-color: blue;
+    }
+
+    .result {
+      background-color: white;
+    }
+
+    .result_correct {
+      background-color: lightblue;
+      border-radius: 0.5rem;
+      width: 50vw;
+      align-items: center;
+      margin: auto;
+      padding: 0.3rem 0;
+    }
+
+    .result_incorrect {
+      display: none;
+      background-color: yellow;
+    }
+
+    footer {
+      width: 90vw;
+      height: 20vh;
+    }
+
+    .user_answer_rate_box {
+      background-color: rgb(0, 87, 0);
+    }
+
+    .user_answer_rate {
+      background-color: rgb(179, 255, 179);
+      display: flex;
+      justify-content: space-around;
+    }
+
+    .user_answer_rate_label {
+      background-color: rgb(57, 35, 255);
+      border-radius: 1rem;
+      width: 10rem;
+      height: 5rem;
+      /* text-align: center;
+      display: table-cell;
+      vertical-align: middle; */
+    }
+
+    .rate_box {
+      width: 50%;
+      display: flex;
+      justify-content: space-around;
+    }
+
+    .correct_rate_box, .incorrect_rate_box {
+      background-color: rgb(167, 0, 78);
+    }
+
+    .accuracy_icon {
+      border-radius: 50%;
+      width: 5rem;
+      height: 5rem;
+      text-align: center;
+      display: table-cell;
+      vertical-align: middle;
+    }
+
+    .correct_icon {
+      background-color: rgb(255, 255, 255);
+
+    }
+
+    .correct_rate .incorrect_rate {
+      background-color: rgb(215, 255, 140);
+    }
+
+    /* .incorrect_rate_box {
+      background-color: rgb(109, 139, 109);
+
+    } */
+
+    .incorrect_icon {
+      background-color: rgb(0, 0, 0);
+
+    }
+/*
+    .incorrect_rate {
+      background-color: rgb(250, 6, 230);
+
+    } */
 
 
+  </style>
 </head>
-<%- include('partials/_header') %>
+<!-- %- include('partials/_header') %> -->
 
 <body>
   <div class="conditional">
