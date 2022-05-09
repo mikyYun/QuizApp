@@ -32,19 +32,41 @@ module.exports = (db) => {
 
   router.get("/", (req, res) => {
     // .redirect()
-    getAllPublicQuiz()
-      .then((quizzes) => { // quizzes == res.rows
-        const user = {};
+    const user_name = req.session.user_name
+    // const user = 
+    getUserByName(user_name)
+    .then((user) => {
+      // res.cookie('user_id', user.id);
+      getAllPublicQuiz()
+      .then((quizzes) => { // quiz == res.rows
         const templateVars = {
           user,
           quizzes
         };
-        res.render("quizzes", templateVars);
+        console.log('temp user is ', templateVars.user)
+        res.render('quizzes', templateVars)
       })
       .catch((e) => {
         console.error(e);
         res.send(e);
       });
+    });
+    
+    // getAllPublicQuiz()
+    //   .then((quizzes) => { // quiz == res.rows
+    //     const user = {}
+    //     const templateVars = {
+    //       user,
+    //       quizzes
+    //     };
+    //     res.render("quizzes", templateVars);
+    //   })
+    //   .catch((e) => {
+    //     console.error(e);
+    //     res.send(e);
+    //   });
+
+
   });
 
   router.get("/private", (req, res) => {
