@@ -34,10 +34,12 @@ module.exports = (db) => {
     console.log("ROUTER/POST/LOGIN")
     // console.log(req.body)
     // const { username, password } = req.body;
-    const user = req.body
-    console.log('req.body is ',req.body)
+    const user = req.body.login_name
+    // console.log('req.body is ',req.body)
     getUserByName(user)
       .then((user) => {
+        console.log('this is user', user)
+        req.session['user_name'] = user.user_name
         // res.cookie('user_id', user.id);
         getAllPublicQuiz()
           .then((quizzes) => { // quiz == res.rows
@@ -45,7 +47,7 @@ module.exports = (db) => {
           user,
           quizzes
         };
-        console.log('temp user is ', templateVars.user)
+        // console.log('temp user is ', templateVars.user)
         res.render('quizzes', templateVars)
       });
     });

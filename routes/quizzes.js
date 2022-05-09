@@ -34,19 +34,41 @@ module.exports = (db) => {
   router.get("/", (req, res) => {
     console.log('ROUTER/GET/')
     // .redirect()
-    getAllPublicQuiz()
+    const user_name = req.session.user_name
+    // const user = 
+    getUserByName(user_name)
+    .then((user) => {
+      // res.cookie('user_id', user.id);
+      getAllPublicQuiz()
       .then((quizzes) => { // quiz == res.rows
-        const user = {}
         const templateVars = {
           user,
           quizzes
         };
-        res.render("quizzes", templateVars);
+        console.log('temp user is ', templateVars.user)
+        res.render('quizzes', templateVars)
       })
       .catch((e) => {
         console.error(e);
         res.send(e);
       });
+    });
+    
+    // getAllPublicQuiz()
+    //   .then((quizzes) => { // quiz == res.rows
+    //     const user = {}
+    //     const templateVars = {
+    //       user,
+    //       quizzes
+    //     };
+    //     res.render("quizzes", templateVars);
+    //   })
+    //   .catch((e) => {
+    //     console.error(e);
+    //     res.send(e);
+    //   });
+
+
   });
 
   // handling create quiz page
