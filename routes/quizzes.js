@@ -32,6 +32,7 @@ module.exports = (db) => {
 
   // handling main/home page
   router.get("/", (req, res) => {
+    console.log('ROUTER/GET/')
     // .redirect()
     getAllPublicQuiz()
       .then((quizzes) => { // quiz == res.rows
@@ -50,6 +51,7 @@ module.exports = (db) => {
 
   // handling create quiz page
   router.get("/create", (req, res) => {
+    console.log('ROUTER/GET/CREATE')
     const user = {}
         const templateVars = {
           user
@@ -59,7 +61,7 @@ module.exports = (db) => {
   });
 
   router.get("/result", (req, res) => {
-    console.log('result')
+    console.log('ROUTER/GET/RESULT')
     const user = {}
         const templateVars = {
           user
@@ -69,6 +71,8 @@ module.exports = (db) => {
 
   // handling individual quiz page
   router.get("/show", (req, res) => {
+    console.log('ROUTER/GET/SHOW')
+
     const quizURL = req.params.shortURL;
     const userID = req.session.user_id;
   });
@@ -81,6 +85,8 @@ module.exports = (db) => {
   // ================== POST ==================== //
 
   router.post("/create", (req, res) => {
+    console.log('ROUTER/POST/CREATE')
+
     const quizURL = generateRandomString(); //abcde.
 
     console.log(req.body);

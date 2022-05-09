@@ -59,16 +59,19 @@ app.use("/users", userRouter);
 // Separate them into separate routes files (see above).
 
 app.get("/", (req, res) => {
+  console.log("APP/GET/")
   // res.render("index");
   res.redirect("/quizzes");
 });
 
 app.get("/create", (req, res) => {
+  console.log("APP/GET/CREATE")
   res.render("quiz_create");
   // res.redirect();
 });
 
 app.get("/result", (req, res) => {
+  console.log("APP/GET/RESULT")
   res.render("quiz_result");
   // res.redirect();
 });
@@ -76,14 +79,14 @@ app.get("/result", (req, res) => {
 
 // GET /login
 app.get('/login', (req, res) => {
-  console.log("TEST")
+  console.log("APP/GET/LOGIN")
   res.render('login');
 })
 
 // dinamic url must be last on the list
 // otherwise it will ignore all other url request below..
 app.get("/:quizURL", (req, res) => {
-  console.log("url")
+  console.log("APP/GET/:quizURL")
   const quizURL = req.params.quizURL;
   const templateVars = {
     //need to be below if statement.
@@ -98,6 +101,8 @@ app.get("/:quizURL", (req, res) => {
 // GET /login/2
 
 app.get("/login/:user_id", (req, res) => {
+  console.log("APP/GET/:USER_ID")
+
   // // set encrypted cookie
   // req.session.user_id = req.pararms.user_id; // if we use cookies.
   // set plain - text cookie
@@ -106,6 +111,8 @@ app.get("/login/:user_id", (req, res) => {
 });
 
 app.get("/api/test", (req, res) => {
+  console.log("APP/GET/API/TEST")
+
   res.json({ text: "hello from server" });
 });
 
