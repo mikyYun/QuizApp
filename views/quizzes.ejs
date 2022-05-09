@@ -22,8 +22,16 @@
 
   <body>
     <%- include('partials/_header') %>
-
     <h1>Public Quiz List</h1>
+    <% if (user) {%>
+    <h2><%= user.user_name %></h2>
+    <% } %>
+    <button id="btn">button</button>
+
+    <div id="belowbtn"></div>
+    <div class="public quiz">
+      <table>
+      <thead>
 <!--
     <button id="btn">button</button> -->
     <!-- <div id="belowbtn"></div> -->

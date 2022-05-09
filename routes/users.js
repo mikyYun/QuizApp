@@ -7,18 +7,47 @@
 
 const express = require("express");
 const router = express.Router();
-const { getUserByName } = require("../database.js");
+const { getUserByName, getAllPublicQuiz } = require("../database.js");
+
+const { Pool } = require('pg/lib');
 
 module.exports = (db) => {
   // router.get("/ping", (req, res) => {
   //   res.send("pong!");
   // });
+  // router.get("/", (req, res) => {
+  //   // .redirect()
+  //   getAllPublicQuiz()
+  //     .then((quizzes) => { // quiz == res.rows
+  //       const templateVars = {
+  //         quizzes
+  //       };
+  //       res.render("users", templateVars);
+  //     })
+  //     .catch((e) => {
+  //       console.error(e);
+  //       res.send(e);
+  //     });
+  // });
+
   router.post("/login", (req, res) => {
-    const { username, password } = req.body;
-    getUserByName(req.body)
+    // console.log(req.body)
+    // const { username, password } = req.body;
+    const user = req.body
+    console.log('req.body is ',req.body)
+    getUserByName(user)
       .then((user) => {
-        res.cookie('user_id', user.id);
+        // res.cookie('user_id', user.id);
+        getAllPublicQuiz()
+          .then((quizzes) => { // quiz == res.rows
+        const templateVars = {
+          user,
+          quizzes
+        };
+        console.log('temp user is ', templateVars.user)
+        res.render('quizzes', templateVars)
       });
+    });
   });
   return router;
 };
