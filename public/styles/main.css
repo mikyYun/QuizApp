@@ -81,7 +81,7 @@ hr {
 .submit {
   transition-duration: 0.4s;
   margin-bottom: 20px;
-  color: lightblue;
+  color: #ff888b;
   text-align: right;
   margin-right: 70px;
   margin-top: 30px;
@@ -108,7 +108,8 @@ hr {
   overflow: auto;
   overflow-wrap: break-word;
   padding: 2em;
-  line-break: auto
+  line-break: auto;
+  border: 10px solid #ff888b;
 }
 
 
