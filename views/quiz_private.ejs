@@ -19,18 +19,7 @@
   </head>
   <body>
     <%- include('partials/_header') %>
-    <h1>Create your unlisted quiz</h1>
-    <table class="private-quiz">
-      <tr>
-        <th scope="col">Question</th>
-        <th scope="col">Quiz URL</th>
-      </tr>
-      <% for (let i = 0; i < quizzes.length; i++) { %>
-      <tr>
-        <td><%=quizzes[i].quiz%></td>
-        <td><a href="">quizzes/x1y2z3</a></td>
-      </tr>
-      <% }%>
-    </table>
+    <h1>These are your unlisted quiz</h1>
+    <table class="private-quiz"></table>
   </body>
 </html>

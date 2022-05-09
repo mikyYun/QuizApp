@@ -58,13 +58,20 @@ app.use("/users", userRouter);
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 
+// THIS WORKS
 app.get("/", (req, res) => {
   // res.render("index");
   res.redirect("/quizzes");
 });
 
+// THIS WORKS
 app.get("/create", (req, res) => {
   res.render("quiz_create");
+  // res.redirect();
+});
+
+app.get("/private", (req, res) => {
+  res.render("quiz_private");
   // res.redirect();
 });
 
@@ -102,6 +109,10 @@ app.get("/result", (req, res) => {
 // GET /login
 app.get('/login', (req, res) => {
   res.render('login');
+});
+
+app.get('/private', (req, res) => {
+  res.render('private');
 });
 
 // app.get('/login', (req, res) => {
