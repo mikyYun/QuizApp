@@ -68,6 +68,15 @@ app.get("/create", (req, res) => {
   // res.redirect();
 });
 
+app.get("/:quizURL", (req, res) => {
+  const quizURL = req.params.quizURL;
+  const templateVars = {
+    //need to be below if statement.
+    quizURL: quizURL,
+  };
+
+  res.render("quiz_show", templateVars);
+});
 
 app.get("/result", (req, res) => {
   res.render("quiz_result");
