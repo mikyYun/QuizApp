@@ -46,7 +46,7 @@ const quizzesRoutes = require("./routes/quizzes"); // IMPORTING ROUTES
 const userRouter = createUserRouter(db);
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
-app.use("/api/hello", userRouter); //prefix for userRouter
+// app.use("/api/hello", userRouter); //prefix for userRouter
 
 app.use("/quizzes", quizzesRoutes(db));
 // Note: mount other resources here, using the same pattern above
@@ -85,9 +85,12 @@ app.get("/result", (req, res) => {
 
 
 // GET /login
-app.get('/login', (req, res) => {
-  res.render('login');
-})
+// app.get('/login', (req, res) => {
+  // console.log('lOOOOOOGIN')
+  // res.render('login');
+// })
+
+
 // GET /login/2
 
 app.get("/login/:user_id", (req, res) => {

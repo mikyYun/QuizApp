@@ -35,7 +35,9 @@ module.exports = (db) => {
     // .redirect()
     getAllPublicQuiz()
       .then((quizzes) => { // quiz == res.rows
+        const user = {}
         const templateVars = {
+          user,
           quizzes
         };
         res.render("quizzes", templateVars);

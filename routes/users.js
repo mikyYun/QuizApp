@@ -32,7 +32,7 @@ module.exports = (db) => {
 
   router.post("/login", (req, res) => {
     // console.log(req.body)
-    const { username, password } = req.body;
+    // const { username, password } = req.body;
     const user = req.body
     console.log('req.body is ',req.body)
     getUserByName(user)
