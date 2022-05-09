@@ -20,7 +20,7 @@ const getUserByName = (user_name) => {
     // , [user.username])
     // , [user.username])
     .then((result) => {
-      console.log('database getUserByName',result.rows[0]);
+      console.log('database getUserByName',result.rows);
       return result.rows[0];
     })
     .catch((err) => {
@@ -34,11 +34,11 @@ const addPrivateQuiz = (quiz) => {
   return pool
     // HOW DO I GRAB THE USER INPUT FROM THE SITE AND USE THAT IN THE SQL?
     .query(
-      `INSERT INTO quizzes(user_id, quiz, answer, is_public)
+      `INSERT INTO quizzes(user_id, question, answer, is_public)
       VALUES($1, $2, $3, $4)
       RETURNING *;
   `,
-      [quiz.user_id, quiz.question, quiz.answer, false]
+      [1, quiz.question, quiz.answer, false]
     )
     .then((result) => {
       // console.log(result.rows);

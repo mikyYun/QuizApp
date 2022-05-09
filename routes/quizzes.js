@@ -31,9 +31,9 @@ module.exports = (db) => {
   // ================== GET ==================== //
 
   router.get("/", (req, res) => {
-    console.log('ROUTER/GET/')
     // .redirect()
-    const user_name = req.session.user_name
+    // const user_name = req.session.user_name
+    const user_name = req.session.user_name;
     // const user = 
     getUserByName(user_name)
     .then((user) => {
@@ -71,56 +71,69 @@ module.exports = (db) => {
   });
 
   router.get("/private", (req, res) => {
-    getAllPrivateQuiz()
-      .then((obj) => { // quizzes == res.rows [{quiz}, {quiz}, {quiz}, {} ] arr[0]
-        const user = {};
-        const templateVars = {
-          user,
-          obj
-        };
-        res.render("quiz_private", templateVars);
-      })
+    const user_name = req.session.user_name;
+    getUserByName(user_name)
+    .then((user) => {
+      getAllPrivateQuiz()
+        .then((obj) => { // quizzes == res.rows [{quiz}, {quiz}, {quiz}, {} ] arr[0]
+          const templateVars = {
+            user,
+            obj
+          };
+          res.render("quiz_private", templateVars);
+        })
       .catch((e) => {
         console.error(e);
         res.send(e);
       });
-
+    });
   });
-  // handling create quiz page
-  router.get("/create", (req, res) => {
-    console.log('ROUTER/GET/CREATE')
-    const user = {}
-    const templateVars = {
-      user
-    };
-    res.render("quiz_create", templateVars);
-    // .redirect(`/result`)
 
+  router.get("/create", (req, res) => {
+    console.log("ROUTER/GET/CREATE")
+    const user_name = req.session.user_name;
+    getUserByName(user_name)
+    .then((user) => {
+          const templateVars = {
+            user
+          };
+          res.render("quiz_create", templateVars);
+        })
+      .catch((e) => {
+        console.error(e);
+        res.send(e);
+      });
+  });
+
+  router.get("/quizzes/:quizURL", (req, res) => {
+    const quizURL = req.params.shortURL;
+
+    const templateVars = {
+      quizURL: quizURL,
+    };
+
+    res.render("quiz_show", templateVars);
   });
 
   router.get("/result", (req, res) => {
-    console.log('ROUTER/GET/RESULT')
-    const user = {}
-    const templateVars = {
-      user
-    };
-    res.render("quiz_result", templateVars);
+    console.log('ROUTER/GET/RESULT');
+    const user_name = req.session.user_name;
+    console.log(user_name)
+    getUserByName(user_name)
+    .then((user) => {
+          const templateVars = {
+            user
+          };
+          res.render("quiz_result", templateVars);
+        })
   });
 
-
-
-  // handling individual quiz page
   router.get("/show", (req, res) => {
     console.log('ROUTER/GET/SHOW')
 
     const quizURL = req.params.shortURL;
     const userID = req.session.user_id;
   });
-
-  // use app.get instead router.get (in server.js)
-  // router.get("/login", (req, res) => {
-  //   res.render('login')
-  // })
 
   router.get("/create", (req, res) => {
     const user_name = req.session.user_name;
@@ -131,19 +144,18 @@ module.exports = (db) => {
         }
         res.render("quiz_create", templateVars);
       })
-    // .redirect(`/result`)
   });
 
   // ================== POST ==================== //
 
   router.post("/create", (req, res) => {
-    console.log('ROUTER/POST/CREATE')
-
-    const quizURL = generateRandomString(); //abcde.
-
+    // const quizURL = generateRandomString(); //abcde.
     console.log(req.body);
     const question = req.body.questionInput;
     const answer = req.body.answerInput;
+
+    // getUserByName(user)
+
     addPrivateQuiz({ question, answer, user_id: 1 })
       .then((quiz) => {
         res.send(quiz);
@@ -151,30 +163,8 @@ module.exports = (db) => {
       .catch((e) => {
         console.error(e);
         res.send(e);
-      });
-
-      
+      });      
   });
-
-  // router.post('/quizzes', (req, res) => {
-  //   console.log('quizzes test')
-  // })
-
-  // router.post('/login', (req, res) => {
-  //   console.log(req.body)
-  //   const { username, password } = req.body;
-  //    getUserByName(req.body)
-  //     .then((user) => {
-  //       console.log('this is user', user)
-  //       res.cookie('user_id', user.id);
-  //       res.render('quizzes/')
-  //     });
-
-  // })
-
-
-
-  //  ================== DO NOT TOUCH BELOW  ==================//
 
   // ================== GARY ==================== //
   /*
@@ -197,10 +187,7 @@ module.exports = (db) => {
         .status(500)
         .json({ error: err.message });
     });
-
-
   });
   */
   return router;
-
 };

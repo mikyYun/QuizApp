@@ -35,6 +35,7 @@ module.exports = (db) => {
     // console.log(req.body)
     // const { username, password } = req.body;
     const user = req.body.login_name
+    console.log('postlogin', user)
     // console.log('req.body is ',req.body)
     getUserByName(user)
       .then((user) => {
