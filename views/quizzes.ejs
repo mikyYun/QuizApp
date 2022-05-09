@@ -57,10 +57,18 @@
     <% } %>
 
     <button id="btn">button</button>
+    <hr>
+    <div class="home">
+      <span>Home</span>
+    </div>
+    <div>
+      <h1 class="public-list">Welcome to the MWM Quiz</h1>
+    </div>
+
+    <button id="btn">button</button>
     <div class="public_quiz">
         <div class="quizes">
           <span scope="col">Public Quiz</span>
-          <span scope="col">Home</span>
           <% for (let i = 0; i < quizzes.length; i++) { %>
             <p><%= quizzes[i].quiz %></p>
           <% }%>
