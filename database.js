@@ -11,12 +11,15 @@ const pool = new Pool({
 
 const getUserByName = (user) => {
   return pool.query(
-    `SELECT *
+    `SELECT user_name
    FROM USERS
    WHERE user_name = $1;`
-    , [user.username])
+    , [user.login_name])
+    // WHERE user_name = $1;`
+    // , [user.username])
+    // , [user.username])
     .then((result) => {
-      // console.log(result.rows);
+      console.log(result.rows[0]);
       return result.rows[0];
     })
     .catch((err) => {
@@ -64,5 +67,6 @@ const getAllPublicQuiz = (options) => {
   `;
   return pool.query(queryString).then((res) => res.rows);
 };
+
 
 module.exports = { getAllPrivateQuiz, getAllPublicQuiz, addPrivateQuiz, getUserByName };

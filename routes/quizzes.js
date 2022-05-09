@@ -60,7 +60,6 @@ module.exports = (db) => {
   router.get("/show", (req, res) => {
     const quizURL = req.params.shortURL;
     const userID = req.session.user_id;
-
   });
 
   // use app.get instead router.get (in server.js)
@@ -89,13 +88,21 @@ module.exports = (db) => {
       });
   });
 
-  router.post('/quizzes', (req, res) => {
-    console.log('quizzes test')
-  })
+  // router.post('/quizzes', (req, res) => {
+  //   console.log('quizzes test')
+  // })
 
-  router.post('/login', (req, res) => {
-    console.log(req.body)
-  })
+  // router.post('/login', (req, res) => {
+  //   console.log(req.body)
+  //   const { username, password } = req.body;
+  //    getUserByName(req.body)
+  //     .then((user) => {
+  //       console.log('this is user', user)
+  //       res.cookie('user_id', user.id);
+  //       res.render('quizzes/')
+  //     });
+
+  // })
 
 
 

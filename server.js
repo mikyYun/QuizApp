@@ -50,7 +50,10 @@ app.use("/api/hello", userRouter); //prefix for userRouter
 
 app.use("/quizzes", quizzesRoutes(db));
 // Note: mount other resources here, using the same pattern above
-app.use("/user", userRouter);
+// app.use("/user", userRouter);
+app.use("/users", userRouter);
+
+
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
