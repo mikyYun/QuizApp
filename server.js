@@ -93,7 +93,6 @@ app.get("/:quizURL", (req, res) => {
   res.render("quiz_show", templateVars);
 });
 
-<<<<<<< HEAD
 app.get("/result", (req, res) => {
   res.render("quiz_result");
   // res.redirect();
@@ -101,20 +100,14 @@ app.get("/result", (req, res) => {
 
 
 // GET /login
-<<<<<<< HEAD
 app.get('/login', (req, res) => {
   res.render('login');
 });
-=======
+
 // app.get('/login', (req, res) => {
-  // console.log('lOOOOOOGIN')
-  // res.render('login');
+// console.log('lOOOOOOGIN')
+// res.render('login');
 // })
-=======
->>>>>>> 0ea7242d3a7145d01f8d41572829327b969cd92a
-
-
->>>>>>> ebabcb9ef0952ccde6f0249c29304c70253fe13c
 // GET /login/2
 
 app.get("/login/:user_id", (req, res) => {
