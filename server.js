@@ -60,6 +60,7 @@ app.use("/users", userRouter);
 
 app.get("/", (req, res) => {
   console.log("APP/GET/")
+  console.log('REQQUIZZES', req)
   // res.render("index");
   res.redirect("/quizzes");
 });
@@ -80,6 +81,7 @@ app.get("/result", (req, res) => {
 // GET /login
 app.get('/login', (req, res) => {
   console.log("APP/GET/LOGIN")
+  console.log('REQREQREQ', req)
   res.render('login');
 })
 

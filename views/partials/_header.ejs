@@ -22,8 +22,16 @@
         <a class="result" href="/result">My result</a>
         <a class="login" href="/login">Login</a>
       </div>
-      <div class="navbar-login">
-        <!-- <form method="GET" action="/login"> -->
+      <!-- % if (user) {%>
+        <div class="navbar-login">
+          Hello, %= user.user_name %>
+        </div>
+          % } else { %>
+            <div class="navbar-login">
+              Hello, visitor
+            </div>
+          % } %>     -->
+            <!-- <form method="GET" action="/login"> -->
         <!-- <a class="nav-login" href="/login">Login
         </a> -->
         <!-- <button type="submit" class="btn btn-primary">Log in</button> -->
