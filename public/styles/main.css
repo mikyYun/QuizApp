@@ -19,6 +19,7 @@ body {
 .navbar2 {
   display: flex;
   justify-content: space-evenly;
+  margin-left: 350px;
 }
 
 th, td {
@@ -88,14 +89,12 @@ hr {
 }
 
 .submit:hover {
-  background-color: red;
+  background-color: darkred;
   color: palegreen;
 }
 
 .btn {
   text-align: right;
-
-
 }
 
 .question {
@@ -111,6 +110,16 @@ hr {
   line-break: auto;
   border: 10px solid #ff888b;
 }
+
+/* handling log out button */
+.logout {
+  margin-left: 20px;
+  color: #ff888b;
+}
+
+.logout:hover {
+  background-color: darkred;
+  color: palegreen;
 
 
 
