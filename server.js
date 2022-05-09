@@ -88,6 +88,13 @@ app.get('/login', (req, res) => {
   res.render('login');
 })
 
+app.post("/logout", (req, res) => {
+  // res.clearCookie("user_id");
+  req.session = null;
+  res.redirect("/login"); // just redirecting WITHOUT data
+});
+
+
 // dinamic url must be last on the list
 // otherwise it will ignore all other url request below..
 app.get("/:quizURL", (req, res) => {
