@@ -123,7 +123,14 @@ module.exports = (db) => {
   // })
 
   router.get("/create", (req, res) => {
-    res.render("quiz_create");
+    const user_name = req.session.user_name;
+    getUserByName(user_name)
+      .then((user) => {
+        const templateVars = {
+          user
+        }
+        res.render("quiz_create", templateVars);
+      })
     // .redirect(`/result`)
   });
 
@@ -145,6 +152,8 @@ module.exports = (db) => {
         console.error(e);
         res.send(e);
       });
+
+      
   });
 
   // router.post('/quizzes', (req, res) => {

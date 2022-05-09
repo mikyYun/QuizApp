@@ -22,6 +22,7 @@
         <a class="result" href="/quizzes/result">My result</a>
         <% if (user) { %>
           <form method="POST" action="/logout">
+            <label for="username">Hello, <%= user.user_name%>! </label>
             <button type="submit" class="btn btn-primary">Logout</button>
           </form>
           <!-- <form method="POST" action="/login">
@@ -29,6 +30,7 @@
           </form> -->
         <% } else { %>
           <form method="POST" action="/login">
+            <label for="username">Hello, visitor! </label>
             <a class="login" href="/login">Login</a>
           </form>
           <% } %>

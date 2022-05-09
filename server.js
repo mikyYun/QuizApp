@@ -90,10 +90,10 @@ app.get("/", (req, res) => {
 //   // res.redirect();
 // });
 
-app.get("/create", (req, res) => {
-  res.render("quiz_create");
-  // res.redirect();
-});
+// app.get("/create", (req, res) => {
+//   res.render("quiz_create");
+//   // res.redirect();
+// });
 
 app.get("/result", (req, res) => {
   console.log("APP/GET/RESULT")
