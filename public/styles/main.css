@@ -8,16 +8,7 @@ body {
   width: 100%;
 }
 
-/* #btn {
-  transition-duration: 0.4s;
-  margin-bottom: 20px;
-  color: lightblue;
-}
-
-#btn:hover {
-  background-color: red;
-  color: palegreen;
-} */
+/* handling main page */
 
 .navbar1 {
   display: flex;
@@ -28,9 +19,7 @@ body {
 .navbar2 {
   display: flex;
   justify-content: space-evenly;
-
 }
-
 
 th, td {
   padding: 15px;
@@ -81,3 +70,21 @@ hr {
 .login {
   margin-left: 20px;
 }
+
+/* handling create page */
+
+.create {
+  color: darkred
+}
+
+.btn {
+  transition-duration: 0.4s;
+  margin-bottom: 20px;
+  color: lightblue;
+}
+
+.btn:hover {
+  background-color: red;
+  color: palegreen;
+}
+
