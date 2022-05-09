@@ -50,12 +50,21 @@ module.exports = (db) => {
 
   // handling create quiz page
   router.get("/create", (req, res) => {
-    res.render("quiz_create");
+    const user = {}
+        const templateVars = {
+          user
+        };
+    res.render("quiz_create", templateVars);
     // .redirect(`/result`)
   });
 
   router.get("/result", (req, res) => {
-    res.render("quiz_result");
+    console.log('result')
+    const user = {}
+        const templateVars = {
+          user
+        };
+    res.render("quiz_result", templateVars);
   });
 
   // handling individual quiz page
