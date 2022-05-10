@@ -1,9 +1,12 @@
 <!-- moon -->
 <!-- when you want to have this everywhere. -->
 
-<header>
+<header class="navbar">
+
+  <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Source+Sans+Pro:wght@300&display=swap" rel="stylesheet">
+
   <nav class="navbar1">
-    <a class="navbar-brand" href="/">MWM Quiz Home</a>
+    <a class="title" href="/">MWM Quiz Home</a>
     <!-- <button
       class="navbar-toggler"
       type="button"
@@ -17,12 +20,12 @@
     </button> -->
     <div class="navbar2">
       <div>
-        <a class="create" href="/quizzes/create">Create quiz</a>
+        <a class="create1" href="/quizzes/create">Create quiz</a>
         <a class="private" href="/quizzes/private">My private quiz</a>
         <a class="result" href="/quizzes/result">My result</a>
         <% if (user) { %>
           <form method="POST" action="/logout">
-            <button type="submit" class="btn btn-primary">Logout</button>
+            <button type="submit" class="logout">Logout</button>
           </form>
           <!-- <form method="POST" action="/login">
             <a class="login" href="/login">Login</a>
