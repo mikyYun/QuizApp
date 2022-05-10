@@ -21,7 +21,7 @@ const getUserByName = (user_name) => {
     // , [user.username])
     // , [user.username])
     .then((result) => {
-      console.log('database getUserByName', result.rows[0]);
+      console.log('database getUserByName',result.rows);
       return result.rows[0];
     })
     .catch((err) => {
@@ -42,7 +42,8 @@ const addPrivateQuiz = (quiz) => {
       [1, quiz.question, quiz.answer, false]
     )
     .then((result) => {
-      // console.log(result.rows);
+      // console.log('addPrivateQuiz', result.rows);
+      console.log('result', result)
       return result.rows[0];
     })
     .catch((err) => {

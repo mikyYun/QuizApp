@@ -8,40 +8,27 @@
   />
 
   <nav class="navbar1">
-    <a class="title" href="/">MWM Quiz Home</a>
-    <!-- <button
-      class="navbar-toggler"
-      type="button"
-      data-toggle="collapse"
-      data-target="#navbarNavAltMarkup"
-      aria-controls="navbarNavAltMarkup"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button> -->
-    <div>
-      <div class="navbar2">
-        <a class="create1" href="/quizzes/create">Create quiz</a>
-        <a class="private" href="/quizzes/private">My private quiz</a>
-        <a class="result" href="/quizzes/result">My result</a>
-        <% if (user) { %>
-        <form method="POST" action="/logout">
-          <label for="username">Hello, <%= user.user_name%>! </label>
-          <button type="submit" class="btn btn-primary">Logout</button>
-        </form>
-        <!-- <form method="POST" action="/login">
-            <a class="login" href="/login">Login</a>
-          </form> -->
+          <!-- a tag href goes rounter.get -->
+          <!-- <a class="create" href="/quizzes/create">Create quiz</a> -->
+          
+          <div class="navbar2">
+            <a class="anchor title" href="/">MWM Quiz Home</a>
+            <a class="anchor private" href="/quizzes/private">My private quiz</a>
+            <% if (user) { %>
+              <a class="anchor create1" href="/quizzes/create">Create quiz</a>
+              <a class="anchor result" href="/quizzes/result">My result</a>
+          <form method="POST" action="/logout">
+            <label for="username" class="greeting">Hello, <%= user.user_name%>! </label>
+            <button type="submit" class="button_logout evnt">Logout</button>
+          </form>
         <% } else { %>
-        <form method="POST" action="/login">
-          <a class="login" href="/login">Login</a>
-          <label for="username">Hello, visitor! </label>
-        </form>
-        <% } %>
+          <a class="anchor result" href="/quizzes/result">My result</a>
+          <form method="GET" action="/login">
+            <label for="username" class="greeting">Hello, visitor! </label>
+            <button class="button_login evnt" href="/login">Login</button>
+          </form>
+          <% } %>
       </div>
-      <div class="navbar-login"></div>
-    </div>
   </nav>
   <hr />
 </header>

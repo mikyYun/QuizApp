@@ -157,12 +157,13 @@ module.exports = (db) => {
 
   router.post("/create", (req, res) => {
     console.log(req.body);
-    const question = req.body.question;
-    const answer = req.body.answer;
-
+    const question = req.body.questionInput;
+    const answer = req.body.answerInput;
+    // console.log('body is', question, answer)
     addPrivateQuiz({ question, answer, user_id: 1 })
       .then((quiz) => {
-        res.send(quiz);
+        // res.send(quiz);
+        res.redirect('/quizzes/private')
       })
       .catch((e) => {
         console.error(e);

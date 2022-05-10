@@ -23,19 +23,22 @@
 
   <body>
     <%- include('partials/_header') %>
+<<<<<<< HEAD
     <h3>quiz ID: <%= `${oneQuiz.id}` %></h3>
 
     <h2><%= `${oneQuestion}` %></h2>
+=======
+    <article class="quiestion_article_box">
+      <h2>
+        Question Number <%= `${oneQuiz.id}` %>
+      </h2>
+>>>>>>> 915103105b8f70f6e2230c525e8a058a2a1df9d5
 
-    <form id="public-quiz-submit-form" data-id="<%= `${oneQuiz.id}` %>">
-      <div>
-        <input
-          class="form-control public-input-answer"
-          type="text"
-          name="answerInput"
-          placeholder="Fill out your answer. (all lower case)"
-        />
+      <div class="quiestion_area">
+        <!-- <h4 class="question_id">Question Number <%= `${oneQuiz.id}` %></h4> -->
+        <h2 class="question_detail"><%= `${oneQuestion}` %></h2>
       </div>
+<<<<<<< HEAD
       <div class="btn">
         <button type="submit" class="submit">Submit</button>
       </div>
@@ -43,5 +46,23 @@
     <div class="public-quiz-result">
       <!-- appended inside app.js-->
     </div>
+=======
+
+      <form id="public-quiz-submit-form" data-id="<%= `${oneQuiz.id}` %>" method="POST" action="/users/login">
+        <div>
+          <textarea
+            class="form-control public-input-answer"
+            type="text"
+            name="answerInput"
+            placeholder="Fill out your answer. (all lower case)"
+          ></textarea> 
+        </div>
+        <div class="btn">
+          <button type="submit" class="question_submit_btn">Submit</button>
+        </div>
+      </form>
+      <div class="public-answers"></div>
+    </article>
+>>>>>>> 915103105b8f70f6e2230c525e8a058a2a1df9d5
   </body>
 </html>

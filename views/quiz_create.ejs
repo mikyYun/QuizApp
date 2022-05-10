@@ -31,22 +31,24 @@
       method="POST"
     >
       <div class="form-group mb-2">
-        <label class="question" for="question-label">Question</label>
-        <input
+          <div class="question" for="question-label">Question
+          </div>
+          <textarea
           class="form-control-1 question-input"
           type="text"
           name="questionInput"
           placeholder="Enter your question."
-        />
-        <label for="answer-label">Answer</label>
-        <input
+          ></textarea>
+        <br>
+        <div class="answer" for="answer-label">Answer</div>
+        <textarea
           class="form-control-2 answer-input"
           type="text"
           name="answerInput"
           placeholder="Enter your answer (all lower cases)."
-        />
+        ></textarea>
         <div class="btn">
-          <button type="submit" class="submit">Submit</button>
+          <button type="submit" class="create_btn">Submit</button>
         </div>
         <!-- presses submit.Our browser sends a POST request to our server. -->
       </div>
