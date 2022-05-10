@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
 // MOON IS WORKING ON THIS
 
+const res = require("express/lib/response");
 const { Pool } = require("pg");
 const pool = new Pool({
   user: "vagrant",
@@ -10,7 +11,7 @@ const pool = new Pool({
 });
 
 const getUserByName = (user_name) => {
-  return pool.query(
+  return pool.query( //IT RETURNS A PROMISE
     `SELECT user_name
    FROM USERS
    WHERE user_name = $1;`
@@ -49,6 +50,14 @@ const addPrivateQuiz = (quiz) => {
     });
 };
 
+const getPublicQuizID = (quizID) => {
+  return pool.query(`
+  SELECT *
+  FROM quizzes
+  WHERE is_public IS true AND quizzes.id = $1
+  `, [quizID]).then((res) => res.rows);
+};
+
 const getAllPublicQuiz = (options) => {
   return pool.query(`
   SELECT quizzes.*
@@ -66,4 +75,4 @@ const getAllPrivateQuiz = (options) => {
 };
 // from line 64 in the where clause: AND user_id = $1
 // from line 65, [payload.user_id]
-module.exports = { getAllPrivateQuiz, getAllPublicQuiz, addPrivateQuiz, getUserByName };
+module.exports = { getPublicQuizID, getAllPrivateQuiz, getAllPublicQuiz, addPrivateQuiz, getUserByName };
