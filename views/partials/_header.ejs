@@ -6,7 +6,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Source+Sans+Pro:wght@300&display=swap" rel="stylesheet">
 
   <nav class="navbar1">
-    <a class="title" href="/">MWM Quiz Home</a>
+    <div class="title_div">
+      <a class="title" href="/">MWM Quiz Home</a>
+    </div>
     <!-- <button
       class="navbar-toggler"
       type="button"
@@ -18,16 +20,15 @@
     >
       <span class="navbar-toggler-icon"></span>
     </button> -->
-    <div class="navbar2">
+    <!-- <div class="navbar2"> -->
+      <!-- a tag href goes rounter.get -->
+      <!-- <a class="create" href="/quizzes/create">Create quiz</a> -->
       <div>
-        <!-- a tag href goes rounter.get -->
-        <a class="create" href="/quizzes/create">Create quiz</a>
-
-    <div>
-      <div class="navbar2">
-        <a class="create1" href="/quizzes/create">Create quiz</a>
         <a class="private" href="/quizzes/private">My private quiz</a>
-        <a class="result" href="/quizzes/result">My result</a>
+      </div>
+    <div class="navbar2">
+      <a class="result" href="/quizzes/result">My result</a>
+        <a class="create1" href="/quizzes/create">Create quiz</a>
         <% if (user) { %>
           <form method="POST" action="/logout">
             <label for="username">Hello, <%= user.user_name%>! </label>
@@ -37,14 +38,15 @@
             <a class="login" href="/login">Login</a>
           </form> -->
         <% } else { %>
-          <form method="POST" action="/login">
+          <form method="GET" action="/login">
             <label for="username">Hello, visitor! </label>
-            <a class="login" href="/login">Login</a>
+            <button class="login" href="/login">Login</button>
+            <!-- <a class="login" href="/login">Login</a> -->
           </form>
           <% } %>
       </div>
-      <div class="navbar-login">
-      </div>
+      <!-- <div class="navbar-login">
+      </div> -->
     </div>
   </nav>
   <hr />
