@@ -29,8 +29,10 @@
       </tr>
       <% for (let i = 0; i < obj.length; i++) { %>
       <tr>
-        <td class="questions_list"><%=obj[i].question%></td>
-        <td class="questions_list_url"><a href="">quizzes/x1y2z3</a></td>
+        <td><%=obj[i].question%></td>
+        <td>
+          <a href="<%=`/quizzes/${obj[i].id}`%>">Go to quiz!</a>
+        </td>
       </tr>
       <% }%>
     </table>

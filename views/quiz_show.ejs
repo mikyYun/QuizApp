@@ -19,34 +19,34 @@
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
-
   </head>
 
   <body>
     <%- include('partials/_header') %>
+    <article class="quiestion_article_box">
+      <h2>
+        Question Number <%= `${oneQuiz.id}` %>
+      </h2>
 
-    <h3><%= `${oneQuestion}` %></h3>
-
-    <div class="card text-center">
-      <div class="card-body">
-        <!-- alligator tag checks the same name in the object that i passed in the res.render -->
-        <p class="card-text"></p>
+      <div class="quiestion_area">
+        <!-- <h4 class="question_id">Question Number <%= `${oneQuiz.id}` %></h4> -->
+        <h2 class="question_detail"><%= `${oneQuestion}` %></h2>
       </div>
-    </div>
 
-    <div>
-    <label for="answer-label">Answer</label>
-        <input
-          class="form-control-"
-          type="text"
-          name="answerInput"
-          placeholder="Fill Out Your Answer"
-        />
+      <form id="public-quiz-submit-form" data-id="<%= `${oneQuiz.id}` %>" method="POST" action="/users/login">
         <div>
-          <p class="empty_message"> Please enter your answer.</p>
+          <textarea
+            class="form-control public-input-answer"
+            type="text"
+            name="answerInput"
+            placeholder="Fill out your answer. (all lower case)"
+          ></textarea> 
         </div>
         <div class="btn">
-          <button type="submit" class="submit">Submit</button>
+          <button type="submit" class="question_submit_btn">Submit</button>
         </div>
+      </form>
+      <div class="public-answers"></div>
+    </article>
   </body>
 </html>

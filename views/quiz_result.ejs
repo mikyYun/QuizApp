@@ -32,7 +32,12 @@
     </div>
     <main class="result_main">
       <div class="result_title">
-        <p class="result_title_greeting">Hello (username)</p>
+        <% if (user) {%>
+        <p class="result_title_greeting">Hello <%= user.user_name%></p>
+        <% } else { %>
+          <p class="result_title_greeting">Hello visitor </p>
+
+          <% }%>
         <!-- <p class="result_title_greeting">Hello (visitor)</p> -->
       </div>
       <div class="result_box">
@@ -48,10 +53,14 @@
         <div class="user_answer_rate">
           <!-- if a visitor, don't need to check rate.
           if corrects 100%, not 0% -->
-          <p class="user_answer_rate_label">
+          <div class="user_answer_rate_label">
             Your Answer Rate :
-          </p>
+          </div>
           <div class="rate_box">
+            <!-- optional.. if rate is .... -->
+            <p class="fairy rank">low rate</p>
+            <!-- <p class="phoneixwing rank">average</p> -->
+            <!-- <p class="phoneix rank">awesome</p> -->
             <div class="correct_rate_box">
               <p class="correct_rate">
                 <p class="accuracy_icon correct_icon">
@@ -61,7 +70,7 @@
               </p>
             </div>
             <div class="incorrect_rate_box">
-              <p class="incorre_rate">
+              <p class="incorret_rate">
                 <p class="accuracy_icon incorrect_icon">
                   7/10
                 </p>

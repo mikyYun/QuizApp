@@ -17,7 +17,7 @@ const {
   urlsForUser,
 } = require("../helpers.js");
 
-const { getPublicQuizID, addPrivateQuiz, getAllPrivateQuiz, getAllPublicQuiz, getUserByName } = require("../database.js");
+const { getPublicQuizID, getAllPublicQuiz, getPrivateQuizID, getAllPrivateQuiz, getUserByName, addPrivateQuiz } = require("../database.js");
 const { Pool } = require('pg/lib');
 const { user } = require('pg/lib/defaults');
 
@@ -32,10 +32,9 @@ module.exports = (db) => {
   // ================== GET ==================== //
 
   router.get("/", (req, res) => {
-    // .redirect()
-    const user_name = req.session.user_name
+    const user_name = req.session.user_name;
     // const user =
-    getUserByName(user_name) //THIS IS A FUNCTION THAT RETURNS A PROMISE
+    getUserByName(user_name)
       .then((user) => {
         // res.cookie('user_id', user.id);
         getAllPublicQuiz()
@@ -44,92 +43,70 @@ module.exports = (db) => {
               user,
               quizzes
             };
-            console.log('temp user is ', templateVars.user);
             res.render('quizzes', templateVars);
           })
           .catch((e) => {
             console.error(e);
             res.send(e);
           });
-
-        // getAllPublicQuiz()
-        //   .then((quizzes) => { // quiz == res.rows
-        //     const user = {}
-        //     const templateVars = {
-        //       user,
-        //       quizzes
-        //     };
-        //     res.render("quizzes", templateVars);
-        //   })
-        //   .catch((e) => {
-        //     console.error(e);
-        //     res.send(e);
-        //   });
-
-
       });
-    });
-    router.get("/private", (req, res) => {
-      const user_name = req.session.user_name;
-      getUserByName(user_name)
-        .then((user) => {
-          getAllPrivateQuiz()
-            .then((obj) => { // quizzes == res.rows [{quiz}, {quiz}, {quiz}, {} ] arr[0]
-              const templateVars = {
-                user,
-                obj
-              };
-              res.render("quiz_private", templateVars);
-            })
-            .catch((e) => {
-              console.error(e);
-              res.send(e);
-            });
-        });
-    });
+  });
 
-    router.get("/create", (req, res) => {
-      console.log("ROUTER/GET/CREATE");
-      const user_name = req.session.user_name;
-      getUserByName(user_name)
-        .then((user) => {
-          const templateVars = {
-            user
-          };
-          res.render("quiz_create", templateVars);
-        })
-        .catch((e) => {
-          console.error(e);
-          res.send(e);
-        });
-    });
+  router.get("/private", (req, res) => {
+    const user_name = req.session.user_name;
+    getUserByName(user_name)
+      .then((user) => {
+        getAllPrivateQuiz()
+          .then((obj) => { // quizzes == res.rows [{quiz}, {quiz}, {quiz}, {} ] arr[0]
+            const templateVars = {
+              user,
+              obj
+            };
+            res.render("quiz_private", templateVars);
+          })
+          .catch((e) => {
+            console.error(e);
+            res.send(e);
+          });
+      });
+  });
 
-    router.get("/result", (req, res) => {
-      console.log('ROUTER/GET/RESULT');
-      const user_name = req.session.user_name;
-      console.log(user_name);
-      getUserByName(user_name)
-        .then((user) => {
-          const templateVars = {
-            user
-          };
-          res.render("quiz_result", templateVars);
-        });
-    });
+  router.get("/create", (req, res) => {
+    console.log("ROUTER/GET/CREATE");
+    const user_name = req.session.user_name;
+    getUserByName(user_name)
+      .then((user) => {
+        const templateVars = {
+          user
+        };
+        res.render("quiz_create", templateVars);
+      })
+      .catch((e) => {
+        console.error(e);
+        res.send(e);
+      });
+  });
 
-    router.get("/show", (req, res) => {
-      console.log('ROUTER/GET/SHOW');
+  router.get("/result", (req, res) => {
+    console.log('ROUTER/GET/RESULT');
+    const user_name = req.session.user_name;
+    console.log(user_name);
+    getUserByName(user_name)
+      .then((user) => {
+        const templateVars = {
+          user
+        };
+        res.render("quiz_result", templateVars);
+      });
+  });
 
-      const quizURL = req.params.shortURL;
-      const userID = req.session.user_id;
-    });
-
-    // handling individual quiz page
-    router.get("/:quizID", (req, res) => {
-      const quizID = req.params.quizID;
-      const user_name = req.session.user_name;
-      getUserByName(user_name)
-        .then((user) => {
+  // handling individual quiz page
+  router.get("/:quizID", (req, res) => {
+    const quizID = req.params.quizID;
+    const user_name = req.session.user_name;
+    getUserByName(user_name)
+      .then((user) => {
+        if (quizID <= 17) {
           getPublicQuizID(quizID)
             .then((quiz) => {
               const oneQuiz = quiz[0];
@@ -138,68 +115,98 @@ module.exports = (db) => {
               const templateVars = {
                 user,
                 oneQuiz: oneQuiz,
-                oneQuestion: oneQuestion
+                oneQuestion: oneQuestion,
               };
-
               res.render("quiz_show", templateVars);
             });
-        });
-    });
-    // const userID = req.session.user_id;
+        }
+        getPrivateQuizID(quizID)
+          .then((quiz) => {
+            console.log(quiz); //promise is coming up as undefined
+            const oneQuiz = quiz[0];
+            const oneQuestion = quiz[0].question;
 
-
-    router.get("/create", (req, res) => {
-      const user_name = req.session.user_name;
-      getUserByName(user_name)
-        .then((user) => {
-          const templateVars = {
-            user
-          };
-          res.render("quiz_create", templateVars);
-        });
-    });
-
-    // ================== POST ==================== //
-    router.post("/create", (req, res) => {
-      // const quizURL = generateRandomString(); //abcde.
-      console.log(req.body);
-      const question = req.body.questionInput;
-      const answer = req.body.answerInput;
-
-      // getUserByName(user)
-
-      addPrivateQuiz({ question, answer, user_id: 1 })
-        .then((quiz) => {
-          res.send(quiz);
-        })
-        .catch((e) => {
-          console.error(e);
-          res.send(e);
-        });
-    });
-
-    // ================== GARY ==================== //
-    /*
-    router.get("/", (req, res) => {
-      res.render("quizzes");
-  
-  
-    res.render("quizzes", {}); //templateVars
-  
-    let query = `SELECT * FROM quizzes`;
-    console.log(query);
-    db.query(query)
-      .then(data => {
-        const quizzes = data.rows;
-        ///template vars and render instead of res.render
-        // res.render("", {res.row})
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
+            const templateVars = {
+              user,
+              oneQuiz: oneQuiz,
+              oneQuestion: oneQuestion
+            };
+            res.render("quiz_show", templateVars);
+          }).catch((error) => {
+            console.log(error);
+          });
       });
+  });
+
+  router.get("/create", (req, res) => {
+    const user_name = req.session.user_name;
+    getUserByName(user_name)
+      .then((user) => {
+        const templateVars = {
+          user
+        };
+        res.render("quiz_create", templateVars);
+      });
+  });
+
+  // ================== POST ==================== //
+
+  router.post("/create", (req, res) => {
+    console.log(req.body);
+    const question = req.body.question;
+    const answer = req.body.answer;
+
+    addPrivateQuiz({ question, answer, user_id: 1 })
+      .then((quiz) => {
+        res.send(quiz);
+      })
+      .catch((e) => {
+        console.error(e);
+        res.send(e);
+      });
+  });
+
+  router.post("/check", (req, res) => {
+    console.log(req.params);
+    console.log(req.body);
+    // const question = req.body.question;
+    const answer = req.body.answer;
+    //QUERY THE ANSWER
+    //ALVIN SOLUTION
+
+    // addPrivateQuiz({ question, answer, user_id: 1 })
+    //   .then((quiz) => {
+    //     res.send(quiz);
+    //   })
+    //   .catch((e) => {
+    //     console.error(e);
+    //     res.send(e);
+    //   });
+  });
+
+
+  // ================== GARY ==================== //
+  /*
+  router.get("/", (req, res) => {
+    res.render("quizzes");
+
+
+  res.render("quizzes", {}); //templateVars
+
+  let query = `SELECT * FROM quizzes`;
+  console.log(query);
+  db.query(query)
+    .then(data => {
+      const quizzes = data.rows;
+      ///template vars and render instead of res.render
+      // res.render("", {res.row})
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
     });
-    */
-    return router;
-  };
+  });
+  */
+  return router;
+};

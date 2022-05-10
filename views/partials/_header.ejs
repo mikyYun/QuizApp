@@ -2,23 +2,12 @@
 <!-- when you want to have this everywhere. -->
 
 <header class="navbar">
-
-  <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Source+Sans+Pro:wght@300&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bungee&family=Source+Sans+Pro:wght@300&display=swap"
+    rel="stylesheet"
+  />
 
   <nav class="navbar1">
-    <!-- <div> -->
-      <!-- <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarNavAltMarkup"
-      aria-controls="navbarNavAltMarkup"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-      >
-      <span class="navbar-toggler-icon"></span>
-      <div class="navbar2">
-        <div>
           <!-- a tag href goes rounter.get -->
           <!-- <a class="create" href="/quizzes/create">Create quiz</a> -->
           
@@ -30,22 +19,16 @@
               <a class="anchor result" href="/quizzes/result">My result</a>
           <form method="POST" action="/logout">
             <label for="username" class="greeting">Hello, <%= user.user_name%>! </label>
-            <button type="submit" class="button_logout">Logout</button>
+            <button type="submit" class="button_logout evnt">Logout</button>
           </form>
-          <!-- <form method="POST" action="/login">
-            <a class="login" href="/login">Login</a>
-          </form> -->
         <% } else { %>
           <a class="anchor result" href="/quizzes/result">My result</a>
           <form method="GET" action="/login">
             <label for="username" class="greeting">Hello, visitor! </label>
-            <button class="button_login" href="/login">Login</button>
+            <button class="button_login evnt" href="/login">Login</button>
           </form>
           <% } %>
       </div>
-      <!-- <div class="navbar-login">
-      </div> -->
-    <!-- </div> -->
   </nav>
   <hr />
 </header>
