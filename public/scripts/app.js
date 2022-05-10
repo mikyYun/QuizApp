@@ -43,6 +43,7 @@ $(document).ready(function () {
     const quizID = $("#public-quiz-submit-form").attr("data-id");
     const userAnswer = $(".public-input-answer").val().toLowerCase();
     console.log('this is quiz id:', quizID);
+    console.log('this is user answer:', userAnswer);
     //sending data in an object format to this route
 
     $.ajax({ //ajax goes into the backend(quizzes.js)

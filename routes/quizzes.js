@@ -173,7 +173,9 @@ module.exports = (db) => {
 
   router.post("/check", (req, res) => {
     const { userAnswer, quizID } = req.body;
-
+    console.log('quizzes-userAnswer', userAnswer);
+    console.log('quizzes-quizID', quizID);
+    
     getPublicQuizID(quizID)
       .then((quiz) => {
         const oneAnswer = quiz[0].answer;

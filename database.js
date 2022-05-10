@@ -21,7 +21,7 @@ const getUserByName = (user_name) => {
     // , [user.username])
     // , [user.username])
     .then((result) => {
-      console.log('database getUserByName',result.rows);
+      console.log('database getUserByName', result.rows);
       return result.rows[0];
     })
     .catch((err) => {
@@ -56,7 +56,10 @@ const getPublicQuizID = (quizID) => {
   SELECT *
   FROM quizzes
   WHERE is_public IS true AND quizzes.id = $1
-  `, [quizID]).then((res) => res.rows);
+  `, [quizID]).then((res) => {
+    res.rows;
+  });
+
 };
 
 const getAllPublicQuiz = (options) => {
@@ -75,12 +78,12 @@ const getPrivateQuizID = (quizID) => {
   `, [quizID]).then((res) => res.rows);
 };
 
-const getAllPrivateQuiz = (options) => {
+const getAllPrivateQuiz = (user_id) => {
   return pool.query(`
   SELECT quizzes.*
   FROM quizzes
   WHERE is_public IS false;
-  `).then((res) => res.rows); //res.rows === quizzes in users.js
+  `, [user_id]).then((res) => res.rows); //res.rows === quizzes in users.js
 };
 // from line 64 in the where clause: AND user_id = $1
 // from line 65, [payload.user_id]
