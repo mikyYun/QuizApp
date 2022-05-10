@@ -19,34 +19,22 @@
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
-
   </head>
 
   <body>
     <%- include('partials/_header') %>
-
+    <h1 class="empty_message">Please enter your answer.</h1>
     <h3><%= `${oneQuestion}` %></h3>
-
-    <div class="card text-center">
-      <div class="card-body">
-        <!-- alligator tag checks the same name in the object that i passed in the res.render -->
-        <p class="card-text"></p>
-      </div>
-    </div>
-
     <div>
-    <label for="answer-label">Answer</label>
-        <input
-          class="form-control-"
-          type="text"
-          name="answerInput"
-          placeholder="Fill Out Your Answer"
-        />
-        <div>
-          <p class="empty_message"> Please enter your answer.</p>
-        </div>
-        <div class="btn">
-          <button type="submit" class="submit">Submit</button>
-        </div>
+      <input
+        class="form-control-"
+        type="text"
+        name="answerInput"
+        placeholder="Fill Out Your Answer"
+      />
+    </div>
+    <div class="btn">
+      <button type="submit" class="submit">Submit</button>
+    </div>
   </body>
 </html>
