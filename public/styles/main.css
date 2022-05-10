@@ -8,18 +8,36 @@ body {
   width: 100%;
 }
 
+/* handling header */
+
+.navbar {
+  background-color: #af8d8d;
+}
+
+.title, .private, .result, .login {
+  color: rgb(174 247 174)
+}
+
+.create1 {
+  color: rgb(174 247 174);
+}
+
+
 /* handling main page */
 
 .navbar1 {
   display: flex;
   justify-content: space-around;
-  margin-top: 25px;
+  margin-top: 0px;
+  padding-top: 25px;
+  font-family: 'Bungee', cursive;
 }
 
 .navbar2 {
   display: flex;
   justify-content: space-evenly;
   margin-left: 350px;
+  font-family: 'Bungee', cursive;
 }
 
 th, td {
@@ -54,10 +72,12 @@ hr {
   text-align: right;
   margin-right: 100px;
   color: darkred;
+  font-family: 'Bungee', cursive;
 }
 
 .question-quiz {
   color: darkred;
+  font-family: 'Bungee', cursive;
 }
 
 .private {
@@ -77,6 +97,7 @@ hr {
 .create {
   color: darkred;
   text-align: center;
+  font-family: 'Bungee', cursive;
 }
 
 .submit {
@@ -88,11 +109,13 @@ hr {
   margin-top: 30px;
   background-color: transparent;
   font-size: 20px;
+  font-family: 'Bungee', cursive;
 }
 
 .submit:hover {
   background-color: darkred;
   color: palegreen;
+  font-family: 'Bungee', cursive;
 }
 
 .btn {
@@ -118,6 +141,7 @@ hr {
 .view {
   text-align: center;
   color: darkred;
+  font-family: 'Bungee', cursive;
 }
 
 
@@ -126,11 +150,13 @@ hr {
 .login_page {
   text-align: center;
   color: darkred;
+  font-family: 'Bungee', cursive;
 }
 
 .your_result {
   text-align: center;
   color: darkred;
+  font-family: 'Bungee', cursive;
 }
 
 .login_name, .login_password {
@@ -152,7 +178,7 @@ hr {
 /* handling log out button */
 .logout {
   margin-left: 20px;
-  color: darkred;
+  color: rgb(174 247 174);
   background-color: transparent;
   font-size: 20px;
 }
@@ -187,6 +213,7 @@ hr {
 
 .result_correct {
   background-color: rgb(174 247 174);
+  color: black;
   border-radius: 1.5rem;
   width: 35vw;
   align-items: center;
