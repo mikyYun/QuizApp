@@ -23,6 +23,7 @@
 
   <body>
     <%- include('partials/_header') %>
+    <form id="public-quiz-submit-form" data-id="<%= `${oneQuiz.id}` %>" method="POST" action="/quizzes/check">
     <article class="quiestion_article_box">
       <h2>
         Question Number <%= `${oneQuiz.id}` %>
@@ -33,7 +34,6 @@
         <h2 class="question_detail"><%= `${oneQuestion}` %></h2>
       </div>
 
-      <form id="public-quiz-submit-form" data-id="<%= `${oneQuiz.id}` %>" method="POST" action="/quizzes/result">
         <div>
           <textarea
             class="form-control public-input-answer"

@@ -151,7 +151,6 @@ hr {
   margin-top: 2rem;
   width: 10rem;
   border: 0.2rem solid #da9f83 ;
-
 }
 
 .question_submit_btn {
@@ -167,6 +166,7 @@ hr {
 .btn {
   text-align: center;
 }
+
 .form-group mb-2 {
   width: 100%;
 }

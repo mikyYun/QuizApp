@@ -3,6 +3,9 @@
 // ========== GARY ==========//
 // $(() => {
 
+
+// const { addUserAnswer } = require("../../database");
+
 //   $("#btn").on("click", () => {
 
 //     $.get("/api/test")
@@ -55,6 +58,7 @@ $(document).ready(function () {
       dataType: 'json',
     })
       .then((boolean) => {
+        console.log("app.js TTTTTTTTTTT")
         let message;
         if (boolean) {
           message = "you got it right!";
@@ -63,7 +67,8 @@ $(document).ready(function () {
         }
         const $quizResult = $(`<p>${message}</p>`);
         $(".public-quiz-result").append($quizResult);
-      })
+        
+        })
       .catch((error) => {
         console.log(error);
       });
