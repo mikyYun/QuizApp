@@ -140,7 +140,7 @@ hr {
   font-family: 'Bungee', cursive;
 }
 
-.create_btn, .question_submit_btn {
+.create_btn, .question_submit_btn, .submit {
   text-align: center;
   transition-duration: 0.4s;
   color: darkred;
@@ -151,16 +151,13 @@ hr {
   margin-top: 2rem;
   width: 10rem;
   border: 0.2rem solid #da9f83 ;
-
 }
-
-
 
 .question_submit_btn {
   width: 5rem;
 }
 
-.create_btn:hover, .question_submit_btn:hover {
+.create_btn:hover, .question_submit_btn:hover, .submit:hover{
   background-color: #af8d8d;
   color: palegreen;
   font-family: 'Bungee', cursive;
@@ -169,6 +166,7 @@ hr {
 .btn {
   text-align: center;
 }
+
 .form-group mb-2 {
   width: 100%;
 }

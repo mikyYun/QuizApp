@@ -17,7 +17,7 @@ const {
   urlsForUser,
 } = require("../helpers.js");
 
-const { getPublicQuizID, getAllPublicQuiz, getPrivateQuizID, getAllPrivateQuiz, getUserByName, addPrivateQuiz } = require("../database.js");
+const { getPublicQuizID, getAllPublicQuiz, getPrivateQuizID, getAllPrivateQuiz, getUserByName, addPrivateQuiz, addUserAnswer } = require("../database.js");
 const { Pool } = require('pg/lib');
 const { user } = require('pg/lib/defaults');
 
@@ -56,7 +56,7 @@ module.exports = (db) => {
     const user_name = req.session.user_name;
     getUserByName(user_name)
       .then((user) => {
-        getAllPrivateQuiz()
+        getAllPrivateQuiz(user.id)
           .then((obj) => { // quizzes == res.rows [{quiz}, {quiz}, {quiz}, {} ] arr[0]
             const templateVars = {
               user,
@@ -90,7 +90,7 @@ module.exports = (db) => {
   router.get("/result", (req, res) => {
     console.log('ROUTER/GET/RESULT');
     const user_name = req.session.user_name;
-    console.log(user_name);
+    // console.log(user_name);
     getUserByName(user_name)
       .then((user) => {
         const templateVars = {
@@ -102,11 +102,13 @@ module.exports = (db) => {
 
   // handling individual quiz page
   router.get("/:quizID", (req, res) => {
+    console.log("NOOO");
     const quizID = req.params.quizID;
     const user_name = req.session.user_name;
     getUserByName(user_name)
       .then((user) => {
         if (quizID <= 17) {
+          console.log("is_quisID", quizID);
           getPublicQuizID(quizID)
             .then((quiz) => {
               const oneQuiz = quiz[0];
@@ -120,25 +122,31 @@ module.exports = (db) => {
                 oneAnswer: oneAnswer,
               };
               res.render("quiz_show", templateVars);
+            })
+            .catch((error) => {
+              console.log(error);
             });
-        }
-        getPrivateQuizID(quizID)
-          .then((quiz) => {
-            console.log(quiz); //promise is coming up as undefined
-            const oneQuiz = quiz[0];
-            const oneQuestion = quiz[0].question;
-            const oneAnswer = quiz[0].answer;
+        } else {
+          getPrivateQuizID(quizID)
+            .then((quiz) => {
+              // console.log(quiz); //promise is coming up as undefined
+              const oneQuiz = quiz[0];
+              const oneQuestion = quiz[0].question;
+              const oneAnswer = quiz[0].answer;
 
-            const templateVars = {
-              user,
-              oneQuiz: oneQuiz,
-              oneQuestion: oneQuestion,
-              oneAnswer: oneAnswer,
-            };
-            res.render("quiz_show", templateVars);
-          }).catch((error) => {
-            console.log(error);
-          });
+              const templateVars = {
+                user,
+                oneQuiz: oneQuiz,
+                oneQuestion: oneQuestion,
+                oneAnswer: oneAnswer,
+              };
+              res.render("quiz_show", templateVars);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+
+        }
       });
   });
 
@@ -156,14 +164,15 @@ module.exports = (db) => {
   // ================== POST ==================== //
 
   router.post("/create", (req, res) => {
-    console.log(req.body);
+    console.log(req.body, req.session.user_id);
     const question = req.body.questionInput;
     const answer = req.body.answerInput;
+    const user_id = req.session.user_id;
     // console.log('body is', question, answer)
-    addPrivateQuiz({ question, answer, user_id: 1 })
+    addPrivateQuiz({ question, answer, user_id })
       .then((quiz) => {
         // res.send(quiz);
-        res.redirect('/quizzes/private')
+        res.redirect('/quizzes/private');
       })
       .catch((e) => {
         console.error(e);
@@ -171,17 +180,72 @@ module.exports = (db) => {
       });
   });
 
+  // router.post("/check", (req, res) => {
   router.post("/check", (req, res) => {
     const { userAnswer, quizID } = req.body;
+<<<<<<< HEAD
     console.log('quizzes-userAnswer', userAnswer);
     console.log('quizzes-quizID', quizID);
     
+=======
+    console.log('quiz', quizID);
+
+>>>>>>> 7651073346e38c23b597c1c73607f38a33cef2c1
     getPublicQuizID(quizID)
       .then((quiz) => {
+        console.log(quiz);
+        // const oneQuestion = quiz[0].question;
+        // const oneQuiz = quiz[0];
         const oneAnswer = quiz[0].answer;
-        res.send(oneAnswer.toLowerCase() === userAnswer.toLowerCase()); //returns true or false
+        return oneAnswer.toLowerCase() === userAnswer.toLowerCase(); //returns true or false
+      })
+      .then((trueOrFalse) => {
+        addUserAnswer(userAnswer)// userAnswer = obj
+          .then(() => {
+            const templateVars = {
+              user: null
+            }
+            res.send(trueOrFalse);
+            // res.send("quiz_result", templateVars);
+          })
+          .catch((err) => {
+            console.log(err)
+            res.send('error addUserAnswer', err)
+          })
+        // res.send(trueOrFalse); //returns true or false
+      })
+      .catch((err) => {
+        console.log("err ", err);
+        res.send('error getPublicQuiz', err)
       });
   });
+
+  // getPublicQuizID(quizID)
+  //   .then((quiz) => {
+  //     const oneAnswer = quiz[0].answer;
+  //     res.send(oneAnswer.toLowerCase() === userAnswer.toLowerCase()); //returns true or false
+  //   });
+
+
+  // const { userAnswer, quizID } = req.body;
+  // console.log('TEST', req.body)
+  // console.log('user is ', userAnswer)
+  // console.log('req.body', quizID)
+
+  // getPublicQuizID(quizID)
+  // .then((quiz) => {
+  // const oneAnswer = quiz[0].answer;
+
+  // const templateVars = {
+  //   user,
+  //   oneQuiz: oneQuiz,
+  //   oneQuestion: oneQuestion,
+  //   oneAnswer: oneAnswer,
+  // };
+
+
+  // console.log('test', quizID)
+
 
   // ================== GARY ==================== //
 
@@ -192,7 +256,7 @@ module.exports = (db) => {
     res.render("quizzes", {}); //templateVars
 
     let query = `SELECT * FROM quizzes`;
-    console.log(query);
+    // console.log(query);
     db.query(query)
       .then(data => {
         const quizzes = data.rows;
@@ -207,3 +271,4 @@ module.exports = (db) => {
   });
   return router;
 };
+

@@ -41,6 +41,7 @@ module.exports = (db) => {
       .then((user) => {
         console.log('this is user', user)
         req.session['user_name'] = user.user_name
+        req.session['user_id'] = user.id
         // res.cookie('user_id', user.id);
         getAllPublicQuiz()
           .then((quizzes) => { // quiz == res.rows

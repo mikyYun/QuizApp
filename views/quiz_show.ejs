@@ -23,20 +23,34 @@
 
   <body>
     <%- include('partials/_header') %>
+<<<<<<< HEAD
     <article class="quiestion_article_box">
       <h2>Question Number <%= `${oneQuiz.id}` %></h2>
+=======
+<<<<<<< HEAD
+=======
+    <form id="public-quiz-submit-form" data-id="<%= `${oneQuiz.id}` %>" method="POST" action="/quizzes/check">
+>>>>>>> mikes
+    <article class="quiestion_article_box">
+      <h2>
+        Question Number <%= `${oneQuiz.id}` %>
+      </h2>
+>>>>>>> 7651073346e38c23b597c1c73607f38a33cef2c1
 
       <div class="quiestion_area">
         <!-- <h4 class="question_id">Question Number <%= `${oneQuiz.id}` %></h4> -->
         <h2 class="question_detail"><%= `${oneQuestion}` %></h2>
       </div>
 
+<<<<<<< HEAD
       <form
         id="public-quiz-submit-form"
         data-id="<%= `${oneQuiz.id}` %>"
         method="POST"
         action="/users/login"
       >
+=======
+>>>>>>> 7651073346e38c23b597c1c73607f38a33cef2c1
         <div>
           <textarea
             class="form-control public-input-answer"
