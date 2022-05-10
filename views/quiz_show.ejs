@@ -23,8 +23,9 @@
 
   <body>
     <%- include('partials/_header') %>
-    <h3><%= `${oneQuestion}` %></h3>
-    <h3><%= `${oneQuiz.id}` %></h3>
+    <h3>quiz ID: <%= `${oneQuiz.id}` %></h3>
+
+    <h2><%= `${oneQuestion}` %></h2>
 
     <form id="public-quiz-submit-form" data-id="<%= `${oneQuiz.id}` %>">
       <div>
@@ -39,6 +40,8 @@
         <button type="submit" class="submit">Submit</button>
       </div>
     </form>
-    <div class="public-answers"></div>
+    <div class="public-quiz-result">
+      <!-- appended inside app.js-->
+    </div>
   </body>
 </html>
