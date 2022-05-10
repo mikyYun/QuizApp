@@ -26,7 +26,7 @@ app.use(morgan("dev"));
 app.use(cookieSession({
   name: 'session',
   keys: ['key1']
-}))
+}));
 
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
@@ -74,51 +74,23 @@ app.get("/", (req, res) => {
   res.redirect("/quizzes");
 });
 
-// THIS WORKS
-// app.get("/create", (req, res) => {
-//   res.render("quiz_create");
-//   // res.redirect();
-// });
-
-// app.get("/private", (req, res) => {
-//   res.render("quiz_private");
-//   // res.redirect();
-// });
-
-// app.get("/result", (req, res) => {
-//   res.render("quiz_result");
-//   // res.redirect();
-// });
-
-// app.get("/create", (req, res) => {
-//   res.render("quiz_create");
-//   // res.redirect();
-// });
-
-// app.get("/result", (req, res) => {
-//   console.log("APP/GET/RESULT")
-//   res.render("quiz_result");
-//   // res.redirect();
-// });
-
-
 // GET /login
 app.get('/login', (req, res) => {
 
-  console.log("APP/GET/LOGIN")
+  console.log("APP/GET/LOGIN");
   // console.log('REQREQREQ', req)
   const templateVars = {
     user: ''
-  }
+  };
   res.render('login', templateVars);
-})
+});
 
 app.post("/logout", (req, res) => {
-  console.log("APP/POST/LOGOUT")
-  console.log(req.session)
+  console.log("APP/POST/LOGOUT");
+  console.log(req.session);
   // res.clearCookie("user_id");
   req.session = null;
-  console.log(req.session)
+  console.log(req.session);
   res.redirect("/login"); // just redirecting WITHOUT data
 });
 
@@ -127,7 +99,7 @@ app.post("/logout", (req, res) => {
 // otherwise it will ignore all other url request below..
 app.get("/:quizURL", (req, res) => {
   console.log("url");
-  console.log("APP/GET/:quizURL")
+  console.log("APP/GET/:quizURL");
   const quizURL = req.params.quizURL;
   const templateVars = {
     //need to be below if statement.
@@ -144,12 +116,6 @@ app.get("/:quizURL", (req, res) => {
 // app.get("/result", (req, res) => {
 //   res.render("quiz_result");
 //   // res.redirect();
-// });
-
-
-// // GET /login
-// app.get('/login', (req, res) => {
-//   res.render('login');
 // });
 
 app.get("/login/:user_id", (req, res) => {
