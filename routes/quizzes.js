@@ -187,22 +187,21 @@ module.exports = (db) => {
     res.render("quizzes");
 
 
-  res.render("quizzes", {}); //templateVars
+    res.render("quizzes", {}); //templateVars
 
-  let query = `SELECT * FROM quizzes`;
-  console.log(query);
-  db.query(query)
-    .then(data => {
-      const quizzes = data.rows;
-      ///template vars and render instead of res.render
-      // res.render("", {res.row})
-    })
-    .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message });
-    });
+    let query = `SELECT * FROM quizzes`;
+    console.log(query);
+    db.query(query)
+      .then(data => {
+        const quizzes = data.rows;
+        ///template vars and render instead of res.render
+        // res.render("", {res.row})
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
   });
-  */
   return router;
 };
