@@ -17,7 +17,7 @@ const {
   urlsForUser,
 } = require("../helpers.js");
 
-const { getPublicQuizID, addPrivateQuiz, getAllPrivateQuiz, getAllPublicQuiz, getUserByName } = require("../database.js");
+const { getPublicQuizID, getAllPublicQuiz, getPrivateQuizID, getAllPrivateQuiz, getUserByName, addPrivateQuiz } = require("../database.js");
 const { Pool } = require('pg/lib');
 const { user } = require('pg/lib/defaults');
 
@@ -43,7 +43,6 @@ module.exports = (db) => {
               user,
               quizzes
             };
-            console.log('temp user is ', templateVars.user);
             res.render('quizzes', templateVars);
           })
           .catch((e) => {
@@ -107,8 +106,23 @@ module.exports = (db) => {
     const user_name = req.session.user_name;
     getUserByName(user_name)
       .then((user) => {
-        getPublicQuizID(quizID)
+        if (quizID <= 17) {
+          getPublicQuizID(quizID)
+            .then((quiz) => {
+              const oneQuiz = quiz[0];
+              const oneQuestion = quiz[0].question;
+
+              const templateVars = {
+                user,
+                oneQuiz: oneQuiz,
+                oneQuestion: oneQuestion,
+              };
+              res.render("quiz_show", templateVars);
+            });
+        }
+        getPrivateQuizID(quizID)
           .then((quiz) => {
+            console.log(quiz); //promise is coming up as undefined
             const oneQuiz = quiz[0];
             const oneQuestion = quiz[0].question;
 
@@ -118,6 +132,8 @@ module.exports = (db) => {
               oneQuestion: oneQuestion
             };
             res.render("quiz_show", templateVars);
+          }).catch((error) => {
+            console.log(error);
           });
       });
   });
@@ -137,8 +153,8 @@ module.exports = (db) => {
 
   router.post("/create", (req, res) => {
     console.log(req.body);
-    const question = req.body.questionInput;
-    const answer = req.body.answerInput;
+    const question = req.body.question;
+    const answer = req.body.answer;
 
     addPrivateQuiz({ question, answer, user_id: 1 })
       .then((quiz) => {
@@ -149,6 +165,25 @@ module.exports = (db) => {
         res.send(e);
       });
   });
+
+  router.post("/check", (req, res) => {
+    console.log(req.params);
+    console.log(req.body);
+    // const question = req.body.question;
+    const answer = req.body.answer;
+    //QUERY THE ANSWER
+    //ALVIN SOLUTION
+
+    // addPrivateQuiz({ question, answer, user_id: 1 })
+    //   .then((quiz) => {
+    //     res.send(quiz);
+    //   })
+    //   .catch((e) => {
+    //     console.error(e);
+    //     res.send(e);
+    //   });
+  });
+
 
   // ================== GARY ==================== //
   /*

@@ -66,6 +66,14 @@ const getAllPublicQuiz = (options) => {
   `).then((res) => res.rows); //res.rows === quizzes in users.js
 };
 
+const getPrivateQuizID = (quizID) => {
+  return pool.query(`
+  SELECT *
+  FROM quizzes
+  WHERE is_public IS false AND quizzes.id = $1
+  `, [quizID]).then((res) => res.rows);
+};
+
 const getAllPrivateQuiz = (options) => {
   return pool.query(`
   SELECT quizzes.*
@@ -75,4 +83,4 @@ const getAllPrivateQuiz = (options) => {
 };
 // from line 64 in the where clause: AND user_id = $1
 // from line 65, [payload.user_id]
-module.exports = { getPublicQuizID, getAllPrivateQuiz, getAllPublicQuiz, addPrivateQuiz, getUserByName };
+module.exports = { getPublicQuizID, getAllPublicQuiz, getPrivateQuizID, getAllPrivateQuiz, addPrivateQuiz, getUserByName };

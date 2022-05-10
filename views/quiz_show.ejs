@@ -24,16 +24,21 @@
   <body>
     <%- include('partials/_header') %>
     <h3><%= `${oneQuestion}` %></h3>
-    <div>
-      <input
-        class="form-control-"
-        type="text"
-        name="answerInput"
-        placeholder="Fill out your answer. (all lower case)"
-      />
-    </div>
-    <div class="btn">
-      <button type="submit" class="submit">Submit</button>
-    </div>
+    <h3><%= `${oneQuiz.id}` %></h3>
+
+    <form id="public-quiz-submit-form" data-id="<%= `${oneQuiz.id}` %>">
+      <div>
+        <input
+          class="form-control public-input-answer"
+          type="text"
+          name="answerInput"
+          placeholder="Fill out your answer. (all lower case)"
+        />
+      </div>
+      <div class="btn">
+        <button type="submit" class="submit">Submit</button>
+      </div>
+    </form>
+    <div class="public-answers"></div>
   </body>
 </html>
