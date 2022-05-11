@@ -16,12 +16,7 @@ const getUserByName = (user_name) => {
    FROM USERS
    WHERE user_name = $1;`
     , [user_name])
-    // , [user.login_name])
-    // WHERE user_name = $1;`
-    // , [user.username])
-    // , [user.username])
     .then((result) => {
-      console.log('database getUserByName', result.rows);
       return result.rows[0];
     })
     .catch((err) => {
@@ -42,8 +37,6 @@ const addPrivateQuiz = (quiz) => {
       [quiz.user_id, quiz.question, quiz.answer, false]
     )
     .then((result) => {
-      // console.log('addPrivateQuiz', result.rows);
-      // console.log('result', result)
       return result.rows[0];
     })
     .catch((err) => {
@@ -56,10 +49,10 @@ const getPublicQuizID = (quizID) => {
   SELECT *
   FROM quizzes
   WHERE is_public IS true AND quizzes.id = $1
-  `, [quizID]).then((res) => {
-    console.log('database_getPublicQID', res.rows);
-    return res.rows;
-  });
+  `, [quizID]).then((res) => 
+    // console.log('database_getPublicQID', res.rows);
+    res.rows
+  );
 };
 
 const getAllPublicQuiz = () => {
@@ -90,7 +83,7 @@ const getAllPrivateQuiz = (user_id) => {
 // from line 64 in the where clause: AND user_id = $1
 // from line 65, [payload.user_id]
 
-const addUserAnswer = (answer, user_answer) => {
+const addUserAnswer = (answer, user_answer, user_id) => {
   console.log('answer is', answer);
   return pool
     .query(
@@ -98,24 +91,15 @@ const addUserAnswer = (answer, user_answer) => {
       VALUES($1, $2, $3)
       RETURNING *;
   `,
-      [answer.user_id, answer.id, user_answer]
+      [user_id, answer.id, user_answer]
     )
     .then((result) => {
-      // console.log('addPrivateQuiz', result.rows);
-      // console.log('result', result)
       return result.rows[0];
     })
     .catch((err) => {
       console.log(err.message);
     });
 };
-
-
-// SELECT COUNT(quizzes.) AS result_users
-// FROM quizzes
-// JOIN results ON quizzes.id = results.quiz_id
-// WHERE results.user_id = $1
-// AND results.user_answer = quizzes.answer;
 
 const correctAnswer = (user) => {
   return pool

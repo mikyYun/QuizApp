@@ -9,9 +9,6 @@ const express = require("express");
 const app = express(); //HAS NOTHING TO DO WITH app.js
 const morgan = require("morgan");
 const cookieSession = require('cookie-session');
-// const cookieSession = require("cookie-session");
-// const bodyParser = require("body-parser");
-
 // PG database client/connection setup
 const { Pool } = require("pg");
 const dbParams = require("./lib/db.js");
@@ -31,15 +28,6 @@ app.use(cookieSession({
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
 
-// app.use(
-//   "/styles",
-//   sassMiddleware({
-//     source: __dirname + "/styles",
-//     destination: __dirname + "/public/styles",
-//     isSass: false, // false => scss, true => sass
-//   })
-// );
-
 app.use(express.static("public")); // SHOWS STYLING IN EJS
 
 // Separated Routes for each Resource
@@ -55,10 +43,9 @@ const userRouter = createUserRouter(db);
 // app.use("/api/hello", userRouter); //prefix for userRouter
 
 app.use("/quizzes", quizzesRoutes(db));
-app.use("/private", quizzesRoutes(db));
+// app.use("/private", quizzesRoutes(db));
 
 // Note: mount other resources here, using the same pattern above
-// app.use("/user", userRouter);
 app.use("/users", userRouter);
 
 
@@ -69,8 +56,6 @@ app.use("/users", userRouter);
 // THIS WORKS
 app.get("/", (req, res) => {
   console.log("APP/GET/")
-  console.log('REQQUIZZES', req)
-  // res.render("index");
   res.redirect("/quizzes");
 });
 
@@ -78,7 +63,6 @@ app.get("/", (req, res) => {
 app.get('/login', (req, res) => {
 
   console.log("APP/GET/LOGIN");
-  // console.log('REQREQREQ', req)
   const templateVars = {
     user: ''
   };
@@ -88,7 +72,6 @@ app.get('/login', (req, res) => {
 app.post("/logout", (req, res) => {
   console.log("APP/POST/LOGOUT");
   console.log(req.session);
-  // res.clearCookie("user_id");
   req.session = null;
   console.log(req.session);
   res.redirect("/login"); // just redirecting WITHOUT data
@@ -108,15 +91,6 @@ app.get("/:quizURL", (req, res) => {
 
   res.render("quiz_show", templateVars);
 });
-
-// GET /login
-// app.get('/login', (req, res) => {
-//   res.render('login');
-// });
-// app.get("/result", (req, res) => {
-//   res.render("quiz_result");
-//   // res.redirect();
-// });
 
 app.get("/login/:user_id", (req, res) => {
   console.log("APP/GET/:USER_ID");

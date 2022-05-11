@@ -25,12 +25,11 @@
     <main class="result_main">
       <div class="result_title">
         <% if (user.user_name) {%>
-        <p class="result_title_greeting">Hello <%= user.user_name%></p>
-        <% } else { %>
-          <p class="result_title_greeting">Hello visitor </p>
-
-          <% }%>
-        <!-- <p class="result_title_greeting">Hello (visitor)</p> -->
+          <p class="result_title_greeting">Hello <%= user.user_name%>
+          </p>
+          <% } else { %>
+            <p class="result_title_greeting">Hello visitor </p>
+            <% }%>
       </div>
       <div class="result_box">
         <p class="result result_correct">
@@ -50,26 +49,27 @@
           </div>
           <div class="rate_box">
             <!-- optional.. if rate is .... -->
+            <% if (nums[0]/nums[2] < 0.4) { %>
             <p class="fairy rank">low rate</p>
-            <!-- <p class="phoneixwing rank">average</p> -->
-            <!-- <p class="phoneix rank">awesome</p> -->
+            <% } else if (nums[0]/nums[2] > 0.8) { %>
+              <p class="phoneix rank">awesome</p>
+            <% } else {%>
+              <p class="phoneixwing rank">average</p>
+            <% } %>
             <div class="correct_rate_box">
               <p class="correct_rate">
-                <p class="accuracy_icon correct_icon">
-                                  <%= nums[0] %> / <%= nums[2] %>
-
-                </p>
-                Correct
+              <p class="accuracy_icon correct_icon">
+                <%= nums[0] %> / <%= nums[2] %>
+              </p>
+              Correct
               </p>
             </div>
             <div class="incorrect_rate_box">
               <p class="incorret_rate">
-                <p class="accuracy_icon incorrect_icon">
-                                  <%= nums[1] %> / <%= nums[2] %>
-
-                </p>
-                Wrong
-
+              <p class="accuracy_icon incorrect_icon">
+                <%= nums[1] %> / <%= nums[2] %>
+              </p>
+              Wrong
               </p>
             </div>
           </div>

@@ -45,9 +45,12 @@ module.exports = (db) => {
 
   router.get("/private", (req, res) => {
     const user_name = req.session.user_name;
-    getUserByName(user_name)
-      .then((user) => {
-        getAllPrivateQuiz(user.id)
+    const user_id = req.session.user_id;
+    const user = { user_name, user_id };
+    // const user_name = req.session.user_name;
+    // getUserByName(user_name)
+      // .then((user) => {
+        getAllPrivateQuiz(user_id)
           .then((obj) => { // quizzes == res.rows [{quiz}, {quiz}, {quiz}, {} ] arr[0]
             const templateVars = {
               user,
@@ -59,24 +62,28 @@ module.exports = (db) => {
             console.error(e);
             res.send(e);
           });
-      });
+      // });
   });
 
   router.get("/create", (req, res) => {
     console.log("ROUTER/GET/CREATE");
     const user_name = req.session.user_name;
-    getUserByName(user_name)
-      .then((user) => {
+    const user_id = req.session.user_id;
+    const user = { user_name, user_id };
+    // const user_name = req.session.user_name;
+    // getUserByName(user_name)
+      // .then((user) => {
         const templateVars = {
           user
         };
         res.render("quiz_create", templateVars);
-      })
-      .catch((e) => {
-        console.error(e);
-        res.send(e);
-      });
+      // })
+      // .catch((e) => {
+      //   console.error(e);
+      //   res.send(e);
+      // });
   });
+
 
   router.get("/result", (req, res) => {
     console.log('ROUTER/GET/RESULT');
@@ -97,22 +104,22 @@ module.exports = (db) => {
   });
   // handling individual quiz page
 
-  router.get("/create", (req, res) => {
-    const user_name = req.session.user_name;
-    getUserByName(user_name)
-      .then((user) => {
-        const templateVars = {
-          user
-        };
-        res.render("quiz_create", templateVars);
-      });
-  });
+  // router.get("/create", (req, res) => {
+  //   const user_name = req.session.user_name;
+  //   const user_id = req.session.user_id;
+  //   const user = { user_name, user_id };
+  //       const templateVars = {
+  //         user
+  //       };
+  //       res.render("quiz_create", templateVars);
+  //     // });
+  // });
 
   router.get("/:quizID", (req, res) => {
     const quizID = req.params.quizID;
     const user_name = req.session.user_name;
-    getUserByName(user_name)
-      .then((user) => {
+    const user_id = req.session.user_id;
+    const user = { user_name, user_id };
         if (quizID <= 17) {
           console.log("is_quizID", quizID);
           getPublicQuizID(quizID)
@@ -152,7 +159,7 @@ module.exports = (db) => {
               console.log(error);
             });
         }
-      });
+      // });
   });
 
   // ================== POST ==================== //
@@ -176,10 +183,12 @@ module.exports = (db) => {
 
   router.post("/check", (req, res) => {
     const { userAnswer, quizID } = req.body;
-    console.log('quiz', quizID);// ok
+    // console.log('quiz', quizID);// ok
     // const quizID = req.params.quizID;
-    console.log("TEST", quizID); // ok
-
+    // console.log("TEST", quizID); // ok
+    const user_name = req.session.user_name;
+    const user_id = req.session.user_id;
+    const user = { user_name, user_id };
     // want to return the value of getPublicQuizID(quizID) to the second then
     if (quizID >= 17) {
       console.log('quizID is larger than 17');
@@ -187,7 +196,7 @@ module.exports = (db) => {
         // getPrivateQuizID(quizID) // return res.rows [{}]
         .then((quiz) => {
           console.log('QUIZ', quiz);
-          addUserAnswer(quiz[0], userAnswer)
+          addUserAnswer(quiz[0], userAnswer, user_id)
             .then(() => {
               console.log('userAnswer: ', userAnswer);
 
@@ -207,12 +216,13 @@ module.exports = (db) => {
         });
 
     } else {
+      console.log("HHHH")
       getPublicQuizID(quizID) // return res.rows [{}]
         .then((quiz) => {
-          addUserAnswer(quiz[0], userAnswer)
+          addUserAnswer(quiz[0], userAnswer, user_id)
             .then(() => {
               console.log('userAnswer: ', userAnswer);
-
+              console.log('quiz[0] is', quiz[0])
               const oneAnswer = quiz[0].answer;
               return oneAnswer.toLowerCase() === userAnswer.toLowerCase();
             })
