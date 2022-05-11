@@ -373,7 +373,7 @@ footer {
   justify-content: space-around;
 }
 
-.rank {
+.rank, .rank1 {
   margin: 0;
   align-items: center;
   width: 10rem;
@@ -432,6 +432,10 @@ footer {
   text-align: center;
 }
 
+.history {
+  display: none;
+}
+
 .history_box {
   margin-top: 2rem;
   display: flex;
@@ -439,10 +443,16 @@ footer {
   align-items: center;
   justify-content: center;
 }
-
+/* .history_box:after { */
+  /* display: flex; */
+/* } */
 .history_box_title {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-top: 2rem;
   font-family: "Bungee", cursive;
-  color: red;
+  color: #af8d8d;
+  height: 2rem;
+  font-size: 1.5rem;
 }

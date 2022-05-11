@@ -111,7 +111,7 @@ const correctAnswer = (user) => {
       AND results.user_answer = quizzes.answer;
       `, [user])
     .then((res) => {
-      console.log('correct answer number: ', res.rows[0].result_users);
+      // console.log('correct answer number: ', res.rows[0].result_users);
       return res.rows[0].result_users; // number
     }
     );
@@ -126,7 +126,7 @@ const wrongAnswer = (user) => {
       AND results.user_answer != quizzes.answer;
       `, [user])
     .then((res) => {
-      console.log('wrong answer number: ', res.rows[0].result_users);
+      // console.log('wrong answer number: ', res.rows[0].result_users);
       return res.rows[0].result_users; // number
     });
 };
@@ -140,7 +140,7 @@ const totalAttempts = (user) => {
       WHERE results.user_id = $1;
         `, [user])
     .then((res) => {
-      console.log('total attmept number: ', res.rows[0].result_users);
+      // console.log('total attmept number: ', res.rows[0].result_users);
       return res.rows[0].result_users; // number
     });
 };
@@ -152,6 +152,7 @@ const getLatestHistory = (user) => {
       JOIN quizzes
       ON quizzes.id = quiz_id
       WHERE results.user_id = $1
+      ORDER BY results.id DESC
       LIMIT 10
       `, [user]
     ).then((res) => {return res.rows})

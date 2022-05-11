@@ -89,11 +89,12 @@ module.exports = (db) => {
     console.log('ROUTER/GET/RESULT');
     const user_name = req.session.user_name;
     const user_id = req.session.user_id;
-    const user = { user_name, user_id };
+
     Promise.all([
       correctAnswer(user_id), wrongAnswer(user_id), totalAttempts(user_id), getLatestHistory(user_id)
     ])
       .then((nums) => {
+        
         console.log("nums", nums);
         const templateVars = {
           nums,

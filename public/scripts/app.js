@@ -78,4 +78,10 @@ $(document).ready(function () {
       });
   });
 
+  $('.rank').on('click', () => {
+    $('.history_box_title').slideToggle('slow')
+    $('.history').slideToggle('slow')
+  })
+
+
 });

@@ -81,12 +81,16 @@ app.post("/logout", (req, res) => {
 // dinamic url must be last on the list
 // otherwise it will ignore all other url request below..
 app.get("/:quizURL", (req, res) => {
-  console.log("url");
+  // console.log("url");
   console.log("APP/GET/:quizURL");
+  const user_name = req.session.user_name;
+  const user_id = req.session.user_id;
+  const user = { user_name, user_id };
   const quizURL = req.params.quizURL;
   const templateVars = {
     //need to be below if statement.
     quizURL: quizURL,
+    user
   };
 
   res.render("quiz_show", templateVars);
