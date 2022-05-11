@@ -31,7 +31,9 @@
       <tr>
         <td><%=obj[i].question%></td>
         <td>
-          <a href="<%=`/quizzes/${obj[i].id}`%>">Go to quiz!</a>
+          <a href="<%=`/quizzes/quizzes/${obj[i].random_string}`%>"
+            >Go to quiz!</a
+          >
         </td>
       </tr>
       <% }%>

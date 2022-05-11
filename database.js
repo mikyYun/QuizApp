@@ -26,16 +26,15 @@ const getUserByName = (user_name) => {
 };
 
 const addPrivateQuiz = (quiz) => {
-  console.log(quiz);
+  console.log('HELLO', quiz);
   return pool
     // HOW DO I GRAB THE USER INPUT FROM THE SITE AND USE THAT IN THE SQL?
     .query(
-      `INSERT INTO quizzes(user_id, question, answer, is_public)
-      VALUES($1, $2, $3, $4)
+      `INSERT INTO quizzes(user_id, question, answer, is_public, random_string)
+      VALUES($1, $2, $3, $4, $5)
       RETURNING *;
   `,
-      [quiz.user_id, quiz.question, quiz.answer, false]
-    )
+      [quiz.user_id, quiz.question, quiz.answer, false, quiz.random_string])
     .then((result) => {
       return result.rows[0];
     })
@@ -49,7 +48,7 @@ const getPublicQuizID = (quizID) => {
   SELECT *
   FROM quizzes
   WHERE is_public IS true AND quizzes.id = $1
-  `, [quizID]).then((res) => 
+  `, [quizID]).then((res) =>
     // console.log('database_getPublicQID', res.rows);
     res.rows
   );
@@ -63,25 +62,22 @@ const getAllPublicQuiz = () => {
   `).then((res) => res.rows); //res.rows === quizzes in users.js
 };
 
-const getPrivateQuizID = (quizID) => {
+const getPrivateQuizID = (randomString) => {
   return pool.query(`
   SELECT *
   FROM quizzes
-  WHERE is_public IS false AND quizzes.id = $1
-  `, [quizID]).then((res) => res.rows);
+  WHERE is_public IS false AND quizzes.random_string = $1
+  `, [randomString]).then((res) => res.rows);
 };
 
 const getAllPrivateQuiz = (user_id) => {
-  console.log('test:::', user_id);
   return pool.query(`
   SELECT quizzes.*
   FROM quizzes
   WHERE is_public IS false
   AND user_id = $1;
-  `, [user_id]).then((res) => res.rows); //res.rows === quizzes in users.js
+  `, [user_id]).then((res) => res.rows); //res.rows === obj in quiz_private.ejs
 };
-// from line 64 in the where clause: AND user_id = $1
-// from line 65, [payload.user_id]
 
 const addUserAnswer = (answer, user_answer, user_id) => {
   console.log('answer is', answer);
@@ -153,10 +149,12 @@ const getLatestHistory = (user) => {
       ON quizzes.id = quiz_id
       WHERE results.user_id = $1
       ORDER BY results.id DESC
-      LIMIT 10
+      LIMIT 10;
       `, [user]
-    ).then((res) => {return res.rows})
-}
+    ).then((res) => {
+      return res.rows;
+    });
+};
 
 
 module.exports = { getPublicQuizID, getAllPublicQuiz, getPrivateQuizID, getAllPrivateQuiz, addPrivateQuiz, getUserByName, addUserAnswer, correctAnswer, totalAttempts, wrongAnswer, getLatestHistory };
