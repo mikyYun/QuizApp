@@ -302,8 +302,6 @@ module.exports = (db) => {
     db.query(query)
       .then(data => {
         const quizzes = data.rows;
-        ///template vars and render instead of res.render
-        // res.render("", {res.row})
       })
       .catch(err => {
         res
