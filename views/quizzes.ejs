@@ -20,12 +20,13 @@
     <script type="text/javascript" src="/scripts/app.js"></script>
   </head>
 
-  <body>
+  <body class="cohort-photo">
     <%- include('partials/_header') %>
     <h1 class="welcome123 view">Welcome to the MWM Quiz</h1>
-    <div class="cohort-photo"></div>
+
 
     <table class="public_quiz">
+      <tbody class="question-url">
       <tr>
         <th scope="col">Question</th>
         <th scope="col">Quiz URL</th>
@@ -38,6 +39,7 @@
         </td>
       </tr>
       <% }%>
+    </tbody>
     </table>
   </body>
 </html>

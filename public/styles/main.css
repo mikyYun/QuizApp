@@ -1,7 +1,20 @@
 .cohort-photo {
-  background: url("../images/cohort.jpeg");
-  background-size: 10rem 10rem;
+  background: url(../images/cohort2.png);
+  background-size: auto;
+  background-position: center;
+  opacity:0.2;
 }
+
+.cohort-photo:hover {
+  opacity: 1;
+}
+
+.question-url {
+    color: rgb(174 247 174);
+    background-color: #af8d8d;
+    opacity: 0.8;
+}
+
 
 body {
   /* display: flex;
@@ -224,8 +237,9 @@ a:active {
 
 .view {
   text-align: center;
-  color: darkred;
+  color: rgb(174 247 174);
   font-family: "Bungee", cursive;
+
 }
 
 .question,
