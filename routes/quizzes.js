@@ -259,31 +259,28 @@ module.exports = (db) => {
         // console.log(quiz);//object id: ..., user_id: ,....,
         // const oneQuestion = quiz[0].question;
         // const oneQuiz = quiz[0];
-        ////////////////////
-      //   const oneAnswer = quiz[0].answer;
-      //   return oneAnswer.toLowerCase() === userAnswer.toLowerCase(); //returns true or false
-      // })
-      // .then((trueOrFalse) => {
-      //   // addUserAnswer(userAnswer)// userAnswer = obj
-      //   addUserAnswer(quiz_obj[0], userAnswer)
-      //     .then(() => {
-      //       console.log('useransweris', userAnswer)
-      //       // const templateVars = {
-      //       //   user: null
-      //       // }
-      //       res.send(trueOrFalse);
-      //       // res.send("quiz_result", templateVars);
-      //     })
-      //     .catch((err) => {
-      //       console.log(err)
-      //       res.send('error addUserAnswer', err)
-      //     })
-      //   // res.send(trueOrFalse); //returns true or false
-      // })
-      // .catch((err) => {
-      //   console.log("err ", err);
-      //   res.send('error getPublicQuiz', err)
-      // });
+  //       const oneAnswer = quiz[0].answer;
+  //       return oneAnswer.toLowerCase() === userAnswer.toLowerCase(); //returns true or false
+  //     })
+  //     .then((trueOrFalse) => {
+  //       addUserAnswer(userAnswer)// userAnswer = obj
+  //         .then(() => {
+  //           const templateVars = {
+  //             user: null
+  //           };
+  //           res.send(trueOrFalse);
+  //         })
+  //         .catch((err) => {
+  //           console.log(err);
+  //           res.send('error addUserAnswer', err);
+  //         });
+  //       // res.send(trueOrFalse); //returns true or false
+  //     })
+  //     .catch((err) => {
+  //       console.log("err ", err);
+  //       res.send('error getPublicQuiz', err);
+  //     });
+    
   });
 
   // getPublicQuizID(quizID)

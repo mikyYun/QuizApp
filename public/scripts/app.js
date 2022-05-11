@@ -41,11 +41,16 @@ $(document).ready(function () {
   //     });
   // });
 
+  $(".alert-message").hide();
+
   $("#public-quiz-submit-form").submit((e) => {
+    $(".alert-message").hide();
+
     e.preventDefault();
     const quizID = $("#public-quiz-submit-form").attr("data-id");
     const userAnswer = $(".public-input-answer").val().toLowerCase();
     console.log('this is quiz id:', quizID);
+    console.log('this is user answer:', userAnswer);
     //sending data in an object format to this route
 
     $.ajax({ //ajax goes into the backend(quizzes.js)
@@ -57,18 +62,17 @@ $(document).ready(function () {
       },
       dataType: 'json',
     })
-      .then((boolean) => {
-        console.log("app.js TTTTTTTTTTT")
+      .then((trueOrFalse) => {
         let message;
-        if (boolean) {
-          message = "you got it right!";
+        if (trueOrFalse) {
+          $("#alert-correct").slideDown();
         } else {
-          message = "you got it wrong!";
+          $("#alert-wrong").slideDown();
         }
-        const $quizResult = $(`<p>${message}</p>`);
-        $(".public-quiz-result").append($quizResult);
-        
-        })
+      })
+      .then(() => {
+
+      })
       .catch((error) => {
         console.log(error);
       });
