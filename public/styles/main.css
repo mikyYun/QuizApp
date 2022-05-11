@@ -15,7 +15,7 @@
 }
 
 .question_article_box {
-  font-family: 'Permanent Marker', cursive;
+  font-family: "Permanent Marker", cursive;
   text-align: center;
 }
 
@@ -79,10 +79,8 @@ body {
 /* handling create page */
 .form-inline,
 .private_quiz {
-  font-family: 'Permanent Marker', cursive;
+  font-family: "Permanent Marker", cursive;
 }
-
-
 
 /* handling main page */
 
@@ -133,7 +131,7 @@ td {
   width: 100%;
   justify-content: center;
   align-items: center;
-  font-family: 'Permanent Marker', cursive;
+  font-family: "Permanent Marker", cursive;
 }
 
 .home {
@@ -456,7 +454,7 @@ footer {
   margin-top: 1em;
 }
 
-.quiestion_article_box {
+.question_article_box {
   text-align: center;
 }
 

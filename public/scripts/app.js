@@ -1,22 +1,5 @@
 /* eslint-disable no-undef */
 // Client facing scripts here
-// ========== GARY ==========//
-// $(() => {
-
-
-// const { addUserAnswer } = require("../../database");
-
-//   $("#btn").on("click", () => {
-
-//     $.get("/api/test")
-//       .then((data) => {
-//         $("#belowbtn").html(data.text);
-
-//       });
-//   });
-// });
-// ========== GARY ==========//
-
 
 $(document).ready(function () {
   // $("#create-quiz-form").submit((e) => {
