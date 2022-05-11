@@ -2,14 +2,6 @@ const generateRandomString = function () {
   const str = Math.random().toString(36).slice(7);
   return str;
 };
-const userExistsByID = function (id, userDB) {
-  for (const userId in userDB) {
-    if (userId === id) {
-      return true;
-    }
-  }
-  return false;
-};
 
 const urlsForUser = function (id, urlDB) {
   let userURLs = {}; //shortURL, longURL, userID
@@ -25,6 +17,5 @@ const urlsForUser = function (id, urlDB) {
 
 module.exports = {
   generateRandomString,
-  userExistsByID,
   urlsForUser
 };

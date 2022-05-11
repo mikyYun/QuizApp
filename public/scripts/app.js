@@ -62,16 +62,22 @@ $(document).ready(function () {
       },
       dataType: 'json',
     })
-      .then((trueOrFalse) => {
-        let message;
-        if (trueOrFalse) {
-          $("#alert-correct").slideDown();
-        } else {
-          $("#alert-wrong").slideDown();
-        }
-      })
-      .then(() => {
+      .then((resultAndID) => {
+        if (resultAndID.trueOrFalseResult) {
+          if (resultAndID.currentQuizID < 17) {
+            let currentQuizID = resultAndID.currentQuizID; //16
+            currentQuizID = currentQuizID + 1; //17
+            // smaller than 17
+            $("#alert-correct").slideDown(); //correct or wrong
+            setTimeout(() => {
+              window.location.href = `/quizzes/${currentQuizID}`;
+              //send them to the next page
+            }, 1000);
+          } else if (resultAndID.currentQuizID === 17) {
+            console.log('APP.JS -this is the last quiz');
+          }
 
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -79,9 +85,9 @@ $(document).ready(function () {
   });
 
   $('.rank').on('click', () => {
-    $('.history_box_title').slideToggle('slow')
-    $('.history').slideToggle('slow')
-  })
+    $('.history_box_title').slideToggle('slow');
+    $('.history').slideToggle('slow');
+  });
 
 
 });

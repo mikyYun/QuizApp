@@ -1,8 +1,7 @@
 .cohort-photo {
-  background: url(../images/cohort2.png);
-  background-size: auto;
-  background-position: center;
-  opacity:0.2;
+  background: url(../images/cohort0.png);
+  background-size: contain;
+  opacity: 0.2;
 }
 
 .cohort-photo:hover {
@@ -10,18 +9,22 @@
 }
 
 .question-url {
-    color: rgb(174 247 174);
-    background-color: #af8d8d;
-    opacity: 0.8;
+  color: black;
+  background-color: #e7b99f;
+  opacity: 0.8;
 }
 
+.question_article_box {
+  font-family: 'Permanent Marker', cursive;
+  text-align: center;
+}
 
 body {
   /* display: flex;
   justify-content: center; */
   align-items: center;
   min-height: 100vh;
-  background: white;
+  background: #6c7874;
 
   /* background: #a3d0db;
   background: linear-gradient(
@@ -39,7 +42,7 @@ body {
 /* handling header */
 
 .navbar {
-  background-color: #af8d8d;
+  background-color: #d1855b;
   /* position: fixed; */
   /* top: 0; */
   width: 100%;
@@ -72,6 +75,15 @@ body {
 .create1 {
   color: rgb(128, 141, 176);
 }
+
+/* handling create page */
+.form-inline,
+.private_quiz {
+  font-family: 'Permanent Marker', cursive;
+}
+
+
+
 /* handling main page */
 
 .navbar1 {
@@ -121,6 +133,7 @@ td {
   width: 100%;
   justify-content: center;
   align-items: center;
+  font-family: 'Permanent Marker', cursive;
 }
 
 .home {
@@ -159,7 +172,7 @@ hr {
 }
 
 .create {
-  color: darkred;
+  color: rgb(174 247 174);
   text-align: center;
   font-family: "Bungee", cursive;
 }
@@ -180,14 +193,14 @@ hr {
 }
 
 .question_submit_btn {
-  width: 5rem;
+  width: 8rem;
 }
 
 .create_btn:hover,
 .question_submit_btn:hover,
 .submit:hover {
-  background-color: #af8d8d;
-  color: palegreen;
+  background-color: #e7b99f;
+  color: black;
   font-family: "Bungee", cursive;
 }
 
@@ -208,7 +221,7 @@ a:visited {
 }
 
 a:hover {
-  color: orange;
+  color: darkred;
 }
 
 a:active {
@@ -230,7 +243,7 @@ a:active {
   line-break: auto;
   border: 10px solid rgb(174 247 174);
   border-radius: 0.5rem;
-  background-color: #af8d8d;
+  background-color: #e7b99f;
 }
 
 /* handling private quiz page */
@@ -239,7 +252,6 @@ a:active {
   text-align: center;
   color: rgb(174 247 174);
   font-family: "Bungee", cursive;
-
 }
 
 .question,
@@ -278,7 +290,7 @@ animation: bounce 2s ease infinite 1s;
 .login_page {
   margin-top: 100px;
   text-align: center;
-  color: darkred;
+  color: rgb(174 247 174);
   font-family: "Bungee", cursive;
 }
 
@@ -297,6 +309,7 @@ animation: bounce 2s ease infinite 1s;
   padding: 2em;
   line-break: auto;
   border: 10px solid rgb(174 247 174);
+  background-color: #e7b99f;
 }
 
 .login-name-label {
@@ -387,7 +400,8 @@ footer {
   justify-content: space-around;
 }
 
-.rank, .rank1 {
+.rank,
+.rank1 {
   margin: 0;
   align-items: center;
   width: 10rem;
@@ -458,7 +472,7 @@ footer {
   justify-content: center;
 }
 /* .history_box:after { */
-  /* display: flex; */
+/* display: flex; */
 /* } */
 .history_box_title {
   display: flex;
@@ -466,7 +480,7 @@ footer {
   justify-content: center;
   margin-top: 2rem;
   font-family: "Bungee", cursive;
-  color: #af8d8d;
+  color: #e7b99f;
   height: 2rem;
   font-size: 1.5rem;
 }
