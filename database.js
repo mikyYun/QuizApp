@@ -89,7 +89,8 @@ const getAllPrivateQuiz = (user_id) => {
 // from line 64 in the where clause: AND user_id = $1
 // from line 65, [payload.user_id]
 
-const addUserAnswer = (answer) => {
+const addUserAnswer = (answer, user_answer) => {
+  console.log('answer is', answer)
   // console.log('answer', answer);
   return pool
     // HOW DO I GRAB THE USER INPUT FROM THE SITE AND USE THAT IN THE SQL?
@@ -98,7 +99,7 @@ const addUserAnswer = (answer) => {
       VALUES($1, $2, $3)
       RETURNING *;
   `,
-      [answer.user_id, answer.quiz_id, answer.user_answer]
+      [answer.user_id, answer.id, user_answer]
     )
     .then((result) => {
       // console.log('addPrivateQuiz', result.rows);

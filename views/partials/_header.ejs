@@ -13,8 +13,8 @@
           
           <div class="navbar2">
             <a class="anchor title" href="/">MWM Quiz Home</a>
-            <a class="anchor private" href="/quizzes/private">My private quiz</a>
             <% if (user) { %>
+              <a class="anchor private" href="/quizzes/private">My private quiz</a>
               <a class="anchor create1" href="/quizzes/create">Create quiz</a>
               <a class="anchor result" href="/quizzes/result">My result</a>
           <form method="POST" action="/logout">
