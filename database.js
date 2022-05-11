@@ -21,7 +21,7 @@ const getUserByName = (user_name) => {
     // , [user.username])
     // , [user.username])
     .then((result) => {
-      // console.log('database getUserByName',result.rows);
+      console.log('database getUserByName', result.rows);
       return result.rows[0];
     })
     .catch((err) => {
@@ -58,7 +58,8 @@ const getPublicQuizID = (quizID) => {
   WHERE is_public IS true AND quizzes.id = $1
   `, [quizID]).then((res) => {
     console.log('database_getPublicQID', res.rows);
-    return res.rows});
+    return res.rows;
+  });
 };
 
 const getAllPublicQuiz = (options) => {
@@ -78,7 +79,7 @@ const getPrivateQuizID = (quizID) => {
 };
 
 const getAllPrivateQuiz = (user_id) => {
-  console.log('test:::', user_id)
+  console.log('test:::', user_id);
   return pool.query(`
   SELECT quizzes.*
   FROM quizzes
@@ -90,10 +91,8 @@ const getAllPrivateQuiz = (user_id) => {
 // from line 65, [payload.user_id]
 
 const addUserAnswer = (answer, user_answer) => {
-  console.log('answer is', answer)
-  // console.log('answer', answer);
+  console.log('answer is', answer);
   return pool
-    // HOW DO I GRAB THE USER INPUT FROM THE SITE AND USE THAT IN THE SQL?
     .query(
       `INSERT INTO results(user_id, quiz_id, user_answer)
       VALUES($1, $2, $3)
@@ -109,7 +108,37 @@ const addUserAnswer = (answer, user_answer) => {
     .catch((err) => {
       console.log(err.message);
     });
-}
+};
 
 
-module.exports = { getPublicQuizID, getAllPublicQuiz, getPrivateQuizID, getAllPrivateQuiz, addPrivateQuiz, getUserByName, addUserAnswer };
+// SELECT COUNT(quizzes.) AS result_users
+// FROM quizzes
+// JOIN results ON quizzes.id = results.quiz_id
+// WHERE results.user_id = $1
+// AND results.user_answer = quizzes.answer;
+
+const correctAnswer = (user) => {
+  return pool
+    .query(
+      `SELECT COUNT(quizzes.*) AS result_users
+      FROM quizzes
+      JOIN results ON quizzes.id = results.quiz_id
+      WHERE results.user_id = $1
+      AND results.user_answer = quizzes.answer;
+      `, [user.id])
+    .then((res) => {
+      console.log('check', res.rows);
+      return res.rows[0].result_users; // number
+    }
+    );
+};
+// const wrongAnswert =
+// SELECT COUNT(quizzes.) AS result_users
+// FROM quizzes
+// JOIN results ON quizzes.id = results.quiz_id
+// WHERE results.user_id = $1
+// AND results.user_answer != quizzes.answer;
+// };
+
+
+module.exports = { getPublicQuizID, getAllPublicQuiz, getPrivateQuizID, getAllPrivateQuiz, addPrivateQuiz, getUserByName, addUserAnswer, correctAnswer };

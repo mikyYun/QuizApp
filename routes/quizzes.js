@@ -17,7 +17,7 @@ const {
   urlsForUser,
 } = require("../helpers.js");
 
-const { getPublicQuizID, getAllPublicQuiz, getPrivateQuizID, getAllPrivateQuiz, getUserByName, addPrivateQuiz, addUserAnswer } = require("../database.js");
+const { correctAnswer, getPublicQuizID, getAllPublicQuiz, getPrivateQuizID, getAllPrivateQuiz, getUserByName, addPrivateQuiz, addUserAnswer } = require("../database.js");
 const { Pool } = require('pg/lib');
 const { user } = require('pg/lib/defaults');
 
@@ -83,11 +83,17 @@ module.exports = (db) => {
   router.get("/result", (req, res) => {
     console.log('ROUTER/GET/RESULT');
     const user_name = req.session.user_name;
-    // console.log(user_name);
-    getUserByName(user_name)
+    console.log(user_name);
+    getUserByName(user_name) ///object that has userid, and username
       .then((user) => {
+        console.log('user', user);  // user : { id: 2, user_name: 'creator' }
+        return user;
+      })
+      .then((user) => {
+        return correctAnswer(user);// 2
+      }).then((user) => {
         const templateVars = {
-          user
+          user,
         };
         res.render("quiz_result", templateVars);
       });
@@ -192,19 +198,17 @@ module.exports = (db) => {
               return oneAnswer.toLowerCase() === userAnswer.toLowerCase();
             })
             .then((trueOrFalse) => {
-              res.send(trueOrFalse);
+              res.send(trueOrFalse); //returns true or false
             })
             .catch((err) => {
               console.log(err);
               res.send('error addUserAnswer', err);
-            })
-            // res.send(trueOrFalse); //returns true or false
-            // })
-            .catch((err) => {
-              console.log("err ", err);
-              res.send('error getPublicQuiz', err);
             });
+        }).catch((err) => {
+          console.log("err ", err);
+          res.send('error getPublicQuiz', err);
         });
+
     } else {
       getPublicQuizID(quizID) // return res.rows [{}]
         .then((quiz) => {
@@ -221,93 +225,12 @@ module.exports = (db) => {
             .catch((err) => {
               console.log(err);
               res.send('error addUserAnswer', err);
-            })
-
-            .catch((err) => {
-              console.log("err ", err);
-              res.send('error getPublicQuiz', err);
             });
+        }).catch((err) => {
+          console.log("err ", err);
+          res.send('error getPublicQuiz', err);
         });
     }
-
-
-
-    ///////////////////////
-    // const quiz_obj = quiz;
-    // console.log(quiz);//object id: ..., user_id: ,....,
-    // const oneQuestion = quiz[0].question;
-    // const oneQuiz = quiz[0];
-    //       const oneAnswer = quiz[0].answer;
-    //       return oneAnswer.toLowerCase() === userAnswer.toLowerCase(); //returns true or false
-    //     })
-    //     .then((trueOrFalse) => {
-    //       addUserAnswer(userAnswer)// userAnswer = obj
-    //         .then(() => {
-    //           const templateVars = {
-    //             user: null
-    //           };
-    //           res.send(trueOrFalse);
-    //         })
-    //         .catch((err) => {
-    //           console.log(err);
-    //           res.send('error addUserAnswer', err);
-    //         });
-    //       // res.send(trueOrFalse); //returns true or false
-    //     })
-    //     .catch((err) => {
-    //       console.log("err ", err);
-    //       res.send('error getPublicQuiz', err);
-    //     });
-
-  });
-
-  // getPublicQuizID(quizID)
-  //   .then((quiz) => {
-  //     const oneAnswer = quiz[0].answer;
-  //     res.send(oneAnswer.toLowerCase() === userAnswer.toLowerCase()); //returns true or false
-  //   });
-
-
-  // const { userAnswer, quizID } = req.body;
-  // console.log('TEST', req.body)
-  // console.log('user is ', userAnswer)
-  // console.log('req.body', quizID)
-
-  // getPublicQuizID(quizID)
-  // .then((quiz) => {
-  // const oneAnswer = quiz[0].answer;
-
-  // const templateVars = {
-  //   user,
-  //   oneQuiz: oneQuiz,
-  //   oneQuestion: oneQuestion,
-  //   oneAnswer: oneAnswer,
-  // };
-
-
-  // console.log('test', quizID)
-
-
-  // ================== GARY ==================== //
-
-  router.get("/", (req, res) => {
-    res.render("quizzes");
-
-
-    res.render("quizzes", {}); //templateVars
-
-    let query = `SELECT * FROM quizzes`;
-    // console.log(query);
-    db.query(query)
-      .then(data => {
-        const quizzes = data.rows;
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
   });
   return router;
 };
-
