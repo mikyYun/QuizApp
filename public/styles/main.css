@@ -2,7 +2,7 @@
   background: url(../images/cohort2.png);
   background-size: auto;
   background-position: center;
-  opacity:0.2;
+  opacity: 0.2;
 }
 
 .cohort-photo:hover {
@@ -10,11 +10,10 @@
 }
 
 .question-url {
-    color: rgb(174 247 174);
-    background-color: #af8d8d;
-    opacity: 0.8;
+  color: rgb(174 247 174);
+  background-color: #af8d8d;
+  opacity: 0.8;
 }
-
 
 body {
   /* display: flex;
@@ -239,7 +238,6 @@ a:active {
   text-align: center;
   color: rgb(174 247 174);
   font-family: "Bungee", cursive;
-
 }
 
 .question,
@@ -387,7 +385,8 @@ footer {
   justify-content: space-around;
 }
 
-.rank, .rank1 {
+.rank,
+.rank1 {
   margin: 0;
   align-items: center;
   width: 10rem;
@@ -458,7 +457,7 @@ footer {
   justify-content: center;
 }
 /* .history_box:after { */
-  /* display: flex; */
+/* display: flex; */
 /* } */
 .history_box_title {
   display: flex;
