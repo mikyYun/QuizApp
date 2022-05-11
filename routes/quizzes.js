@@ -47,9 +47,6 @@ module.exports = (db) => {
     const user_name = req.session.user_name;
     const user_id = req.session.user_id;
     const user = { user_name, user_id };
-    // const user_name = req.session.user_name;
-    // getUserByName(user_name)
-      // .then((user) => {
         getAllPrivateQuiz(user_id)
           .then((obj) => { // quizzes == res.rows [{quiz}, {quiz}, {quiz}, {} ] arr[0]
             const templateVars = {
@@ -70,9 +67,6 @@ module.exports = (db) => {
     const user_name = req.session.user_name;
     const user_id = req.session.user_id;
     const user = { user_name, user_id };
-    // const user_name = req.session.user_name;
-    // getUserByName(user_name)
-      // .then((user) => {
         const templateVars = {
           user
         };
@@ -89,7 +83,8 @@ module.exports = (db) => {
     console.log('ROUTER/GET/RESULT');
     const user_name = req.session.user_name;
     const user_id = req.session.user_id;
-
+    const user = { user_name, user_id };
+    
     Promise.all([
       correctAnswer(user_id), wrongAnswer(user_id), totalAttempts(user_id), getLatestHistory(user_id)
     ])
@@ -104,18 +99,6 @@ module.exports = (db) => {
       });
   });
   // handling individual quiz page
-
-  // router.get("/create", (req, res) => {
-  //   const user_name = req.session.user_name;
-  //   const user_id = req.session.user_id;
-  //   const user = { user_name, user_id };
-  //       const templateVars = {
-  //         user
-  //       };
-  //       res.render("quiz_create", templateVars);
-  //     // });
-  // });
-
   router.get("/:quizID", (req, res) => {
     const quizID = req.params.quizID;
     const user_name = req.session.user_name;
