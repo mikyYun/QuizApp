@@ -19,20 +19,12 @@
 
 <body>
   <%- include('partials/_header') %>
-
-  <div class="conditional">
-      <!-- if (user)
-      } else {
-      }
-      if the answer is correct
-      if the answer is incorrect -->
-    </div>
     <div>
       <h1 class="your_result">Your Result</h1>
     </div>
     <main class="result_main">
       <div class="result_title">
-        <% if (user) {%>
+        <% if (user.user_name) {%>
         <p class="result_title_greeting">Hello <%= user.user_name%></p>
         <% } else { %>
           <p class="result_title_greeting">Hello visitor </p>
@@ -64,7 +56,8 @@
             <div class="correct_rate_box">
               <p class="correct_rate">
                 <p class="accuracy_icon correct_icon">
-                  3/10
+                                  <%= nums[0] %> / <%= nums[2] %>
+
                 </p>
                 Correct
               </p>
@@ -72,9 +65,11 @@
             <div class="incorrect_rate_box">
               <p class="incorret_rate">
                 <p class="accuracy_icon incorrect_icon">
-                  7/10
+                                  <%= nums[1] %> / <%= nums[2] %>
+
                 </p>
                 Wrong
+
               </p>
             </div>
           </div>
