@@ -186,7 +186,7 @@ module.exports = (db) => {
           console.log('QUIZ', quiz);
           addUserAnswer(quiz[0], userAnswer)
             .then(() => {
-              console.log('useransweris', userAnswer);
+              console.log('userAnswer: ', userAnswer);
 
               const oneAnswer = quiz[0].answer;
               return oneAnswer.toLowerCase() === userAnswer.toLowerCase();
