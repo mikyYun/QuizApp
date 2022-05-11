@@ -9,8 +9,8 @@
 }
 
 .question-url {
-  color: rgb(174 247 174);
-  background-color: #af8d8d;
+  color: black;
+  background-color: #e7b99f;
   opacity: 0.8;
 }
 
@@ -19,7 +19,7 @@ body {
   justify-content: center; */
   align-items: center;
   min-height: 100vh;
-  background: grey;
+  background: #6c7874;
 
   /* background: #a3d0db;
   background: linear-gradient(
@@ -37,7 +37,7 @@ body {
 /* handling header */
 
 .navbar {
-  background-color: #af8d8d;
+  background-color: #d1855b;
   /* position: fixed; */
   /* top: 0; */
   width: 100%;
@@ -167,7 +167,7 @@ hr {
 }
 
 .create {
-  color: darkred;
+  color: rgb(174 247 174);
   text-align: center;
   font-family: "Bungee", cursive;
 }
@@ -194,8 +194,8 @@ hr {
 .create_btn:hover,
 .question_submit_btn:hover,
 .submit:hover {
-  background-color: #af8d8d;
-  color: palegreen;
+  background-color: #e7b99f;
+  color: black;
   font-family: "Bungee", cursive;
 }
 
@@ -238,7 +238,7 @@ a:active {
   line-break: auto;
   border: 10px solid rgb(174 247 174);
   border-radius: 0.5rem;
-  background-color: #af8d8d;
+  background-color: #e7b99f;
 }
 
 /* handling private quiz page */
@@ -285,7 +285,7 @@ animation: bounce 2s ease infinite 1s;
 .login_page {
   margin-top: 100px;
   text-align: center;
-  color: darkred;
+  color: rgb(174 247 174);
   font-family: "Bungee", cursive;
 }
 
@@ -304,7 +304,7 @@ animation: bounce 2s ease infinite 1s;
   padding: 2em;
   line-break: auto;
   border: 10px solid rgb(174 247 174);
-  background-color: #af8d8d;
+  background-color: #e7b99f;
 }
 
 .login-name-label {
@@ -475,7 +475,7 @@ footer {
   justify-content: center;
   margin-top: 2rem;
   font-family: "Bungee", cursive;
-  color: #af8d8d;
+  color: #e7b99f;
   height: 2rem;
   font-size: 1.5rem;
 }
