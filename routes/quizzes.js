@@ -21,24 +21,17 @@ const { getPublicQuizID, getAllPublicQuiz, getPrivateQuizID, getAllPrivateQuiz, 
 const { Pool } = require('pg/lib');
 const { user } = require('pg/lib/defaults');
 
-//=============GLOBAL OBJECTS================//
-
-// const quizDB = res.rows
-// const userDB =
-
-
 module.exports = (db) => {
 
   // ================== GET ==================== //
 
   router.get("/", (req, res) => {
     const user_name = req.session.user_name;
-    // const user =
     getUserByName(user_name)
       .then((user) => {
         // res.cookie('user_id', user.id);
         getAllPublicQuiz()
-          .then((quizzes) => { // quiz == res.rows
+          .then((quizzes) => { // quizzes == res.rows
             const templateVars = {
               user,
               quizzes
@@ -102,13 +95,12 @@ module.exports = (db) => {
 
   // handling individual quiz page
   router.get("/:quizID", (req, res) => {
-    console.log("NOOO");
     const quizID = req.params.quizID;
     const user_name = req.session.user_name;
     getUserByName(user_name)
       .then((user) => {
         if (quizID <= 17) {
-          console.log("is_quisID", quizID);
+          console.log("is_quizID", quizID);
           getPublicQuizID(quizID)
             .then((quiz) => {
               const oneQuiz = quiz[0];
@@ -145,7 +137,6 @@ module.exports = (db) => {
             .catch((error) => {
               console.log(error);
             });
-
         }
       });
   });
@@ -180,107 +171,95 @@ module.exports = (db) => {
       });
   });
 
-  // router.post("/check", (req, res) => {
   router.post("/check", (req, res) => {
     const { userAnswer, quizID } = req.body;
     console.log('quiz', quizID);// ok
     // const quizID = req.params.quizID;
-    console.log("TEST", quizID) // ok
+    console.log("TEST", quizID); // ok
 
-    // want to return the value of getPublicQuizID(quizID) to second then
-    // const quiz_obj = getPublicQuizID(quizID)
-    // console.log('quiz_obj', quiz_obj)
+    // want to return the value of getPublicQuizID(quizID) to the second then
     if (quizID >= 17) {
-      console.log('quisid is larger than 17')
+      console.log('quizID is larger than 17');
       getPrivateQuizID(quizID) // return res.rows [{}]
-      // getPrivateQuizID(quizID) // return res.rows [{}]
+        // getPrivateQuizID(quizID) // return res.rows [{}]
         .then((quiz) => {
-          console.log('qqqqqqqqz', quiz);
+          console.log('QUIZ', quiz);
           addUserAnswer(quiz[0], userAnswer)
             .then(() => {
-              console.log('useransweris', userAnswer)
-              // const templateVars = {
-              //   user: null
-              // }
-             
-              // res.send("quiz_result", templateVars);
+              console.log('useransweris', userAnswer);
+
               const oneAnswer = quiz[0].answer;
-              return oneAnswer.toLowerCase() === userAnswer.toLowerCase(); 
+              return oneAnswer.toLowerCase() === userAnswer.toLowerCase();
             })
             .then((trueOrFalse) => {
               res.send(trueOrFalse);
             })
             .catch((err) => {
-              console.log(err)
-              res.send('error addUserAnswer', err)
+              console.log(err);
+              res.send('error addUserAnswer', err);
             })
-          // res.send(trueOrFalse); //returns true or false
-        // })
-        .catch((err) => {
-          console.log("err ", err);
-          res.send('error getPublicQuiz', err)
+            // res.send(trueOrFalse); //returns true or false
+            // })
+            .catch((err) => {
+              console.log("err ", err);
+              res.send('error getPublicQuiz', err);
+            });
         });
-      })
     } else {
-      console.log('is works>??')
+      console.log('is works>??');
       getPublicQuizID(quizID) // return res.rows [{}]
         .then((quiz) => {
           addUserAnswer(quiz[0], userAnswer)
             .then(() => {
-              console.log('useransweris', userAnswer)
-              // const templateVars = {
-              //   user: null
-              // }
-             
-              // res.send("quiz_result", templateVars);
+              console.log('useransweris', userAnswer);
+
               const oneAnswer = quiz[0].answer;
-              return oneAnswer.toLowerCase() === userAnswer.toLowerCase(); 
+              return oneAnswer.toLowerCase() === userAnswer.toLowerCase();
             })
             .then((trueOrFalse) => {
               res.send(trueOrFalse);
             })
             .catch((err) => {
-              console.log(err)
-              res.send('error addUserAnswer', err)
+              console.log(err);
+              res.send('error addUserAnswer', err);
             })
-          // res.send(trueOrFalse); //returns true or false
-        // })
-        .catch((err) => {
-          console.log("err ", err);
-          res.send('error getPublicQuiz', err)
+
+            .catch((err) => {
+              console.log("err ", err);
+              res.send('error getPublicQuiz', err);
+            });
         });
-      })
     }
 
 
 
-        ///////////////////////
-        // const quiz_obj = quiz;
-        // console.log(quiz);//object id: ..., user_id: ,....,
-        // const oneQuestion = quiz[0].question;
-        // const oneQuiz = quiz[0];
-  //       const oneAnswer = quiz[0].answer;
-  //       return oneAnswer.toLowerCase() === userAnswer.toLowerCase(); //returns true or false
-  //     })
-  //     .then((trueOrFalse) => {
-  //       addUserAnswer(userAnswer)// userAnswer = obj
-  //         .then(() => {
-  //           const templateVars = {
-  //             user: null
-  //           };
-  //           res.send(trueOrFalse);
-  //         })
-  //         .catch((err) => {
-  //           console.log(err);
-  //           res.send('error addUserAnswer', err);
-  //         });
-  //       // res.send(trueOrFalse); //returns true or false
-  //     })
-  //     .catch((err) => {
-  //       console.log("err ", err);
-  //       res.send('error getPublicQuiz', err);
-  //     });
-    
+    ///////////////////////
+    // const quiz_obj = quiz;
+    // console.log(quiz);//object id: ..., user_id: ,....,
+    // const oneQuestion = quiz[0].question;
+    // const oneQuiz = quiz[0];
+    //       const oneAnswer = quiz[0].answer;
+    //       return oneAnswer.toLowerCase() === userAnswer.toLowerCase(); //returns true or false
+    //     })
+    //     .then((trueOrFalse) => {
+    //       addUserAnswer(userAnswer)// userAnswer = obj
+    //         .then(() => {
+    //           const templateVars = {
+    //             user: null
+    //           };
+    //           res.send(trueOrFalse);
+    //         })
+    //         .catch((err) => {
+    //           console.log(err);
+    //           res.send('error addUserAnswer', err);
+    //         });
+    //       // res.send(trueOrFalse); //returns true or false
+    //     })
+    //     .catch((err) => {
+    //       console.log("err ", err);
+    //       res.send('error getPublicQuiz', err);
+    //     });
+
   });
 
   // getPublicQuizID(quizID)
