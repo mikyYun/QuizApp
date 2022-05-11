@@ -183,14 +183,8 @@ module.exports = (db) => {
   // router.post("/check", (req, res) => {
   router.post("/check", (req, res) => {
     const { userAnswer, quizID } = req.body;
-<<<<<<< HEAD
-    console.log('quizzes-userAnswer', userAnswer);
-    console.log('quizzes-quizID', quizID);
-    
-=======
     console.log('quiz', quizID);
 
->>>>>>> 7651073346e38c23b597c1c73607f38a33cef2c1
     getPublicQuizID(quizID)
       .then((quiz) => {
         console.log(quiz);
@@ -204,19 +198,18 @@ module.exports = (db) => {
           .then(() => {
             const templateVars = {
               user: null
-            }
+            };
             res.send(trueOrFalse);
-            // res.send("quiz_result", templateVars);
           })
           .catch((err) => {
-            console.log(err)
-            res.send('error addUserAnswer', err)
-          })
+            console.log(err);
+            res.send('error addUserAnswer', err);
+          });
         // res.send(trueOrFalse); //returns true or false
       })
       .catch((err) => {
         console.log("err ", err);
-        res.send('error getPublicQuiz', err)
+        res.send('error getPublicQuiz', err);
       });
   });
 

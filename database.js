@@ -21,11 +21,7 @@ const getUserByName = (user_name) => {
     // , [user.username])
     // , [user.username])
     .then((result) => {
-<<<<<<< HEAD
-      console.log('database getUserByName', result.rows);
-=======
       // console.log('database getUserByName',result.rows);
->>>>>>> 7651073346e38c23b597c1c73607f38a33cef2c1
       return result.rows[0];
     })
     .catch((err) => {
@@ -61,14 +57,8 @@ const getPublicQuizID = (quizID) => {
   FROM quizzes
   WHERE is_public IS true AND quizzes.id = $1
   `, [quizID]).then((res) => {
-<<<<<<< HEAD
-    res.rows;
-  });
-
-=======
     console.log('database_getPublicQID', res.rows);
     return res.rows});
->>>>>>> 7651073346e38c23b597c1c73607f38a33cef2c1
 };
 
 const getAllPublicQuiz = (options) => {
@@ -88,19 +78,12 @@ const getPrivateQuizID = (quizID) => {
 };
 
 const getAllPrivateQuiz = (user_id) => {
-<<<<<<< HEAD
-  return pool.query(`
-  SELECT quizzes.*
-  FROM quizzes
-  WHERE is_public IS false;
-=======
   console.log('test:::', user_id)
   return pool.query(`
   SELECT quizzes.*
   FROM quizzes
   WHERE is_public IS false
   AND user_id = $1;
->>>>>>> 7651073346e38c23b597c1c73607f38a33cef2c1
   `, [user_id]).then((res) => res.rows); //res.rows === quizzes in users.js
 };
 // from line 64 in the where clause: AND user_id = $1

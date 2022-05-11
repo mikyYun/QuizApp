@@ -41,7 +41,11 @@ $(document).ready(function () {
   //     });
   // });
 
+  $(".alert-message").hide();
+
   $("#public-quiz-submit-form").submit((e) => {
+    $(".alert-message").hide();
+
     e.preventDefault();
     const quizID = $("#public-quiz-submit-form").attr("data-id");
     const userAnswer = $(".public-input-answer").val().toLowerCase();
@@ -58,18 +62,17 @@ $(document).ready(function () {
       },
       dataType: 'json',
     })
-      .then((boolean) => {
-        console.log("app.js TTTTTTTTTTT")
+      .then((trueOrFalse) => {
         let message;
-        if (boolean) {
-          message = "you got it right!";
+        if (trueOrFalse) {
+          $("#alert-correct").slideDown();
         } else {
-          message = "you got it wrong!";
+          $("#alert-wrong").slideDown();
         }
-        const $quizResult = $(`<p>${message}</p>`);
-        $(".public-quiz-result").append($quizResult);
-        
-        })
+      })
+      .then(() => {
+
+      })
       .catch((error) => {
         console.log(error);
       });
