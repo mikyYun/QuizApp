@@ -1,10 +1,25 @@
+.cohort-photo {
+  background: url("../images/cohort.jpeg");
+  background-size: 10rem 10rem;
+}
+
 body {
   /* display: flex;
   justify-content: center; */
   align-items: center;
   min-height: 100vh;
-  background: #a3d0db;
-  background: linear-gradient(227deg, #74959d 0%, #7f8bb5 20%, #8aaa8c 34%, #779f98 59%, #8bbdc9 74%, #a3d0db 100%);
+  background: white;
+
+  /* background: #a3d0db;
+  background: linear-gradient(
+    227deg,
+    #74959d 0%,
+    #7f8bb5 20%,
+    #8aaa8c 34%,
+    #779f98 59%,
+    #8bbdc9 74%,
+    #a3d0db 100%
+  ); */
   width: 100%;
 }
 
@@ -21,9 +36,8 @@ body {
 .private,
 .result,
 .login {
-  color: rgb(174 247 174)
+  color: rgb(174 247 174);
 }
-
 
 .anchor {
   color: rgb(174 247 174);
@@ -35,7 +49,7 @@ body {
 }
 
 .anchor:hover {
-  color: #7b90ab
+  color: #7b90ab;
 }
 
 .greeting {
@@ -43,7 +57,7 @@ body {
 }
 
 .create1 {
-  color: rgb(128, 141, 176)
+  color: rgb(128, 141, 176);
 }
 /* handling main page */
 
@@ -52,19 +66,18 @@ body {
   height: 5rem;
   /* margin-top: 0px; */
   padding-top: 25px;
-  font-family: 'Bungee', cursive;
+  font-family: "Bungee", cursive;
 }
 
 .navbar2 {
   display: flex;
   justify-content: space-around;
-  font-family: 'Bungee', cursive;
+  font-family: "Bungee", cursive;
 }
 
 .button_login,
 .button_logout {
   background-color: #7287b2;
-  ;
   border-radius: 5px;
   margin-left: 5px;
   color: rgb(174 247 174);
@@ -83,8 +96,6 @@ body {
     transform: rotate(720deg);
   }
 }
-
-
 
 th,
 td {
@@ -108,7 +119,7 @@ td {
   text-align: right;
   margin-right: 100px;
   margin-top: 0 px;
-  color: darkred
+  color: darkred;
 }
 
 hr {
@@ -119,7 +130,7 @@ hr {
 
 .question-quiz {
   color: darkred;
-  font-family: 'Bungee', cursive;
+  font-family: "Bungee", cursive;
 }
 
 .private {
@@ -137,30 +148,34 @@ hr {
 .create {
   color: darkred;
   text-align: center;
-  font-family: 'Bungee', cursive;
+  font-family: "Bungee", cursive;
 }
 
-.create_btn, .question_submit_btn, .submit {
+.create_btn,
+.question_submit_btn,
+.submit {
   text-align: center;
   transition-duration: 0.4s;
   color: darkred;
   background-color: transparent;
   font-size: 20px;
-  font-family: 'Bungee', cursive;
+  font-family: "Bungee", cursive;
   border-radius: 50%;
   margin-top: 2rem;
   width: 10rem;
-  border: 0.2rem solid #da9f83 ;
+  border: 0.2rem solid #da9f83;
 }
 
 .question_submit_btn {
   width: 5rem;
 }
 
-.create_btn:hover, .question_submit_btn:hover, .submit:hover{
+.create_btn:hover,
+.question_submit_btn:hover,
+.submit:hover {
   background-color: #af8d8d;
   color: palegreen;
-  font-family: 'Bungee', cursive;
+  font-family: "Bungee", cursive;
 }
 
 .btn {
@@ -176,16 +191,15 @@ a {
 }
 
 a:visited {
-  color: #0000EE;
-  ;
+  color: #0000ee;
 }
 
 a:hover {
-  color: orange
+  color: orange;
 }
 
 a:active {
-  color: orange
+  color: orange;
 }
 
 .form-group {
@@ -211,7 +225,7 @@ a:active {
 .view {
   text-align: center;
   color: darkred;
-  font-family: 'Bungee', cursive;
+  font-family: "Bungee", cursive;
 }
 
 .question,
@@ -220,15 +234,25 @@ a:active {
   font-weight: bold;
 }
 @keyframes bounce {
-  0%   { transform: scale(1,.6) translateY(0); }
-  20%  { transform: scale(.3,.7) translateY(0); }
-  40%  { transform: scale(.7,.2) translateY(0); }
-  80% { transform: scale(.2,.7) translateY(0);}
-  100% { transform: scale(.7,1) translateY(0);}
+  0% {
+    transform: scale(1, 0.6) translateY(0);
+  }
+  20% {
+    transform: scale(0.3, 0.7) translateY(0);
+  }
+  40% {
+    transform: scale(0.7, 0.2) translateY(0);
+  }
+  80% {
+    transform: scale(0.2, 0.7) translateY(0);
+  }
+  100% {
+    transform: scale(0.7, 1) translateY(0);
+  }
 }
 
 .question {
-animation: bounce 2s ease infinite 1s;
+  animation: bounce 2s ease infinite 1s;
 }
 
 /* .answer {
@@ -241,13 +265,13 @@ animation: bounce 2s ease infinite 1s;
   margin-top: 100px;
   text-align: center;
   color: darkred;
-  font-family: 'Bungee', cursive;
+  font-family: "Bungee", cursive;
 }
 
 .your_result {
   text-align: center;
   color: darkred;
-  font-family: 'Bungee', cursive;
+  font-family: "Bungee", cursive;
 }
 
 .login_name,
@@ -265,8 +289,6 @@ animation: bounce 2s ease infinite 1s;
   margin-left: 50px;
 }
 
-
-
 /* handling log out button */
 .logout {
   margin-left: 20px;
@@ -280,8 +302,6 @@ animation: bounce 2s ease infinite 1s;
   color: palegreen;
 }
 
-
-
 /* handling result page */
 
 .conditional {
@@ -293,7 +313,6 @@ animation: bounce 2s ease infinite 1s;
   margin-top: 15vh;
   width: 90vw;
   height: 30vh;
-
 }
 
 .result_title_greeting {
@@ -301,7 +320,6 @@ animation: bounce 2s ease infinite 1s;
   font-size: 1.5rem;
   padding: 0.3rem 0;
 }
-
 
 .result_correct {
   background-color: rgb(174 247 174);
@@ -335,13 +353,11 @@ footer {
   height: 20vh;
 }
 
-
 .user_answer_rate {
   text-align: -webkit-center;
 }
 
 .user_answer_rate_label {
-
   border-radius: 1rem;
   width: 20%;
   height: 5rem;
@@ -363,21 +379,23 @@ footer {
   width: 10rem;
   height: 10rem;
   /* background-size: 10rem 10rem; */
-
 }
 
 .fairy {
-  background: linear-gradient(0deg, transparent, transparent), url('../images/fairywing.png');
+  background: linear-gradient(0deg, transparent, transparent),
+    url("../images/fairywing.png")
   background-size: 10rem 10rem;
-}
+};
 
 .phoneixwing {
-  background: linear-gradient(0deg, transparent, transparent), url('../images/phoenixwing.png');
+  background: linear-gradient(0deg, transparent, transparent),
+    url("../images/phoenixwing.png");
   background-size: 10rem 10rem;
 }
 
 .phoneix {
-  background: linear-gradient(0deg, transparent, transparent), url('../images/phoenix.png');
+  background: linear-gradient(0deg, transparent, transparent),
+    url("../images/phoenix.png");
   background-size: 10rem 10rem;
 }
 
@@ -388,7 +406,6 @@ footer {
   text-align: center;
   display: table-cell;
   vertical-align: middle;
-  
 }
 
 .correct_icon {
@@ -396,7 +413,8 @@ footer {
   color: white;
 }
 
-.correct_rate, .incorret_rate {
+.correct_rate,
+.incorret_rate {
   margin-top: 3rem;
 }
 
@@ -413,4 +431,3 @@ footer {
 .quiestion_article_box {
   text-align: center;
 }
-
