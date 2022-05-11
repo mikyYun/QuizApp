@@ -14,6 +14,11 @@
   opacity: 0.8;
 }
 
+.question_article_box {
+  font-family: 'Permanent Marker', cursive;
+  text-align: center;
+}
+
 body {
   /* display: flex;
   justify-content: center; */
@@ -188,7 +193,7 @@ hr {
 }
 
 .question_submit_btn {
-  width: 5rem;
+  width: 8rem;
 }
 
 .create_btn:hover,
