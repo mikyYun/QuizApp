@@ -62,7 +62,7 @@ const getPublicQuizID = (quizID) => {
   });
 };
 
-const getAllPublicQuiz = (options) => {
+const getAllPublicQuiz = () => {
   return pool.query(`
   SELECT quizzes.*
   FROM quizzes
@@ -125,20 +125,40 @@ const correctAnswer = (user) => {
       JOIN results ON quizzes.id = results.quiz_id
       WHERE results.user_id = $1
       AND results.user_answer = quizzes.answer;
-      `, [user.id])
+      `, [user])
     .then((res) => {
-      console.log('check', res.rows);
+      console.log('correct answer number: ', res.rows[0].result_users);
       return res.rows[0].result_users; // number
     }
     );
 };
-// const wrongAnswert =
-// SELECT COUNT(quizzes.) AS result_users
-// FROM quizzes
-// JOIN results ON quizzes.id = results.quiz_id
-// WHERE results.user_id = $1
-// AND results.user_answer != quizzes.answer;
-// };
+const wrongAnswer = (user) => {
+  return pool
+    .query(
+      `SELECT COUNT(quizzes.*) AS result_users
+      FROM quizzes
+      JOIN results ON quizzes.id = results.quiz_id
+      WHERE results.user_id = $1
+      AND results.user_answer != quizzes.answer;
+      `, [user])
+    .then((res) => {
+      console.log('wrong answer number: ', res.rows[0].result_users);
+      return res.rows[0].result_users; // number
+    });
+};
 
+const totalAttempts = (user) => {
+  return pool
+    .query(
+      `SELECT COUNT(quizzes.*) AS result_users
+      FROM quizzes
+      JOIN results ON quizzes.id = results.quiz_id
+      WHERE results.user_id = $1;
+        `, [user])
+    .then((res) => {
+      console.log('total attmept number: ', res.rows[0].result_users);
+      return res.rows[0].result_users; // number
+    });
+};
 
-module.exports = { getPublicQuizID, getAllPublicQuiz, getPrivateQuizID, getAllPrivateQuiz, addPrivateQuiz, getUserByName, addUserAnswer, correctAnswer };
+module.exports = { getPublicQuizID, getAllPublicQuiz, getPrivateQuizID, getAllPrivateQuiz, addPrivateQuiz, getUserByName, addUserAnswer, correctAnswer, totalAttempts, wrongAnswer };

@@ -8,27 +8,29 @@
   />
 
   <nav class="navbar1">
-          <!-- a tag href goes rounter.get -->
-          <!-- <a class="create" href="/quizzes/create">Create quiz</a> -->
-          
-          <div class="navbar2">
-            <a class="anchor title" href="/">MWM Quiz Home</a>
-            <% if (user) { %>
-              <a class="anchor private" href="/quizzes/private">My private quiz</a>
-              <a class="anchor create1" href="/quizzes/create">Create quiz</a>
-              <a class="anchor result" href="/quizzes/result">My result</a>
-          <form method="POST" action="/logout">
-            <label for="username" class="greeting">Hello, <%= user.user_name%>! </label>
-            <button type="submit" class="button_logout evnt">Logout</button>
-          </form>
-        <% } else { %>
-          <a class="anchor result" href="/quizzes/result">My result</a>
-          <form method="GET" action="/login">
-            <label for="username" class="greeting">Hello, visitor! </label>
-            <button class="button_login evnt" href="/login">Login</button>
-          </form>
-          <% } %>
-      </div>
+    <!-- a tag href goes rounter.get -->
+    <!-- <a class="create" href="/quizzes/create">Create quiz</a> -->
+
+    <div class="navbar2">
+      <a class="anchor title" href="/">MWM Quiz Home</a>
+      <% if (user.user_name) { %>
+      <a class="anchor private" href="/quizzes/private">My private quiz</a>
+      <a class="anchor create1" href="/quizzes/create">Create quiz</a>
+      <a class="anchor result" href="/quizzes/result">My result</a>
+      <form method="POST" action="/logout">
+        <label for="username" class="greeting"
+          >Hello, <%= user.user_name%>!
+        </label>
+        <button type="submit" class="button_logout evnt">Logout</button>
+      </form>
+      <% } else { %>
+      <a class="anchor result" href="/quizzes/result">My result</a>
+      <form method="GET" action="/login">
+        <label for="username" class="greeting">Hello, visitor! </label>
+        <button class="button_login evnt" href="/login">Login</button>
+      </form>
+      <% } %>
+    </div>
   </nav>
   <hr />
 </header>
