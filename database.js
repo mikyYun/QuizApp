@@ -158,5 +158,11 @@ const getLatestHistory = (user) => {
     ).then((res) => {return res.rows})
 }
 
+const findSubmitedAnswer = (user) => {
+  return pool
+    .query('', [user]
+    ).then((res) => res.rows)
+}
+
 
 module.exports = { getPublicQuizID, getAllPublicQuiz, getPrivateQuizID, getAllPrivateQuiz, addPrivateQuiz, getUserByName, addUserAnswer, correctAnswer, totalAttempts, wrongAnswer, getLatestHistory };
