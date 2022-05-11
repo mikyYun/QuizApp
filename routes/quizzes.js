@@ -17,7 +17,7 @@ const {
   urlsForUser,
 } = require("../helpers.js");
 
-const { correctAnswer, getPublicQuizID, getAllPublicQuiz, getPrivateQuizID, getAllPrivateQuiz, getUserByName, addPrivateQuiz, addUserAnswer, wrongAnswer, totalAttempts } = require("../database.js");
+const { correctAnswer, getPublicQuizID, getAllPublicQuiz, getPrivateQuizID, getAllPrivateQuiz, getUserByName, addPrivateQuiz, addUserAnswer, wrongAnswer, totalAttempts, getLatestHistory } = require("../database.js");
 const { Pool } = require('pg/lib');
 
 module.exports = (db) => {
@@ -91,7 +91,7 @@ module.exports = (db) => {
     const user_id = req.session.user_id;
     const user = { user_name, user_id };
     Promise.all([
-      correctAnswer(user_id), wrongAnswer(user_id), totalAttempts(user_id)
+      correctAnswer(user_id), wrongAnswer(user_id), totalAttempts(user_id), getLatestHistory(user_id)
     ])
       .then((nums) => {
         console.log("nums", nums);
@@ -188,7 +188,7 @@ module.exports = (db) => {
     // console.log("TEST", quizID); // ok
     const user_name = req.session.user_name;
     const user_id = req.session.user_id;
-    const user = { user_name, user_id };
+    // const user = { user_name, user_id };
     // want to return the value of getPublicQuizID(quizID) to the second then
     if (quizID >= 17) {
       console.log('quizID is larger than 17');

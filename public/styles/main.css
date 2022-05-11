@@ -431,3 +431,18 @@ footer {
 .quiestion_article_box {
   text-align: center;
 }
+
+.history_box {
+  margin-top: 2rem;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.history_box_title {
+  display: block;
+  margin-top: 2rem;
+  font-family: "Bungee", cursive;
+  color: red;
+}

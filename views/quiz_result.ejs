@@ -35,26 +35,25 @@
         <p class="result result_correct">
           You have answered these correctly. Keep it up!
         </p>
-        <p class="result result_incorrect">
+        <!-- <p class="result result_incorrect">
           You have answered wrong. Try again!
-        </p>
+        </p> -->
       </div>
 
       <div class="user_answer_rate_box">
         <div class="user_answer_rate">
-          <!-- if a visitor, don't need to check rate.
-          if corrects 100%, not 0% -->
           <div class="user_answer_rate_label">
             Your Answer Rate :
           </div>
           <div class="rate_box">
+            
             <!-- optional.. if rate is .... -->
             <% if (nums[0]/nums[2] < 0.4) { %>
-            <p class="fairy rank">low rate</p>
+            <p class="fairy rank"> </p>
             <% } else if (nums[0]/nums[2] > 0.8) { %>
-              <p class="phoneix rank">awesome</p>
+              <p class="phoneix rank"></p>
             <% } else {%>
-              <p class="phoneixwing rank">average</p>
+              <p class="phoneixwing rank"></p>
             <% } %>
             <div class="correct_rate_box">
               <p class="correct_rate">
@@ -74,6 +73,30 @@
             </div>
           </div>
         </div>
+      </div>
+      <div class="history_box">
+        <span class="history_box_title">Click to see Your latest attempts</span>
+        <table>
+          <tr>
+            <th>Question</th>
+            <th>Answer</th>
+            <th>Attempt</th>
+          </tr>
+          <% for (const each of nums[3]) { %>
+            <tr>
+              <td><%= each.question %></td>
+              <td><%= each.answer %></td>
+              <td><%= each.user_answer %></td>
+              <td>
+                <% if (each.answer === each.user_answer) { %>
+                  🟢
+                <% } else { %>
+                  💥
+                <% } %>
+              </td>
+            </tr>
+            <% } %>
+          </table>
       </div>
     </main>
 

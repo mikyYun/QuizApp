@@ -145,4 +145,17 @@ const totalAttempts = (user) => {
     });
 };
 
-module.exports = { getPublicQuizID, getAllPublicQuiz, getPrivateQuizID, getAllPrivateQuiz, addPrivateQuiz, getUserByName, addUserAnswer, correctAnswer, totalAttempts, wrongAnswer };
+const getLatestHistory = (user) => {
+  return pool
+    .query(
+      `SELECT question, answer, user_answer FROM results
+      JOIN quizzes
+      ON quizzes.id = quiz_id
+      WHERE results.user_id = $1
+      LIMIT 10
+      `, [user]
+    ).then((res) => {return res.rows})
+}
+
+
+module.exports = { getPublicQuizID, getAllPublicQuiz, getPrivateQuizID, getAllPrivateQuiz, addPrivateQuiz, getUserByName, addUserAnswer, correctAnswer, totalAttempts, wrongAnswer, getLatestHistory };
