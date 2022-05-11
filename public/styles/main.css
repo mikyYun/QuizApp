@@ -383,9 +383,9 @@ footer {
 
 .fairy {
   background: linear-gradient(0deg, transparent, transparent),
-    url("../images/fairywing.png")
+    url("../images/fairywing.png");
   background-size: 10rem 10rem;
-};
+}
 
 .phoneixwing {
   background: linear-gradient(0deg, transparent, transparent),
