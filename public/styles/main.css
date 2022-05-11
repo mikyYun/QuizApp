@@ -1,6 +1,12 @@
 .cohort-photo {
-  background: url("../images/cohort.jpeg");
-  background-size: 10rem 10rem;
+  background: url(../images/cohort2.png);
+  background-size: auto;
+  background-position: center;
+  opacity:0.2;
+}
+
+.cohort-photo:hover {
+  opacity: 1;
 }
 
 body {
