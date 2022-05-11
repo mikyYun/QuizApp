@@ -19,7 +19,7 @@ body {
   justify-content: center; */
   align-items: center;
   min-height: 100vh;
-  background: white;
+  background: grey;
 
   /* background: #a3d0db;
   background: linear-gradient(
@@ -70,6 +70,15 @@ body {
 .create1 {
   color: rgb(128, 141, 176);
 }
+
+/* handling create page */
+.form-inline,
+.private_quiz {
+  font-family: 'Permanent Marker', cursive;
+}
+
+
+
 /* handling main page */
 
 .navbar1 {
@@ -119,6 +128,7 @@ td {
   width: 100%;
   justify-content: center;
   align-items: center;
+  font-family: 'Permanent Marker', cursive;
 }
 
 .home {
@@ -294,6 +304,7 @@ animation: bounce 2s ease infinite 1s;
   padding: 2em;
   line-break: auto;
   border: 10px solid rgb(174 247 174);
+  background-color: #af8d8d;
 }
 
 .login-name-label {
