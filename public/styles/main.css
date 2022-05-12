@@ -68,6 +68,26 @@ body {
   color: #7b90ab;
 }
 
+/* handling icon */
+.house-anchor,
+.unlock-anchor,
+.create-anchor,
+.result-anchor {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.fa-solid {
+  text-align: center;
+  margin-top: 8px;
+  font-size: 20px;
+  color: darkred
+}
+
+.fa-solid:hover {
+  color: #7b90ab;
+}
+
 .greeting {
   color: #7287b2;
 }
