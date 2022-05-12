@@ -74,7 +74,7 @@ app.post("/logout", (req, res) => {
   console.log(req.session);
   req.session = null;
   console.log(req.session);
-  res.redirect("/login"); // just redirecting WITHOUT data
+  res.redirect("/quizzes"); // just redirecting WITHOUT data
 });
 
 
