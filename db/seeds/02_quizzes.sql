@@ -1,5 +1,5 @@
 INSERT INTO quizzes (user_id, question, answer, is_public) VALUES (2, 'who lives in victoria?', 'amy', true);
-INSERT INTO quizzes (user_id, question, answer, is_public) VALUES (2, 'which day did this cohort kick-off?', '0404', true);
+INSERT INTO quizzes (user_id, question, answer, is_public) VALUES (2, 'which day did this cohort kick-off (e.g. 0101)?', '0404', true);
 INSERT INTO quizzes (user_id, question, answer, is_public) VALUES (2, 'who is the most handsome guy at LHL?', 'andy', true);
 INSERT INTO quizzes (user_id, question, answer, is_public) VALUES (2, 'which guy has the longest hair in the cohort?', 'robbie', true);
 INSERT INTO quizzes (user_id, question, answer, is_public) VALUES (2, 'who was a commercial truck driver before the course?', 'jason', true);
@@ -14,4 +14,8 @@ INSERT INTO quizzes (user_id, question, answer, is_public) VALUES (2, 'who is a 
 INSERT INTO quizzes (user_id, question, answer, is_public) VALUES (2, 'who is the Einstein in the cohort?', 'jc', true);
 INSERT INTO quizzes (user_id, question, answer, is_public) VALUES (2, 'who was modelling for a Korean dashcam company before?', 'aidan', true);
 INSERT INTO quizzes (user_id, question, answer, is_public) VALUES (2, 'who worked as a QA before?', 'moon', true);
+INSERT INTO quizzes (user_id, question, answer, is_public) VALUES (2, 'which instructor supervises our friday exams?', 'david', true);
+INSERT INTO quizzes (user_id, question, answer, is_public) VALUES (2, 'which instructor supervises our friday exams?', 'david', true);
+INSERT INTO quizzes (user_id, question, answer, is_public) VALUES (2, 'which instructor supervises our friday exams?', 'david', true);
+INSERT INTO quizzes (user_id, question, answer, is_public) VALUES (2, 'which instructor supervises our friday exams?', 'david', true);
 INSERT INTO quizzes (user_id, question, answer, is_public) VALUES (2, 'which instructor supervises our friday exams?', 'david', true);
