@@ -87,7 +87,7 @@ const getAllPrivateQuiz = (user_id) => {
 };
 
 const addUserAnswer = (user_id, quiz, user_answer) => {
-  console.log('answer is "WHY IS THIS UNDEFINDED', user_answer);
+  console.log('answer is :', user_answer);
   return pool
     .query(
       `INSERT INTO results(user_id, quiz_id, user_answer)

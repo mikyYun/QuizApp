@@ -7,16 +7,31 @@
     rel="stylesheet"
   />
 
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet">
+
   <nav class="navbar1">
     <!-- a tag href goes rounter.get -->
     <!-- <a class="create" href="/quizzes/create">Create quiz</a> -->
 
     <div class="navbar2">
+      <div class="house-anchor">
+      <a class="fa-solid fa-house-chimney" id="nav-icons" href="/"></a>
       <a class="anchor title" href="/">MWM Quiz Home</a>
+      </div>
       <% if (user.user_name && user.user_name !== 'visitor') { %>
-      <a class="anchor private" href="/quizzes/private">My private quiz</a>
-      <a class="anchor create1" href="/quizzes/create">Create quiz</a>
-      <a class="anchor result" href="/quizzes/result">My result</a>
+      <div class="unlock-anchor">
+        <a class="fa-solid fa-unlock" id="nav-icons" href="/quizzes/private" ></a>
+        <a class="anchor private" href="/quizzes/private">My private quiz</a>
+      </div>
+      <div class="create-anchor">
+        <a class="fa-solid fa-circle-plus" id="nav-icons" href="/quizzes/create" ></a>
+        <a class="anchor create1" href="/quizzes/create">Create quiz</a>
+      </div>
+      <div class="result-anchor">
+        <a class="fa-solid fa-square-poll-horizontal" id="nav-icons" href="/quizzes/result" ></a>
+        <a class="anchor result" href="/quizzes/result">My result</a>
+      </div>
+
       <form method="POST" action="/logout">
         <label for="username" class="greeting"
           >Hello, <%= user.user_name%>!
@@ -24,7 +39,10 @@
         <button type="submit" class="button_logout evnt">Logout</button>
       </form>
       <% } else { %>
-      <a class="anchor result" href="/quizzes/result">My result</a>
+        <div class="result-anchor">
+          <a class="fa-solid fa-square-poll-horizontal" id="nav-icons" href="/quizzes/result" ></a>
+          <a class="anchor result" href="/quizzes/result">My result</a>
+        </div>
       <form method="GET" action="/login">
         <label for="username" class="greeting">Hello, visitor! </label>
         <button class="button_login evnt" href="/login">Login</button>

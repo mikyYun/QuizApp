@@ -157,7 +157,7 @@ module.exports = (db) => {
     }
     const user = { user_name, user_id };
     console.log("req.params", req.params);
-    console.log("is_quizID", quizID); //WHY IS THIS UNDEFINED?
+    console.log("is_quizID", quizID);
     getPublicQuizID(quizID)
       .then((quiz) => {
         const oneQuiz = quiz[0];
@@ -208,8 +208,7 @@ module.exports = (db) => {
     const { quizID, private } = req.body;
     // console.log("REQ.BODY", req.body);
     const userAnswer = req.body.userAnswer; //it's a string.
-    console.log('req.body.userAnswer', userAnswer)
-    // console.log('check-quiz why is this undefined?', quizID);// ok
+    // console.log('QUIZ ID is: ', quizID);// ok
     // const quizID = req.params.quizID;
     // console.log("TEST", quizID); // ok
     let user_name = req.session.user_name;
