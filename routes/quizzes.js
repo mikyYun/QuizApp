@@ -226,7 +226,7 @@ module.exports = (db) => {
               const currentQuizID = quiz[0].id;// 16
               const trueOrFalseResult = oneAnswer.toLowerCase() === userAnswer.toLowerCase(); // true
               return { trueOrFalseResult, currentQuizID };
-            })
+            })///////////can't we just res.send instead return on line 228???
             .then((trueOrFalse) => {
               res.send(trueOrFalse); //returns object { t/f, nextQuizID }
             })

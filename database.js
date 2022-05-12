@@ -163,6 +163,27 @@ const getLatestHistory = (user) => {
       return res.rows;
     });
 };
+// current userid, questionid, 
+const hasCorrectAnswer = (user_id, quiz, user_answer) => {
+  return pool
+    .query(`
+    SELECT *
+    FROM results
+    WHERE user_id = $1
+    AND quiz_id = $2
+    GROUP BY results.id;`,
+    [user_id, quiz.id])
+    .then((res) => {
+      const user_history = res.rows[0]
+      if (user_history.user_answer === user_answer) {
+        return 
+      }
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+}
+
 
 const findSubmitedAnswer = (user) => {
   return pool
