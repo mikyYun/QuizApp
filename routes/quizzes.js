@@ -245,7 +245,7 @@ module.exports = (db) => {
           // console.log("QUIZ ID", quizID);
           // console.log("QUIZ", quiz);
 
-          addUserAnswer(quiz[0], userAnswer, user_id)
+          addUserAnswer( user_id, quiz[0], userAnswer)
             .then(() => {
 
               // quiz [  { id: question: answer } ]
