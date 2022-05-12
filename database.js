@@ -164,19 +164,21 @@ const getLatestHistory = (user) => {
     });
 };
 // current userid, questionid, 
-const hasCorrectAnswer = (user_id, quiz, user_answer) => {
+const hadAttempted = (quiz) => { // a row of quiz
   return pool
     .query(`
     SELECT *
     FROM results
-    WHERE user_id = $1
-    AND quiz_id = $2
-    GROUP BY results.id;`,
-    [user_id, quiz.id])
-    .then((res) => {
-      const user_history = res.rows[0]
-      if (user_history.user_answer === user_answer) {
-        return 
+    WHERE user_id = $1 
+    AND quiz_id = $2;`, // number of quiz & current user's history
+    [quiz.user_id, quiz.id])
+    .then((res) => {//first attempt -> empty [{obj}]
+      console.log('hascorrectA Table', res.rows)// should empty arr
+      if (res.rows.length === 0) {
+        return false
+      } else {
+        console.log('historyyyyyyyyyyyyyyyy', res.rows) // should an objs in an arr
+        return true
       }
     })
     .catch((err) => {
@@ -192,4 +194,4 @@ const findSubmitedAnswer = (user) => {
 }
 
 
-module.exports = { getPublicQuizID, getAllPublicQuiz, getPrivateQuizID, getAllPrivateQuiz, addPrivateQuiz, getUserByName, addUserAnswer, correctAnswer, totalAttempts, wrongAnswer, getLatestHistory };
+module.exports = { getPublicQuizID, getAllPublicQuiz, getPrivateQuizID, getAllPrivateQuiz, addPrivateQuiz, getUserByName, addUserAnswer, correctAnswer, totalAttempts, wrongAnswer, getLatestHistory, hadAttempted };

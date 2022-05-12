@@ -15,7 +15,7 @@ const {
   generateRandomString,
   urlsForUser,
 } = require("../helpers.js");
-const { correctAnswer, getPublicQuizID, getAllPublicQuiz, getPrivateQuizID, getAllPrivateQuiz, getUserByName, addPrivateQuiz, addUserAnswer, wrongAnswer, totalAttempts, getLatestHistory, hadAttempted } = require("../database.js");
+const { correctAnswer, getPublicQuizID, getAllPublicQuiz, getPrivateQuizID, getAllPrivateQuiz, getUserByName, addPrivateQuiz, addUserAnswer, wrongAnswer, totalAttempts, getLatestHistory } = require("../database.js");
 const { Pool } = require('pg/lib');
 
 module.exports = (db) => {
@@ -27,13 +27,13 @@ module.exports = (db) => {
     let user_id = req.session.user_id;
     if (user_id === undefined) {
       user_name = 'visitor',
-        user_id = 1;
+      user_id = 1
     }
     const user = { user_name, user_id };
-    /**
-     * if every user use the same name,
-     * 
-     */
+  /**
+   * if every user use the same name,
+   * 
+   */
 
 
     getAllPublicQuiz()
@@ -92,10 +92,10 @@ module.exports = (db) => {
     let user_id = req.session.user_id;
     if (user_id === undefined) {
       user_name = 'visitor',// randomStr()
-        user_id;
+      user_id
     }
-    console.log('user_id', user_id);
-    console.log('user_name', user_name);
+    console.log('user_id', user_id)
+    console.log('user_name', user_name)
 
     const user = { user_name, user_id };
 
@@ -119,7 +119,7 @@ module.exports = (db) => {
     let user_id = req.session.user_id;
     if (user_id === undefined) {
       user_name = 'visitor',
-        user_id = 1;
+      user_id = 1
     }
     const user = { user_name, user_id };
 
@@ -153,7 +153,7 @@ module.exports = (db) => {
     let user_id = req.session.user_id;
     if (user_id === undefined) {
       user_name = 'visitor',
-        user_id = 1;
+      user_id = 1
     }
     const user = { user_name, user_id };
     console.log("req.params", req.params);
@@ -200,83 +200,85 @@ module.exports = (db) => {
 
   router.post("/check", (req, res) => {
     const { quizID, private } = req.body;
-    // console.log("REQ.BODY", req.body);
+    console.log("REQ.BODY", req.body);
     const userAnswer = req.body.userAnswer; //it's a string.
     // console.log('check-quiz why is this undefined?', quizID);// ok
     // const quizID = req.params.quizID;
     // console.log("TEST", quizID); // ok
     let user_name = req.session.user_name;
-    console.log('user_name is', user_name);
     let user_id = req.session.user_id;
-    console.log('user_id is', user_id);
     if (user_id === undefined) {
       user_name = 'visitor',
-        user_id = 1;
+      user_id = 1
     }
-    console.log('user_name is', user_name);
-    console.log('user_id is', user_id);
-
-    const user = { user_name, user_id };
-
-    // answer check first
-    
-    if (private === 'true') {
-      getPrivateQuizID(quizID)
-      .then((quiz) => {
-        // console.log("USER ID ", user_id);
-        // console.log("quiz0", quiz[0]);
-        // console.log("UA", userAnswer);
-        // const nextUUID = quiz[0].randomString;
-        const oneAnswer = quiz[0].answer;
-        const currentQuizID = quiz[0].id;// 16
-        const trueOrFalseResult = oneAnswer.toLowerCase() === userAnswer.toLowerCase(); // true
-        const trueOrFalse = {trueOrFalseResult, currentQuizID}
-          hadAttempted(quiz[0])
-            .then((hasHistory) => {
-              if (hasHistory) {
-                console.log(currentQuizID)
-                return res.send(trueOrFalse)
-              } else if (hasHistory !== true) {
-                addUserAnswer(user_id, quiz[0], userAnswer)
-                  .then(() => res.send(trueOrFalse))
-                  .catch((err) => {
-                    console.log('private_addUserAnswer catch', err)
-                  })
-              }
+    // const user = { user_name, user_id };
+    // want to return the value of getPublicQuizID(quizID) to the second then
+    if (private === 'true') { //all private quiz
+      getPrivateQuizID(quizID) // return res.rows [{}]
+        .then((quiz) => {
+          console.log("USER ID ", user_id);
+          console.log("quiz0", quiz[0]);
+          console.log("UA", userAnswer);
+          addUserAnswer(user_id, quiz[0], userAnswer)
+            .then(() => {
+              const nextUUID = quiz[0].randomString;
+              const oneAnswer = quiz[0].answer;
+              const currentQuizID = quiz[0].id;// 16
+              const trueOrFalseResult = oneAnswer.toLowerCase() === userAnswer.toLowerCase(); // true
+              return { trueOrFalseResult, currentQuizID };
+            })///////////can't we just res.send instead return on line 228???
+            .then((trueOrFalse) => {
+              res.send(trueOrFalse); //returns object { t/f, nextQuizID }
             })
-            .then((err) => {
-              console.log('private_hadAttempted catch', err)
-            })
-        })
+            .catch((err) => {
+              console.log(err);
+              res.send('error addUserAnswer', err);
+            });
+        }).catch((err) => {
+          console.log("err ", err);
+          res.send('error getPublicQuiz', err);
+        });
+
     } else {
-      console.log('ddddddddddddd', quizID)
-      getPublicQuizID(quizID)
-      .then((quiz) => {
-        // const nextUUID = quiz[0].randomString;
-        const oneAnswer = quiz[0].answer;
-        const currentQuizID = quiz[0].id;// 16
-        const trueOrFalseResult = oneAnswer.toLowerCase() === userAnswer.toLowerCase(); // true
-        const trueOrFalse = {trueOrFalseResult, currentQuizID}
-        console.log('quiquiquiz', quiz)
-        hadAttempted(quiz[0])
-          .then((hasHistory) => {
-            if (hasHistory === true) {
-              console.log(currentQuizID)
-              return res.send(trueOrFalse)
-            } else if (hasHistory !== true) {
-              addUserAnswer(user_id, quiz[0], userAnswer)
-                .then(() => res.send(trueOrFalse))
-                .catch((err) => {
-                  console.log('public_addUserAnswer catch', err)
-                })
-            }
-          })
-          .catch((err) => {
-            console.log('public_hadAttempted catch', err)
-          })
-      })
+      getPublicQuizID(quizID) // return res.rows [{}]
+        .then((quiz) => {
+          // console.log("QUIZ ID", quizID);
+          // console.log("QUIZ", quiz);
 
+          addUserAnswer( user_id, quiz[0], userAnswer)
+            .then(() => {
+
+              // quiz [  { id: question: answer } ]
+
+              const oneAnswer = quiz[0].answer;
+              if (quiz[0].id <= 17) { //public quizzes
+                const currentQuizID = quiz[0].id;// 16
+                const trueOrFalseResult = oneAnswer.toLowerCase() === userAnswer.toLowerCase(); // true
+                // if (quiz[0].id !== 17) {
+                  return { trueOrFalseResult, currentQuizID };
+                // }
+                // console.log('171717171717')
+                // return 
+              } 
+              // else if (quiz[0].id === 17) {
+              //   console.log('QUIZZES.JS - This is the 17th');
+              //   res.redirect('/quizzes')
+              // }
+            })
+            .then((trueOrFalse) => {
+              // send trueOrFalse to app.js
+              // ajax .....then((here))
+              res.send(trueOrFalse);
+            })
+            .catch((err) => {
+              console.log(err);
+              res.send('error addUserAnswer', err);
+            });
+        }).catch((err) => {
+          console.log("err ", err);
+          res.send('this is an error for getPublicQuiz', err);
+        });
     }
   });
   return router;
-}
+};
