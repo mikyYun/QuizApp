@@ -1,7 +1,7 @@
 .cohort-photo {
   background: url(../images/cohort0.png);
   background-size: contain;
-  opacity: 0.2;
+  opacity: 0;
 }
 
 .cohort-photo:hover {
@@ -40,6 +40,12 @@ body {
 }
 
 /* handling header */
+
+.mwm-logo {
+  height: 60px;
+  width: 200px;
+  color: transparent
+}
 
 .navbar {
   background-color: #d1855b;
@@ -380,7 +386,7 @@ animation: bounce 2s ease infinite 1s;
   background-color: rgb(174 247 174);
   color: black;
   border-radius: 1.5rem;
-  width: 35vw;
+  width: 28vw;
   align-items: center;
   margin: auto;
   padding: 1.3rem 0;
@@ -519,7 +525,17 @@ footer {
 }
 
 @keyframes color-change {
-  0% { color: red; }
-  50% { color: blue; }
-  100% { color: red; }
+  0% { color: darkred; }
+  50% { color: rgb(174 247 174); }
+  100% { color: darkred; }
+}
+
+.copyright {
+  width: 100vw;
+  height: 0vh;
+  text-align: -webkit-center;
+  position: absolute;
+  bottom: 0px;
+  color: darkred;
+  font-family: 'Fredoka One', cursive
 }
