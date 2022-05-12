@@ -222,7 +222,7 @@ hr {
   border-radius: 50%;
   margin-top: 2rem;
   width: 10rem;
-  border: 0.2rem solid #da9f83;
+  border: 0.3rem solid rgb(174 247 174);
 }
 
 .question_submit_btn {
