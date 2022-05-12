@@ -32,7 +32,7 @@ module.exports = (db) => {
     const user = { user_name, user_id };
     /**
      * if every user use the same name,
-     * 
+     *
      */
 
 
@@ -167,13 +167,13 @@ module.exports = (db) => {
           .then((allPublicQuiz) => {
 
             const numberOfPublicQuiz = allPublicQuiz.length// number
-            console.log('nnnnnnnnnnnnnnnnnnnnnnn',numberOfPublicQuiz)
+            console.log('nnnnnnnnnnnnnnnnnnnnnnn', numberOfPublicQuiz)
             const templateVars = {
               user,
               oneQuiz: oneQuiz,
               oneQuestion: oneQuestion,
               oneAnswer: oneAnswer,
-              numberOfPublicQuiz: numberOfPublicQuiz 
+              numberOfPublicQuiz: numberOfPublicQuiz
             };
             res.render("quiz_show", templateVars);
           })
@@ -225,24 +225,19 @@ module.exports = (db) => {
     const user = { user_name, user_id };
 
     // answer check first
-    
+
     if (private === 'true') {
       getPrivateQuizID(quizID)
-      .then((quiz) => {
-        console.log
-        // console.log("USER ID ", user_id);
-        // console.log("quiz0", quiz[0]);
-        // console.log("UA", userAnswer);
-        // const nextUUID = quiz[0].randomString;
-        const oneAnswer = quiz[0].answer;
-        const currentQuizID = quiz[0].id;// 16
-        const trueOrFalseResult = oneAnswer.toLowerCase() === userAnswer.toLowerCase(); // true
-        const trueOrFalse = {trueOrFalseResult, currentQuizID}
+        .then((quiz) => {
+          const oneAnswer = quiz[0].answer;
+          const currentQuizID = quiz[0].id;// 16
+          const trueOrFalseResult = oneAnswer.toLowerCase() === userAnswer.toLowerCase(); // true
+          const trueOrFalse = { trueOrFalseResult, currentQuizID }
           hadAttempted(quiz[0], userAnswer) // check the user's history(first attempt) in our results table
             .then((hasHistory) => {
               if (hasHistory) {
-                console.log(currentQuizID)
-                return res.send(trueOrFalse)
+                console.log(currentQuizID);
+                return res.send(trueOrFalse);
               } else if (hasHistory !== true) {
                 addUserAnswer(user_id, quiz[0], userAnswer)
                   .then(() => res.send(trueOrFalse))
@@ -258,31 +253,31 @@ module.exports = (db) => {
     } else {
       console.log('ddddddddddddd', quizID)
       getPublicQuizID(quizID)
-      .then((quiz) => {
-        // const nextUUID = quiz[0].randomString;
-        const oneAnswer = quiz[0].answer;
-        const currentQuizID = quiz[0].id;// 16
-        const trueOrFalseResult = oneAnswer.toLowerCase() === userAnswer.toLowerCase(); // true
-        const trueOrFalse = {trueOrFalseResult, currentQuizID}
-        console.log('quiquiquiz', quiz)
-        hadAttempted(quiz[0], userAnswer)
-          .then((hasHistory) => {
-            if (hasHistory) {
-              console.log(currentQuizID)
-              return res.send(trueOrFalse)
-            } else if (hasHistory !== true) {
-              console.log("WHEREWHERE")
-              addUserAnswer(user_id, quiz[0], userAnswer)
-                .then(() => res.send(trueOrFalse))
-                .catch((err) => {
-                  console.log('public_addUserAnswer catch', err)
-                })
-            }
-          })
-          .catch((err) => {
-            console.log('public_hadAttempted catch', err)
-          })
-      })
+        .then((quiz) => {
+          // const nextUUID = quiz[0].randomString;
+          const oneAnswer = quiz[0].answer;
+          const currentQuizID = quiz[0].id;// 16
+          const trueOrFalseResult = oneAnswer.toLowerCase() === userAnswer.toLowerCase(); // true
+          const trueOrFalse = { trueOrFalseResult, currentQuizID }
+          console.log('quiquiquiz', quiz)
+          hadAttempted(quiz[0], userAnswer)
+            .then((hasHistory) => {
+              if (hasHistory) {
+                console.log(currentQuizID)
+                return res.send(trueOrFalse)
+              } else if (hasHistory !== true) {
+                console.log("WHEREWHERE")
+                addUserAnswer(user_id, quiz[0], userAnswer)
+                  .then(() => res.send(trueOrFalse))
+                  .catch((err) => {
+                    console.log('public_addUserAnswer catch', err)
+                  })
+              }
+            })
+            .catch((err) => {
+              console.log('public_hadAttempted catch', err)
+            })
+        })
 
     }
   });
