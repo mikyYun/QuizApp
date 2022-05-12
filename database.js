@@ -164,7 +164,7 @@ const getLatestHistory = (user) => {
     });
 };
 // current userid, questionid, 
-const hadAttempted = (quiz) => { // a row of quiz
+const hadAttempted = (quiz, user_answer) => { // a row of quiz
   return pool
     .query(`
     SELECT *
@@ -173,12 +173,23 @@ const hadAttempted = (quiz) => { // a row of quiz
     AND quiz_id = $2;`, // number of quiz & current user's history
     [quiz.user_id, quiz.id])
     .then((res) => {//first attempt -> empty [{obj}]
-      console.log('hascorrectA Table', res.rows)// should empty arr
+      console.log('hascorrectA Table', user_answer)// should empty arr
+      console.log('resresrse', res.rows)
       if (res.rows.length === 0) {
         return false
       } else {
-        console.log('historyyyyyyyyyyyyyyyy', res.rows) // should an objs in an arr
-        return true
+        console.log('historyyyyyyyyyyyyyyyy', user_answer) // should an objs in an arr
+        return pool
+        .query(`
+        UPDATE results
+        SET user_answer = $3
+        WHERE user_id = $1
+        AND quiz_id = $2;
+        `, [quiz.user_id, quiz.id, user_answer])
+        .then((res) => {
+          console.log('res.rows', res.rows)
+          return true
+        })
       }
     })
     .catch((err) => {

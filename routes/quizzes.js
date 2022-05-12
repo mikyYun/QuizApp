@@ -202,6 +202,7 @@ module.exports = (db) => {
     const { quizID, private } = req.body;
     // console.log("REQ.BODY", req.body);
     const userAnswer = req.body.userAnswer; //it's a string.
+    console.log('req.body.userAnswer', userAnswer)
     // console.log('check-quiz why is this undefined?', quizID);// ok
     // const quizID = req.params.quizID;
     // console.log("TEST", quizID); // ok
@@ -223,6 +224,7 @@ module.exports = (db) => {
     if (private === 'true') {
       getPrivateQuizID(quizID)
       .then((quiz) => {
+        console.log
         // console.log("USER ID ", user_id);
         // console.log("quiz0", quiz[0]);
         // console.log("UA", userAnswer);
@@ -231,7 +233,7 @@ module.exports = (db) => {
         const currentQuizID = quiz[0].id;// 16
         const trueOrFalseResult = oneAnswer.toLowerCase() === userAnswer.toLowerCase(); // true
         const trueOrFalse = {trueOrFalseResult, currentQuizID}
-          hadAttempted(quiz[0])
+          hadAttempted(quiz[0], userAnswer) // check the user's history(first attempt) in our results table
             .then((hasHistory) => {
               if (hasHistory) {
                 console.log(currentQuizID)
@@ -258,12 +260,13 @@ module.exports = (db) => {
         const trueOrFalseResult = oneAnswer.toLowerCase() === userAnswer.toLowerCase(); // true
         const trueOrFalse = {trueOrFalseResult, currentQuizID}
         console.log('quiquiquiz', quiz)
-        hadAttempted(quiz[0])
+        hadAttempted(quiz[0], userAnswer)
           .then((hasHistory) => {
-            if (hasHistory === true) {
+            if (hasHistory) {
               console.log(currentQuizID)
               return res.send(trueOrFalse)
             } else if (hasHistory !== true) {
+              console.log("WHEREWHERE")
               addUserAnswer(user_id, quiz[0], userAnswer)
                 .then(() => res.send(trueOrFalse))
                 .catch((err) => {
