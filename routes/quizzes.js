@@ -92,21 +92,26 @@ module.exports = (db) => {
     console.log('user_name', user_name);
 
     const user = { user_name, user_id };
-    
-    Promise.all([
-      correctAnswer(user_id), wrongAnswer(user_id), totalAttempts(user_id), getLatestHistory(user_id)
-    ])
-      .then((nums) => {
 
-        console.log("nums", nums);
+    Promise.all([
+      correctAnswer(user_id), wrongAnswer(user_id), totalAttempts(user_id), getLatestHistory(user_id), getAllPublicQuiz()
+    ])
+      .then((nums) => { // this is an array
+        // nums[0] = correct
+        // nums[1] = wrong
+        // nums[2] = total attempts
+        // nums[3] = answer rate - badge.
+        // nums[4] = all public quiz...
+        const numberOfPublicQuiz = nums[4].length;
+        nums[4] = numberOfPublicQuiz;
         const templateVars = {
           nums,
-          user
+          user,
         };
         res.render("quiz_result", templateVars);
       });
   });
-/////////////do we need this??
+  /////////////do we need this??
   router.get("/quizzes/:randomString", (req, res) => {
     const randomString = req.params.randomString;
     let user_name = req.session.user_name;
@@ -158,7 +163,7 @@ module.exports = (db) => {
         const oneQuestion = quiz[0].question;
         const oneAnswer = quiz[0].answer;
         getAllPublicQuiz()
-          .then((allPublicQuiz) => {
+          .then((allPublicQuiz) => { //allPublicQuiz = [  {} {} {} ]
 
             const numberOfPublicQuiz = allPublicQuiz.length// number
             console.log('nnnnnnnnnnnnnnnnnnnnnnn', numberOfPublicQuiz)
