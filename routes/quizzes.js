@@ -123,6 +123,9 @@ module.exports = (db) => {
         console.log(error);
       });
   });
+
+  // get/quizzes/:quizID <- this is our RESTful route
+  //  post/quizzes/:quizID/results
   // handling individual quiz page
   router.get("/:quizID", (req, res) => {
     const quizID = req.params.quizID;
@@ -172,25 +175,29 @@ module.exports = (db) => {
   });
 
   router.post("/check", (req, res) => {
-    const { userAnswer, quizID } = req.body;
-    console.log('check-quiz', quizID);// ok
+    const { quizID, private } = req.body;
+    console.log("REQ.BODY", req.body);
+    const userAnswer = req.body.userAnswer; //it's a string.
+    // console.log('check-quiz why is this undefined?', quizID);// ok
     // const quizID = req.params.quizID;
     // console.log("TEST", quizID); // ok
     const user_name = req.session.user_name;
     const user_id = req.session.user_id;
     // const user = { user_name, user_id };
     // want to return the value of getPublicQuizID(quizID) to the second then
-    if (quizID >= 17) { //all private quiz
-      console.log('quizID is larger than 17');
+    if (private === 'true') { //all private quiz
       getPrivateQuizID(quizID) // return res.rows [{}]
-        // getPrivateQuizID(quizID) // return res.rows [{}]
         .then((quiz) => {
-          console.log('QUIZ', quiz);
-          addUserAnswer(quiz[0], userAnswer, user_id)
+          console.log("USER ID ", user_id);
+          console.log("quiz0", quiz[0]);
+          console.log("UA", userAnswer);
+          addUserAnswer(user_id, quiz[0], userAnswer)
             .then(() => {
-              console.log('userAnswer: ', userAnswer);
+              const nextUUID = quiz[0].randomString;
               const oneAnswer = quiz[0].answer;
-
+              const currentQuizID = quiz[0].id;// 16
+              const trueOrFalseResult = oneAnswer.toLowerCase() === userAnswer.toLowerCase(); // true
+              return { trueOrFalseResult, currentQuizID };
             })
             .then((trueOrFalse) => {
               res.send(trueOrFalse); //returns object { t/f, nextQuizID }
@@ -207,15 +214,18 @@ module.exports = (db) => {
     } else {
       getPublicQuizID(quizID) // return res.rows [{}]
         .then((quiz) => {
+          console.log("QUIZ ID", quizID);
+          console.log("QUIZ", quiz);
+
           addUserAnswer(quiz[0], userAnswer, user_id)
             .then(() => {
-              console.log('userAnswer: ', userAnswer);
-              console.log('quiz[0] is', quiz[0]);
+
+              // quiz [  { id: question: answer } ]
+
               const oneAnswer = quiz[0].answer;
               if (quiz[0].id < 17) { //public quizzes
                 const currentQuizID = quiz[0].id;// 16
                 const trueOrFalseResult = oneAnswer.toLowerCase() === userAnswer.toLowerCase(); // true
-                console.log('currentQuizID', currentQuizID);
                 return { trueOrFalseResult, currentQuizID };
               } else if (quiz[0].id === 17) {
                 console.log('QUIZZES.JS - This is the 17th');
@@ -230,7 +240,7 @@ module.exports = (db) => {
             });
         }).catch((err) => {
           console.log("err ", err);
-          res.send('error getPublicQuiz', err);
+          res.send('this is an error for getPublicQuiz', err);
         });
     }
   });

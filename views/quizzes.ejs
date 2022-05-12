@@ -16,7 +16,10 @@
     <link rel="stylesheet" href="../styles/main.css" type="text/css" />
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
 
-    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap"
+      rel="stylesheet"
+    />
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
@@ -24,24 +27,23 @@
 
   <body class="cohort-photo">
     <%- include('partials/_header') %>
-    <h1 class="welcome123 view">Welcome to the MWM Quiz</h1>
-
+    <h1 class="welcome view">Welcome to the MWM Quiz</h1>
 
     <table class="public_quiz">
       <tbody class="question-url">
-      <tr>
-        <th scope="col">Question</th>
-        <th scope="col">Quiz URL</th>
-      </tr>
-      <% for (let i = 0; i < quizzes.length; i++) { %>
-      <tr>
-        <td><%=quizzes[i].question%></td>
-        <td>
-          <a href="<%=`/quizzes/${quizzes[i].id}`%>">Go to quiz!</a>
-        </td>
-      </tr>
-      <% }%>
-    </tbody>
+        <tr>
+          <th scope="col">Question</th>
+          <th scope="col">Quiz URL</th>
+        </tr>
+        <% for (let i = 0; i < quizzes.length; i++) { %>
+        <tr>
+          <td><%=quizzes[i].question%></td>
+          <td>
+            <a href="<%=`/quizzes/${quizzes[i].id}`%>">Go to quiz!</a>
+          </td>
+        </tr>
+        <% }%>
+      </tbody>
     </table>
   </body>
 </html>
