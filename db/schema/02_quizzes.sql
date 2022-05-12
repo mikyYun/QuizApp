@@ -11,7 +11,7 @@ CREATE TABLE quizzes (
 
 
 
-quizzes
+-- quizzes
 -- id | user_id | question | answer | is_public  | random_string
 -- 1    2(mike)    mikeQ      mikeA    false        a1b2c3
 -- 1    3(moon)    q1        a1    false            x1y2z3

@@ -23,9 +23,18 @@ module.exports = (db) => {
   // ================== GET ==================== //
 
   router.get("/", (req, res) => {
-    const user_name = req.session.user_name;
-    const user_id = req.session.user_id;
+    let user_name = req.session.user_name;
+    let user_id = req.session.user_id;
+    if (user_id === undefined) {
+      user_name = 'visitor',
+      user_id = 1
+    }
     const user = { user_name, user_id };
+  /**
+   * if every user use the same name,
+   * 
+   */
+
 
     getAllPublicQuiz()
       .then((quizzes) => { // quizzes == res.rows
@@ -79,8 +88,15 @@ module.exports = (db) => {
 
   router.get("/result", (req, res) => {
     console.log('ROUTER/GET/RESULT');
-    const user_name = req.session.user_name;
-    const user_id = req.session.user_id;
+    let user_name = req.session.user_name;
+    let user_id = req.session.user_id;
+    if (user_id === undefined) {
+      user_name = 'visitor',// randomStr()
+      user_id
+    }
+    console.log('user_id', user_id)
+    console.log('user_name', user_name)
+
     const user = { user_name, user_id };
 
     Promise.all([
@@ -99,8 +115,12 @@ module.exports = (db) => {
 
   router.get("/quizzes/:randomString", (req, res) => {
     const randomString = req.params.randomString;
-    const user_name = req.session.user_name;
-    const user_id = req.session.user_id;
+    let user_name = req.session.user_name;
+    let user_id = req.session.user_id;
+    if (user_id === undefined) {
+      user_name = 'visitor',
+      user_id = 1
+    }
     const user = { user_name, user_id };
 
     getPrivateQuizID(randomString) // a1b2c3
@@ -126,8 +146,12 @@ module.exports = (db) => {
   // handling individual quiz page
   router.get("/:quizID", (req, res) => {
     const quizID = req.params.quizID;
-    const user_name = req.session.user_name;
-    const user_id = req.session.user_id;
+    let user_name = req.session.user_name;
+    let user_id = req.session.user_id;
+    if (user_id === undefined) {
+      user_name = 'visitor',
+      user_id = 1
+    }
     const user = { user_name, user_id };
     console.log("req.params", req.params);
     console.log("is_quizID", quizID); //WHY IS THIS UNDEFINED?
@@ -176,8 +200,12 @@ module.exports = (db) => {
     console.log('check-quiz', quizID);// ok
     // const quizID = req.params.quizID;
     // console.log("TEST", quizID); // ok
-    const user_name = req.session.user_name;
-    const user_id = req.session.user_id;
+    let user_name = req.session.user_name;
+    let user_id = req.session.user_id;
+    if (user_id === undefined) {
+      user_name = 'visitor',
+      user_id = 1
+    }
     // const user = { user_name, user_id };
     // want to return the value of getPublicQuizID(quizID) to the second then
     if (quizID >= 17) { //all private quiz

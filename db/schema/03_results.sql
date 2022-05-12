@@ -6,3 +6,4 @@ CREATE TABLE results (
   quiz_id INTEGER REFERENCES quizzes(id) ON DELETE CASCADE,
   user_answer VARCHAR(255)
 );
+

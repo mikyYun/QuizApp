@@ -41,6 +41,7 @@ $(document).ready(function () {
   //     });
   // });
 
+
   $(".alert-message").hide();
 
   $("#public-quiz-submit-form").submit((e) => {
@@ -88,6 +89,5 @@ $(document).ready(function () {
     $('.history_box_title').slideToggle('slow');
     $('.history').slideToggle('slow');
   });
-
 
 });
