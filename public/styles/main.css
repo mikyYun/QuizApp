@@ -15,7 +15,7 @@
 }
 
 .question_article_box {
-  font-family: "Permanent Marker", cursive;
+  font-family: 'Fredoka One', cursive;
   text-align: center;
 }
 
@@ -79,7 +79,7 @@ body {
 /* handling create page */
 .form-inline,
 .private_quiz {
-  font-family: "Permanent Marker", cursive;
+  font-family: 'Fredoka One', cursive;
 }
 
 /* handling main page */
@@ -131,7 +131,7 @@ td {
   width: 100%;
   justify-content: center;
   align-items: center;
-  font-family: "Permanent Marker", cursive;
+  font-family: 'Fredoka One', cursive;
 }
 
 .home {
@@ -294,7 +294,7 @@ animation: bounce 2s ease infinite 1s;
 
 .your_result {
   text-align: center;
-  color: darkred;
+  color: rgb(174 247 174);
   font-family: "Bungee", cursive;
 }
 
@@ -335,9 +335,10 @@ animation: bounce 2s ease infinite 1s;
 
 .result_main {
   margin: auto;
-  margin-top: 15vh;
+  margin-top: 8vh;
   width: 90vw;
   height: 30vh;
+  font-family: 'Fredoka One', cursive;
 }
 
 .result_title_greeting {
