@@ -29,7 +29,8 @@
       </div>
       <div class="result-anchor">
         <a class="fa-solid fa-square-poll-horizontal" id="nav-icons" href="/quizzes/result" ></a>
-        <a class="anchor result" href="/quizzes/result">My result</a>
+        <a class="anchor result" href="<%=`/quizzes/result/${user.user_id}` %>" >My result,id</a>
+
       </div>
 
       <form method="POST" action="/logout">
@@ -41,7 +42,7 @@
       <% } else { %>
         <div class="result-anchor">
           <a class="fa-solid fa-square-poll-horizontal" id="nav-icons" href="/quizzes/result" ></a>
-          <a class="anchor result" href="/quizzes/result">My result</a>
+          <a class="anchor result" href="<%=`/quizzes/result/${user.user_id}` %>">My result</a>
         </div>
       <form method="GET" action="/login">
         <label for="username" class="greeting">Hello, visitor! </label>

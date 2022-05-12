@@ -12,28 +12,9 @@ const { getUserByName, getAllPublicQuiz } = require("../database.js");
 const { Pool } = require('pg/lib');
 
 module.exports = (db) => {
-  // router.get("/ping", (req, res) => {
-  //   res.send("pong!");
-  // });
-  // router.get("/", (req, res) => {
-  //   // .redirect()
-  //   getAllPublicQuiz()
-  //     .then((quizzes) => { // quiz == res.rows
-  //       const templateVars = {
-  //         quizzes
-  //       };
-  //       res.render("users", templateVars);
-  //     })
-  //     .catch((e) => {
-  //       console.error(e);
-  //       res.send(e);
-  //     });
-  // });
-
   router.post("/login", (req, res) => {
     console.log("ROUTER/POST/LOGIN");
     // console.log(req.body)
-    // const { username, password } = req.body;
     const user = req.body.login_name;
     // console.log('postlogin', user);
     // console.log('req.body is ',req.body)
@@ -42,7 +23,6 @@ module.exports = (db) => {
         console.log('this is user', user);
         req.session['user_name'] = user.user_name;
         req.session['user_id'] = user.id;
-        // res.cookie('user_id', user.id);
         getAllPublicQuiz()
           .then((quizzes) => { // quiz == res.rows
             const templateVars = {
@@ -50,7 +30,8 @@ module.exports = (db) => {
               quizzes
             };
             // console.log('temp user is ', templateVars.user)
-            res.render('quizzes', templateVars)
+            // res.render('quizzes', templateVars)
+            res.redirect('/quizzes')
           });
       });
   })
