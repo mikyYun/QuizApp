@@ -163,13 +163,13 @@ const getLatestHistory = (user) => {
       return res.rows;
     });
 };
-// current userid, questionid, 
+// current userid, questionid,
 const hadAttempted = (quiz, user_answer) => { // a row of quiz
   return pool
     .query(`
     SELECT *
     FROM results
-    WHERE user_id = $1 
+    WHERE user_id = $1
     AND quiz_id = $2;`, // number of quiz & current user's history
     [quiz.user_id, quiz.id])
     .then((res) => {//first attempt -> empty [{obj}]

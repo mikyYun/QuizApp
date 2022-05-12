@@ -81,7 +81,6 @@ module.exports = (db) => {
 
 
   router.get("/result/:userID", (req, res) => {
-    console.log('ROUTER/GET/RESULT');
     let user_name = req.session.user_name;
     let user_id = req.session.user_id;
     if (user_id === undefined) {

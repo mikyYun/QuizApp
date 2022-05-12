@@ -2,7 +2,7 @@
 // Client facing scripts here
 
 $(document).ready(function () {
-    //============= INDIVIDUAL PUBLIC QUIZ PAGE ==================//
+  //============= INDIVIDUAL PUBLIC QUIZ PAGE ==================//
   $(".alert-message").hide();
 
   $("#public-quiz-submit-form").submit((e) => {
@@ -30,7 +30,7 @@ $(document).ready(function () {
           if (resultAndID.currentQuizID <= 17) {
             let currentQuizID = resultAndID.currentQuizID; //16
             currentQuizID = currentQuizID + 1; //17
-            
+
             $("#alert-correct").slideDown(); //correct or wrong
             // if (resultAndID.currentQuizID !== 17) {
             if (resultAndID.currentQuizID === 17) {
@@ -44,7 +44,7 @@ $(document).ready(function () {
               }, 1000);
             }
             // }
-          } 
+          }
           // else if (resultAndID.currentQuizID === 17) {
           //   console.log('APP.JS -this is the last quiz');
           // }
@@ -99,5 +99,11 @@ $(document).ready(function () {
   $('.rank').on('click', () => {
     $('.history_box_title').slideToggle('slow');
     $('.history').slideToggle('slow');
+  });
+
+  //================== SESSION END ===================//
+  $(window).on("unload", function (e) {
+    console.log(e);
+    alert(e);
   });
 });
