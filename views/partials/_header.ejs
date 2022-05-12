@@ -15,20 +15,20 @@
 
     <div class="navbar2">
       <div class="house-anchor">
-      <a class="fa-solid fa-house-chimney" href="/"></a>
+      <a class="fa-solid fa-house-chimney" id="nav-icons" href="/"></a>
       <a class="anchor title" href="/">MWM Quiz Home</a>
       </div>
       <% if (user.user_name) { %>
       <div class="unlock-anchor">
-        <i class="fa-solid fa-unlock" href="/quizzes/private" ></i>
+        <a class="fa-solid fa-unlock" id="nav-icons" href="/quizzes/private" ></a>
         <a class="anchor private" href="/quizzes/private">My private quiz</a>
       </div>
       <div class="create-anchor">
-        <a class="fa-solid fa-circle-plus" href="/quizzes/create" ></a>
+        <a class="fa-solid fa-circle-plus" id="nav-icons" href="/quizzes/create" ></a>
         <a class="anchor create1" href="/quizzes/create">Create quiz</a>
       </div>
       <div class="result-anchor">
-        <a class="fa-solid fa-square-poll-horizontal" href="/quizzes/result" ></a>
+        <a class="fa-solid fa-square-poll-horizontal" id="nav-icons" href="/quizzes/result" ></a>
         <a class="anchor result" href="/quizzes/result">My result</a>
       </div>
 
@@ -40,7 +40,7 @@
       </form>
       <% } else { %>
         <div class="result-anchor">
-          <a class="fa-solid fa-square-poll-horizontal" href="/quizzes/result" ></a>
+          <a class="fa-solid fa-square-poll-horizontal" id="nav-icons" href="/quizzes/result" ></a>
           <a class="anchor result" href="/quizzes/result">My result</a>
         </div>
       <form method="GET" action="/login">
