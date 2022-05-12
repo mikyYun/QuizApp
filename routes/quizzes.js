@@ -163,14 +163,20 @@ module.exports = (db) => {
         const oneQuiz = quiz[0];
         const oneQuestion = quiz[0].question;
         const oneAnswer = quiz[0].answer;
+        getAllPublicQuiz()
+          .then((allPublicQuiz) => {
 
-        const templateVars = {
-          user,
-          oneQuiz: oneQuiz,
-          oneQuestion: oneQuestion,
-          oneAnswer: oneAnswer,
-        };
-        res.render("quiz_show", templateVars);
+            const numberOfPublicQuiz = allPublicQuiz.length// number
+            console.log('nnnnnnnnnnnnnnnnnnnnnnn',numberOfPublicQuiz)
+            const templateVars = {
+              user,
+              oneQuiz: oneQuiz,
+              oneQuestion: oneQuestion,
+              oneAnswer: oneAnswer,
+              numberOfPublicQuiz: numberOfPublicQuiz 
+            };
+            res.render("quiz_show", templateVars);
+          })
       })
       .catch((error) => {
         console.log(error);
