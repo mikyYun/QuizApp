@@ -30,12 +30,6 @@ module.exports = (db) => {
         user_id = 1;
     }
     const user = { user_name, user_id };
-    /**
-     * if every user use the same name,
-     *
-     */
-
-
     getAllPublicQuiz()
       .then((quizzes) => { // quizzes == res.rows
         const templateVars = {
@@ -86,19 +80,18 @@ module.exports = (db) => {
   });
 
 
-  router.get("/result", (req, res) => {
+  router.get("/result/:userID", (req, res) => {
     console.log('ROUTER/GET/RESULT');
     let user_name = req.session.user_name;
     let user_id = req.session.user_id;
     if (user_id === undefined) {
       user_name = 'visitor',// randomStr()
-        user_id
+        user_id = 1
     }
     console.log('user_id', user_id);
     console.log('user_name', user_name);
 
     const user = { user_name, user_id };
-
 
     Promise.all([
       correctAnswer(user_id), wrongAnswer(user_id), totalAttempts(user_id), getLatestHistory(user_id), getAllPublicQuiz()
@@ -118,7 +111,7 @@ module.exports = (db) => {
         res.render("quiz_result", templateVars);
       });
   });
-
+  /////////////do we need this??
   router.get("/quizzes/:randomString", (req, res) => {
     const randomString = req.params.randomString;
     let user_name = req.session.user_name;
