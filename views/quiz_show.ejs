@@ -17,7 +17,8 @@
     <link rel="stylesheet" href="/styles/main.css" type="text/css" />
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
 
-    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
@@ -28,13 +29,17 @@
     <%- include('partials/_header') %>
 
     <article class="question_article_box">
-      <h2>Question Number <%= `${oneQuiz.id}` %></h2>
-    <form id="public-quiz-submit-form" data-id="<%= `${oneQuiz.id}` %>" method="POST" action="/quizzes/check">
-    <article class="quiestion_article_box">
-        <div class="quiestion_area">
+      <% if (oneQuiz.id === 17) {%>
+      <h3 class="last_question">
+        !!This Is Your Last Question!!
+      </h3>
+      <% } %>
+      <h2>Question</h2>
+    <form id="public-quiz-submit-form" data-id="<%= `${oneQuiz.id}` %>">
+    <article class="question_article_box">
+        <div class="question_area">
         <h2 class="question_detail"><%= `${oneQuestion}` %></h2>
-      </div>
-
+        </div>
         <div>
           <textarea
             class="form-control public-input-answer"

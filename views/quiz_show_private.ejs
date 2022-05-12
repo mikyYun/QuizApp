@@ -24,24 +24,24 @@
 
   <body>
     <%- include('partials/_header') %>
-    <article class="quiestion_article_box">
-      <h2>Question Number <%= `${oneQuiz.id}` %></h2>
-    <form id="public-quiz-submit-form" data-id="<%= `${oneQuiz.id}` %>" method="POST" action="/quizzes/check">
-    <article class="quiestion_article_box">
-        <div class="quiestion_area">
+    <article class="question_article_box">
+      <h2>Question</h2>
+    <form id="private-quiz-submit-form" data-id="<%= `${oneString}` %>">
+    <article class="question_article_box">
+        <div class="question_area">
         <h2 class="question_detail"><%= `${oneQuestion}` %></h2>
       </div>
 
         <div>
           <textarea
-            class="form-control public-input-answer"
+            class="form-control private-input-answer"
             type="text"
             name="answerInput"
             placeholder="Fill out your answer."
           ></textarea>
         </div>
 
-        <div class="public-quiz-alert">
+        <div class="private-quiz-alert">
           <label class="alert-message" id="alert-correct">Correct!</label>
           <label class="alert-message" id="alert-wrong">Wrong!</label>
        </div>

@@ -48,9 +48,10 @@ const getPublicQuizID = (quizID) => {
   SELECT *
   FROM quizzes
   WHERE is_public IS true AND quizzes.id = $1
-  `, [quizID]).then((res) =>
-    // console.log('database_getPublicQID', res.rows);
-    res.rows
+  `, [quizID]).then((res) => {
+    console.log('database_getPublicID', res.rows);
+    return res.rows;
+  }
   );
 };
 
@@ -60,14 +61,20 @@ const getAllPublicQuiz = () => {
   FROM quizzes
   WHERE is_public IS true;
   `).then((res) => res.rows); //res.rows === quizzes in users.js
+  // [{ quizid, question, answer.. } {} {}]
 };
 
-const getPrivateQuizID = (randomString) => {
-  return pool.query(`
+const getPrivateQuizID = (uuid) => {
+  console.log('UUID', uuid);
+  const sqlQuery = `
   SELECT *
   FROM quizzes
-  WHERE is_public IS false AND quizzes.random_string = $1
-  `, [randomString]).then((res) => res.rows);
+  WHERE is_public IS false
+  AND quizzes.random_string = $1;
+  `;
+  console.log("SQL", sqlQuery);
+
+  return pool.query(sqlQuery, [uuid]).then((res) => res.rows);
 };
 
 const getAllPrivateQuiz = (user_id) => {
@@ -79,15 +86,16 @@ const getAllPrivateQuiz = (user_id) => {
   `, [user_id]).then((res) => res.rows); //res.rows === obj in quiz_private.ejs
 };
 
-const addUserAnswer = (answer, user_answer, user_id) => {
-  console.log('answer is', answer);
+const addUserAnswer = (user_id, quiz, user_answer) => {
+  console.log('answer is "WHY IS THIS UNDEFINDED', user_answer);
   return pool
     .query(
       `INSERT INTO results(user_id, quiz_id, user_answer)
       VALUES($1, $2, $3)
       RETURNING *;
   `,
-      [user_id, answer.id, user_answer]
+      [user_id, quiz.id, user_answer]
+      //answer.id refers to quiz.id
     )
     .then((result) => {
       return result.rows[0];
