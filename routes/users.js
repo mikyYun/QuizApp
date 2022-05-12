@@ -12,24 +12,6 @@ const { getUserByName, getAllPublicQuiz } = require("../database.js");
 const { Pool } = require('pg/lib');
 
 module.exports = (db) => {
-  // router.get("/ping", (req, res) => {
-  //   res.send("pong!");
-  // });
-  // router.get("/", (req, res) => {
-  //   // .redirect()
-  //   getAllPublicQuiz()
-  //     .then((quizzes) => { // quiz == res.rows
-  //       const templateVars = {
-  //         quizzes
-  //       };
-  //       res.render("users", templateVars);
-  //     })
-  //     .catch((e) => {
-  //       console.error(e);
-  //       res.send(e);
-  //     });
-  // });
-
   router.post("/login", (req, res) => {
     console.log("ROUTER/POST/LOGIN");
     // console.log(req.body)
