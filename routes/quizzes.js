@@ -111,7 +111,7 @@ module.exports = (db) => {
       });
   });
   /////////////do we need this??
-  router.get("/quizzes/:randomString", (req, res) => {
+  router.get("/p/:randomString", (req, res) => {
     const randomString = req.params.randomString;
     let user_name = req.session.user_name;
     let user_id = req.session.user_id;
