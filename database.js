@@ -24,7 +24,6 @@ const getUserByName = (user_name) => {
 };
 
 const addPrivateQuiz = (quiz) => {
-  console.log('HELLO', quiz);
   return pool
     .query(
       `INSERT INTO quizzes(user_id, question, answer, is_public, random_string)
@@ -62,7 +61,6 @@ const getAllPublicQuiz = () => {
 };
 
 const getPrivateQuizID = (uuid) => {
-  console.log('UUID', uuid);
   const sqlQuery = `
   SELECT *
   FROM quizzes
