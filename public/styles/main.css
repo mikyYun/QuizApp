@@ -222,7 +222,7 @@ hr {
   border-radius: 50%;
   margin-top: 2rem;
   width: 10rem;
-  border: 0.2rem solid #da9f83;
+  border: 0.3rem solid rgb(174 247 174);
 }
 
 .question_submit_btn {
@@ -475,8 +475,14 @@ footer {
   color: white;
 }
 
+.attempt_icon {
+  background-color: blue;
+  color: white;
+}
+
 .correct_rate,
-.incorret_rate {
+.incorret_rate,
+.attempt_rate {
   margin-top: 3rem;
 }
 
