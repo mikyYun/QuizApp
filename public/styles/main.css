@@ -15,7 +15,7 @@
 }
 
 .question_article_box {
-  font-family: 'Fredoka One', cursive;
+  font-family: "Fredoka One", cursive;
   text-align: center;
 }
 
@@ -87,17 +87,16 @@ body {
   text-align: center;
   margin-top: 8px;
   font-size: 25px;
-  color: darkred
+  color: darkred;
 }
 
 #nav-icons {
-  color: darkred
+  color: darkred;
 }
 
 #nav-icons:hover {
   color: #7b90ab;
 }
-
 
 .fa-solid:hover {
   color: #7b90ab;
@@ -114,7 +113,7 @@ body {
 /* handling create page */
 .form-inline,
 .private_quiz {
-  font-family: 'Fredoka One', cursive;
+  font-family: "Fredoka One", cursive;
 }
 
 /* handling main page */
@@ -166,7 +165,7 @@ td {
   width: 100%;
   justify-content: center;
   align-items: center;
-  font-family: 'Fredoka One', cursive;
+  font-family: "Fredoka One", cursive;
 }
 
 .home {
@@ -185,6 +184,10 @@ hr {
   border: 1px solid rgb(174 247 174);
   border-top-width: 3px;
   margin-top: 25px;
+}
+
+.question_article_box {
+  font-family: "Bungee", cursive;
 }
 
 .question-quiz {
@@ -373,7 +376,7 @@ animation: bounce 2s ease infinite 1s;
   margin-top: 8vh;
   width: 90vw;
   height: 30vh;
-  font-family: 'Fredoka One', cursive;
+  font-family: "Fredoka One", cursive;
 }
 
 .result_title_greeting {
@@ -526,14 +529,20 @@ footer {
 }
 
 .last_question {
-  font-size:xx-large;
+  font-size: xx-large;
   animation: color-change 1s infinite;
 }
 
 @keyframes color-change {
-  0% { color: darkred; }
-  50% { color: rgb(174 247 174); }
-  100% { color: darkred; }
+  0% {
+    color: darkred;
+  }
+  50% {
+    color: rgb(174 247 174);
+  }
+  100% {
+    color: darkred;
+  }
 }
 
 .copyright {
@@ -543,5 +552,5 @@ footer {
   position: absolute;
   bottom: 0px;
   color: darkred;
-  font-family: 'Fredoka One', cursive
+  font-family: "Fredoka One", cursive;
 }
