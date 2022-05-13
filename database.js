@@ -157,7 +157,7 @@ const getLatestHistory = (user) => {
       ON quizzes.id = quiz_id
       WHERE results.user_id = $1
       ORDER BY results.id DESC
-      LIMIT 10;
+      LIMIT 1;
       `, [user]
     ).then((res) => {
       return res.rows;
@@ -171,7 +171,7 @@ const hadAttempted = (quiz, user_answer) => { // a row of quiz
     FROM results
     WHERE user_id = $1
     AND quiz_id = $2;`, // number of quiz & current user's history
-    [quiz.user_id, quiz.id])
+      [quiz.user_id, quiz.id])
     .then((res) => {//first attempt -> empty [{obj}]
       console.log('hascorrectA Table', user_answer)// should empty arr
       console.log('resresrse', res.rows)
@@ -180,16 +180,16 @@ const hadAttempted = (quiz, user_answer) => { // a row of quiz
       } else {
         console.log('historyyyyyyyyyyyyyyyy', user_answer) // should an objs in an arr
         return pool
-        .query(`
+          .query(`
         UPDATE results
         SET user_answer = $3
         WHERE user_id = $1
         AND quiz_id = $2;
         `, [quiz.user_id, quiz.id, user_answer])
-        .then((res) => {
-          console.log('res.rows', res.rows)
-          return true
-        })
+          .then((res) => {
+            console.log('res.rows', res.rows)
+            return true
+          })
       }
     })
     .catch((err) => {
