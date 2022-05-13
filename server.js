@@ -80,6 +80,7 @@ app.post("/logout", (req, res) => {
 
 // dinamic url must be last on the list
 // otherwise it will ignore all other url request below..
+//localhost/something
 app.get("/:quizURL", (req, res) => {
   // console.log("url");
   console.log("APP/GET/:quizURL");
