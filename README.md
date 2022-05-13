@@ -1,4 +1,16 @@
-LHL Node Skeleton
+# Lighthouse mid_project
+## QUIZ APP
+
+### Collaborators
+![collaborators](docs/collaborators.png)
+
+### Final Product
+
+
+
+
+
+
 =========
 
 ## Project Setup
