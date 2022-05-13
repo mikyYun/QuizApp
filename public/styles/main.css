@@ -475,8 +475,14 @@ footer {
   color: white;
 }
 
+.attempt_icon {
+  background-color: blue;
+  color: white;
+}
+
 .correct_rate,
-.incorret_rate {
+.incorret_rate,
+.attempt_rate {
   margin-top: 3rem;
 }
 
