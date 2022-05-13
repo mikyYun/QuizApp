@@ -60,6 +60,7 @@
 
 ## GETTING STARTED
 - Install all dependencies (using the 'npm install' command)
+- Run 'npm run db:reset' to create all default database
 - Run the development web server using the 'npm run local' command
 - Go to <http://localhost:8080/quizzes> in your browser
 
