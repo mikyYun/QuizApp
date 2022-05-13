@@ -1,6 +1,4 @@
 /* eslint-disable camelcase */
-// MOON IS WORKING ON THIS
-
 const res = require("express/lib/response");
 const { Pool } = require("pg");
 const pool = new Pool({
@@ -11,10 +9,10 @@ const pool = new Pool({
 });
 
 const getUserByName = (user_name) => {
-  return pool.query( //IT RETURNS A PROMISE
+  return pool.query(
     `SELECT id, user_name
-   FROM USERS
-   WHERE user_name = $1;`
+    FROM USERS
+    WHERE user_name = $1;`
     , [user_name])
     .then((result) => {
       return result.rows[0];
@@ -28,7 +26,6 @@ const getUserByName = (user_name) => {
 const addPrivateQuiz = (quiz) => {
   console.log('HELLO', quiz);
   return pool
-    // HOW DO I GRAB THE USER INPUT FROM THE SITE AND USE THAT IN THE SQL?
     .query(
       `INSERT INTO quizzes(user_id, question, answer, is_public, random_string)
       VALUES($1, $2, $3, $4, $5)
@@ -60,8 +57,8 @@ const getAllPublicQuiz = () => {
   SELECT quizzes.*
   FROM quizzes
   WHERE is_public IS true;
-  `).then((res) => res.rows); //res.rows === quizzes in users.js
-  // [{ quizid, question, answer.. } {} {}]
+  `).then((res) => res.rows); // res.rows === quizzes in users.js
+  // [{ quizid, question, answer.. }, {}, {}]
 };
 
 const getPrivateQuizID = (uuid) => {
@@ -72,8 +69,6 @@ const getPrivateQuizID = (uuid) => {
   WHERE is_public IS false
   AND quizzes.random_string = $1;
   `;
-  console.log("SQL", sqlQuery);
-
   return pool.query(sqlQuery, [uuid]).then((res) => res.rows);
 };
 
@@ -87,7 +82,6 @@ const getAllPrivateQuiz = (user_id) => {
 };
 
 const addUserAnswer = (user_id, quiz, user_answer) => {
-  console.log('answer is :', user_answer);
   return pool
     .query(
       `INSERT INTO results(user_id, quiz_id, user_answer)
@@ -95,7 +89,6 @@ const addUserAnswer = (user_id, quiz, user_answer) => {
       RETURNING *;
   `,
       [user_id, quiz.id, user_answer]
-      //answer.id refers to quiz.id
     )
     .then((result) => {
       return result.rows[0];
@@ -115,8 +108,7 @@ const correctAnswer = (user) => {
       AND results.user_answer = quizzes.answer;
       `, [user])
     .then((res) => {
-      // console.log('correct answer number: ', res.rows[0].result_users);
-      return res.rows[0].result_users; // number
+      return res.rows[0].result_users; // This returns a number
     }
     );
 };
@@ -130,7 +122,6 @@ const wrongAnswer = (user) => {
       AND results.user_answer != quizzes.answer;
       `, [user])
     .then((res) => {
-      // console.log('wrong answer number: ', res.rows[0].result_users);
       return res.rows[0].result_users; // number
     });
 };
@@ -144,7 +135,6 @@ const totalAttempts = (user) => {
       WHERE results.user_id = $1;
         `, [user])
     .then((res) => {
-      // console.log('total attmept number: ', res.rows[0].result_users);
       return res.rows[0].result_users; // number
     });
 };
@@ -163,46 +153,40 @@ const getLatestHistory = (user) => {
       return res.rows;
     });
 };
-// current userid, questionid,
 const hadAttempted = (quiz, user_answer) => { // a row of quiz
   return pool
-    .query(`
-    SELECT *
-    FROM results
-    WHERE user_id = $1
-    AND quiz_id = $2;`, // number of quiz & current user's history
+    .query(
+      `SELECT *
+      FROM results
+      WHERE user_id = $1
+      AND quiz_id = $2;`, // number of quiz & current user's history
       [quiz.user_id, quiz.id])
-    .then((res) => {//first attempt -> empty [{obj}]
-      console.log('hascorrectA Table', user_answer)// should empty arr
-      console.log('resresrse', res.rows)
+    .then((res) => { //first attempt -> empty [ {obj} ]
       if (res.rows.length === 0) {
-        return false
+        return false;
       } else {
-        console.log('historyyyyyyyyyyyyyyyy', user_answer) // should an objs in an arr
         return pool
-          .query(`
-        UPDATE results
-        SET user_answer = $3
-        WHERE user_id = $1
-        AND quiz_id = $2;
-        `, [quiz.user_id, quiz.id, user_answer])
+          .query(
+            `UPDATE results
+            SET user_answer = $3
+            WHERE user_id = $1
+            AND quiz_id = $2;
+            `, [quiz.user_id, quiz.id, user_answer])
           .then((res) => {
-            console.log('res.rows', res.rows)
-            return true
-          })
+            console.log('res.rows', res.rows);
+            return true;
+          });
       }
     })
     .catch((err) => {
       console.log(err.message);
     });
-}
-
+};
 
 const findSubmitedAnswer = (user) => {
   return pool
     .query('', [user]
-    ).then((res) => res.rows)
-}
+    ).then((res) => res.rows);
+};
 
-
-module.exports = { getPublicQuizID, getAllPublicQuiz, getPrivateQuizID, getAllPrivateQuiz, addPrivateQuiz, getUserByName, addUserAnswer, correctAnswer, totalAttempts, wrongAnswer, getLatestHistory, hadAttempted };
+module.exports = { getPublicQuizID, getAllPublicQuiz, getPrivateQuizID, getAllPrivateQuiz, addPrivateQuiz, getUserByName, addUserAnswer, correctAnswer, totalAttempts, wrongAnswer, getLatestHistory, hadAttempted, findSubmitedAnswer };
