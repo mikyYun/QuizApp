@@ -183,10 +183,4 @@ const hadAttempted = (quiz, user_answer) => { // a row of quiz
     });
 };
 
-const findSubmitedAnswer = (user) => {
-  return pool
-    .query('', [user]
-    ).then((res) => res.rows);
-};
-
-module.exports = { getPublicQuizID, getAllPublicQuiz, getPrivateQuizID, getAllPrivateQuiz, addPrivateQuiz, getUserByName, addUserAnswer, correctAnswer, totalAttempts, wrongAnswer, getLatestHistory, hadAttempted, findSubmitedAnswer };
+module.exports = { getPublicQuizID, getAllPublicQuiz, getPrivateQuizID, getAllPrivateQuiz, addPrivateQuiz, getUserByName, addUserAnswer, correctAnswer, totalAttempts, wrongAnswer, getLatestHistory, hadAttempted };
