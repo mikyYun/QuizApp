@@ -21,25 +21,20 @@
 
 <body>
   <%- include('partials/_header') %>
-    <div>
-      <h1 class="your_result">Your Result</h1>
-    </div>
+    <h1 class="your_result">Your Result</h1>
     <main class="result_main">
       <div class="result_title">
         <% if (user.user_name) {%>
           <p class="result_title_greeting">Hello <%= user.user_name%>
           </p>
-          <% } else { %>
-            <p class="result_title_greeting">Hello visitor </p>
-            <% }%>
+        <% } else { %>
+          <p class="result_title_greeting">Hello visitor </p>
+        <% }%>
       </div>
-      <div class="result_box">
+      <div>
         <p class="result result_correct">
           Here is your progress, keep it up! :D
         </p>
-        <!-- <p class="result result_incorrect">
-          You have answered wrong. Try again!
-        </p> -->
       </div>
 
       <div class="user_answer_rate_box">
@@ -49,7 +44,6 @@
           </div>
           <div class="rate_box">
 
-            <!-- optional.. if rate is .... -->
             <% if (nums[0]/nums[2] < 0.4) { %>
             <p class="fairy rank"> </p>
             <% } else if (nums[0]/nums[2] > 0.8) { %>
@@ -57,15 +51,15 @@
             <% } else {%>
               <p class="phoneixwing rank"></p>
             <% } %>
-            <div class="attempt_rate_box">
-            <p class="attempt_rate">
-            <p class="accuracy_icon attempt_icon">
-              <%= nums[4] %>
-            </p>
-            Attempts
-            </p>
+            <div>
+              <p class="attempt_rate">
+              <p class="accuracy_icon attempt_icon">
+                <%= nums[4] %>
+              </p>
+              Attempts
+              </p>
             </div>
-            <div class="correct_rate_box">
+            <div>
               <p class="correct_rate">
               <p class="accuracy_icon correct_icon">
                 <%= nums[0] %> / <%= nums[4] %>
@@ -73,7 +67,7 @@
               Correct
               </p>
             </div>
-            <div class="incorrect_rate_box">
+            <div>
               <p class="incorret_rate">
               <p class="accuracy_icon incorrect_icon">
                 <%= nums[1] %> / <%= nums[4] %>
@@ -117,5 +111,4 @@
         <span>&#169; 2022 MWM Quiz. All Rights Reserved | Made by Moon, Will, Mike at LHL</span>
       </footer>
     </div>
-
 </html>

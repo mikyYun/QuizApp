@@ -31,7 +31,7 @@ module.exports = (db) => {
     }
     const user = { user_name, user_id };
     getAllPublicQuiz()
-      .then((quizzes) => { // quizzes == res.rows
+      .then((quizzes) => {
         const templateVars = {
           user,
           quizzes
@@ -49,7 +49,7 @@ module.exports = (db) => {
     const user_id = req.session.user_id;
     const user = { user_name, user_id };
     getAllPrivateQuiz(user_id)
-      .then((obj) => { // quizzes == res.rows [{quiz}, {quiz}, {quiz}, {} ] arr[0]
+      .then((obj) => {
         const templateVars = {
           user,
           obj
@@ -57,10 +57,9 @@ module.exports = (db) => {
         res.render("quiz_private", templateVars);
       })
       .catch((e) => {
-        console.error(e);
+        console.error('err', e);
         res.send(e);
       });
-    // });
   });
 
   router.get("/create", (req, res) => {
@@ -72,11 +71,6 @@ module.exports = (db) => {
       user
     };
     res.render("quiz_create", templateVars);
-    // })
-    // .catch((e) => {
-    //   console.error(e);
-    //   res.send(e);
-    // });
   });
 
 
@@ -84,23 +78,16 @@ module.exports = (db) => {
     let user_name = req.session.user_name;
     let user_id = req.session.user_id;
     if (user_id === undefined) {
-      user_name = 'visitor',// randomStr()
-        user_id = 1
+      user_name = 'visitor',
+        user_id = 1;
     }
-    console.log('user_id', user_id);
-    console.log('user_name', user_name);
 
     const user = { user_name, user_id };
 
     Promise.all([
       correctAnswer(user_id), wrongAnswer(user_id), totalAttempts(user_id), getLatestHistory(user_id), getAllPublicQuiz()
     ])
-      .then((nums) => { // this is an array
-        // nums[0] = correct
-        // nums[1] = wrong
-        // nums[2] = total attempts
-        // nums[3] = answer rate - badge.
-        // nums[4] = all public quiz...
+      .then((nums) => {
         const numberOfPublicQuiz = nums[4].length;
         nums[4] = numberOfPublicQuiz;
         const templateVars = {
@@ -110,7 +97,7 @@ module.exports = (db) => {
         res.render("quiz_result", templateVars);
       });
   });
-  /////////////do we need this??
+
   router.get("/p/:randomString", (req, res) => {
     const randomString = req.params.randomString;
     let user_name = req.session.user_name;
@@ -119,9 +106,10 @@ module.exports = (db) => {
       user_name = 'visitor',
         user_id = 1;
     }
+
     const user = { user_name, user_id };
 
-    getPrivateQuizID(randomString) // a1b2c3
+    getPrivateQuizID(randomString)
       .then((quiz) => {
         const oneQuiz = quiz[0];
         const oneQuestion = quiz[0].question;
@@ -142,10 +130,6 @@ module.exports = (db) => {
       });
   });
 
-  // get/quizzes/:quizID <- this is our RESTful route
-  //  post/quizzes/:quizID/results
-  // handling individual quiz page
-  // localhost/quizzes/something
   router.get("/:quizID", (req, res) => {
     const quizID = req.params.quizID;
     let user_name = req.session.user_name;
@@ -155,18 +139,14 @@ module.exports = (db) => {
         user_id = 1;
     }
     const user = { user_name, user_id };
-    console.log("req.params", req.params);
-    console.log("is_quizID", quizID);
     getPublicQuizID(quizID)
       .then((quiz) => {
         const oneQuiz = quiz[0];
         const oneQuestion = quiz[0].question;
         const oneAnswer = quiz[0].answer;
         getAllPublicQuiz()
-          .then((allPublicQuiz) => { //allPublicQuiz = [  {} {} {} ]
-
-            const numberOfPublicQuiz = allPublicQuiz.length// number
-            console.log('nnnnnnnnnnnnnnnnnnnnnnn', numberOfPublicQuiz)
+          .then((allPublicQuiz) => {
+            const numberOfPublicQuiz = allPublicQuiz.length;
             const templateVars = {
               user,
               oneQuiz: oneQuiz,
@@ -175,27 +155,24 @@ module.exports = (db) => {
               numberOfPublicQuiz: numberOfPublicQuiz
             };
             res.render("quiz_show", templateVars);
-          })
+          });
       })
       .catch((error) => {
         console.log(error);
       });
-    // };
   });
-
 
   // ================== POST ==================== //
 
-  router.post("/create", (req, res) => { //LOGED IN USER ONLY.
+  router.post("/create", (req, res) => {
     console.log(req.body, req.session.user_id);
     const question = req.body.questionInput;
     const answer = req.body.answerInput;
     const user_id = req.session.user_id;
-    // console.log('body is', question, answer)
-    const random_string = generateRandomString(); //returns string 'x1y2z3'
-    addPrivateQuiz({ question, answer, user_id, random_string }) // finish inserting
+    const random_string = generateRandomString();
+    addPrivateQuiz({ question, answer, user_id, random_string })
       .then(() => {
-        res.redirect('/quizzes/private'); // list of private quizzes
+        res.redirect('/quizzes/private');
       })
       .catch((e) => {
         console.error(e);
@@ -205,25 +182,16 @@ module.exports = (db) => {
 
   router.post("/check", (req, res) => {
     const { quizID, private } = req.body;
-    // console.log("REQ.BODY", req.body);
-    const userAnswer = req.body.userAnswer; //it's a string.
-    // console.log('QUIZ ID is: ', quizID);// ok
-    // const quizID = req.params.quizID;
-    // console.log("TEST", quizID); // ok
+    const userAnswer = req.body.userAnswer;
     let user_name = req.session.user_name;
     console.log('user_name is', user_name);
     let user_id = req.session.user_id;
-    console.log('user_id is', user_id);
     if (user_id === undefined) {
       user_name = 'visitor',
         user_id = 1;
     }
-    console.log('user_name is', user_name);
-    console.log('user_id is', user_id);
 
     const user = { user_name, user_id };
-
-    // answer check first
 
     if (private === 'true') {
       getPrivateQuizID(quizID)
@@ -231,54 +199,49 @@ module.exports = (db) => {
           const oneAnswer = quiz[0].answer;
           const currentQuizID = quiz[0].id;// 16
           const trueOrFalseResult = oneAnswer.toLowerCase() === userAnswer.toLowerCase(); // true
-          const trueOrFalse = { trueOrFalseResult, currentQuizID }
+          const trueOrFalse = { trueOrFalseResult, currentQuizID };
           hadAttempted(quiz[0], userAnswer) // check the user's history(first attempt) in our results table
             .then((hasHistory) => {
               if (hasHistory) {
-                console.log(currentQuizID);
                 return res.send(trueOrFalse);
               } else if (hasHistory !== true) {
                 addUserAnswer(user_id, quiz[0], userAnswer)
                   .then(() => res.send(trueOrFalse))
                   .catch((err) => {
-                    console.log('private_addUserAnswer catch', err)
-                  })
+                    console.log('private_addUserAnswer catch', err);
+                  });
               }
             })
             .then((err) => {
-              console.log('private_hadAttempted catch', err)
-            })
-        })
+              console.log('private_hadAttempted catch', err);
+            });
+        });
     } else {
-      console.log('ddddddddddddd', quizID)
       getPublicQuizID(quizID)
         .then((quiz) => {
-          // const nextUUID = quiz[0].randomString;
           const oneAnswer = quiz[0].answer;
-          const currentQuizID = quiz[0].id;// 16
-          const trueOrFalseResult = oneAnswer.toLowerCase() === userAnswer.toLowerCase(); // true
-          const trueOrFalse = { trueOrFalseResult, currentQuizID }
-          console.log('quiquiquiz', quiz)
+          const currentQuizID = quiz[0].id;
+          const trueOrFalseResult = oneAnswer.toLowerCase() === userAnswer.toLowerCase();
+          const trueOrFalse = { trueOrFalseResult, currentQuizID };
           hadAttempted(quiz[0], userAnswer)
             .then((hasHistory) => {
               if (hasHistory) {
-                console.log(currentQuizID)
-                return res.send(trueOrFalse)
+                console.log(currentQuizID);
+                return res.send(trueOrFalse);
               } else if (hasHistory !== true) {
-                console.log("WHEREWHERE")
+                console.log("WHEREWHERE");
                 addUserAnswer(user_id, quiz[0], userAnswer)
                   .then(() => res.send(trueOrFalse))
                   .catch((err) => {
-                    console.log('public_addUserAnswer catch', err)
-                  })
+                    console.log('public_addUserAnswer catch', err);
+                  });
               }
             })
             .catch((err) => {
-              console.log('public_hadAttempted catch', err)
-            })
-        })
-
+              console.log('public_hadAttempted catch', err);
+            });
+        });
     }
   });
   return router;
-}
+};
