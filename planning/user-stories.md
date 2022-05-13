@@ -28,8 +28,7 @@
 
 - As a user, I shouldn't be able to see a link of private quiz, because it is not listed.
 
-- As a non-user, I shouldn't be able to create a quiz. (?)
-- As a non-user, I shouldn't be able to see a list of public quizzes.
+- As a non-user, I shouldn't be able to create a quiz.
 - As a non-user, I shouldn't be able to see the results of others' attempts.
 - As a non-user, I shoudln't be able to share a link to the result of others' attempts.
 
