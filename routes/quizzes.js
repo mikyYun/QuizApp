@@ -145,6 +145,7 @@ module.exports = (db) => {
   // get/quizzes/:quizID <- this is our RESTful route
   //  post/quizzes/:quizID/results
   // handling individual quiz page
+  // localhost/quizzes/something
   router.get("/:quizID", (req, res) => {
     const quizID = req.params.quizID;
     let user_name = req.session.user_name;
