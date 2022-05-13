@@ -1,4 +1,5 @@
 /* eslint-disable camelcase */
+
 // load .env data into process.env
 require("dotenv").config();
 
@@ -9,6 +10,7 @@ const express = require("express");
 const app = express(); //HAS NOTHING TO DO WITH app.js
 const morgan = require("morgan");
 const cookieSession = require('cookie-session');
+
 // PG database client/connection setup
 const { Pool } = require("pg");
 const dbParams = require("./lib/db.js");
@@ -38,31 +40,28 @@ const createUserRouter = require("./routes/users");
 const { port } = require("pg/lib/defaults");
 const quizzesRoutes = require("./routes/quizzes"); // IMPORTING ROUTES
 const userRouter = createUserRouter(db);
+
 // Mount all resource routes
+
 // Note: Feel free to replace the example routes below with your own
-// app.use("/api/hello", userRouter); //prefix for userRouter
 
 app.use("/quizzes", quizzesRoutes(db));
-// app.use("/private", quizzesRoutes(db));
 
 // Note: mount other resources here, using the same pattern above
 app.use("/users", userRouter);
 
 
 // Home page
+
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 
-// THIS WORKS
 app.get("/", (req, res) => {
-  console.log("APP/GET/")
   res.redirect("/quizzes");
 });
 
-// GET /login
 app.get('/login', (req, res) => {
 
-  console.log("APP/GET/LOGIN");
   const templateVars = {
     user: ''
   };
@@ -70,7 +69,6 @@ app.get('/login', (req, res) => {
 });
 
 app.post("/logout", (req, res) => {
-  console.log("APP/POST/LOGOUT");
   console.log(req.session);
   req.session = null;
   console.log(req.session);
@@ -80,16 +78,14 @@ app.post("/logout", (req, res) => {
 
 // dinamic url must be last on the list
 // otherwise it will ignore all other url request below..
-//localhost/something
+// localhost/something
+
 app.get("/:quizURL", (req, res) => {
-  // console.log("url");
-  console.log("APP/GET/:quizURL");
   const user_name = req.session.user_name;
   const user_id = req.session.user_id;
   const user = { user_name, user_id };
   const quizURL = req.params.quizURL;
   const templateVars = {
-    //need to be below if statement.
     quizURL: quizURL,
     user
   };
@@ -99,16 +95,11 @@ app.get("/:quizURL", (req, res) => {
 
 app.get("/login/:user_id", (req, res) => {
   console.log("APP/GET/:USER_ID");
-
-  // // set encrypted cookie
-  // req.session.user_id = req.pararms.user_id; // if we use cookies.
-  // set plain - text cookie
   res.cookie('user_id', req.params.user_id);
   res.redirect("/");
 });
 
 app.get("/api/test", (req, res) => {
-  console.log("APP/GET/API/TEST")
 
   res.json({ text: "hello from server" });
 });
@@ -117,9 +108,3 @@ app.get("/api/test", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
-
-//submit
-
-// app.post() <- will check if the answer is correct or not.
-// store users answers.
-// only if you want to refer to the users' answer.

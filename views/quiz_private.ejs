@@ -1,4 +1,3 @@
-<!-- moon -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -22,6 +21,7 @@
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
   </head>
+
   <body>
     <%- include('partials/_header') %>
     <div>
@@ -36,14 +36,13 @@
       <tr>
         <td><%=obj[i].question%></td>
         <td>
-          <a href="<%=`/quizzes/p/${obj[i].random_string}`%>"
-            >Go to quiz!</a
-          >
+          <a href="<%=`/quizzes/p/${obj[i].random_string}`%>">Go to quiz!</a>
         </td>
       </tr>
       <% }%>
     </table>
   </body>
+
   <div class="copyright">
     <footer>
       <span

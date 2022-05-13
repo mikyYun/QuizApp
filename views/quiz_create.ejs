@@ -1,9 +1,7 @@
-<!-- moon   -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <title>Create Quiz | MWM</title>
-
     <meta charset="utf-8" />
     <meta
       name="viewport"
@@ -15,8 +13,10 @@
     <link rel="stylesheet" href="/styles/main.css" type="text/css" />
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
 
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
-
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap"
+      rel="stylesheet"
+    />
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
@@ -26,7 +26,6 @@
     <%- include('partials/_header') %>
 
     <h1 class="create">Create a new quiz!</h1>
-
     <form
       id="create-quiz-form"
       class="form-inline"
@@ -34,15 +33,15 @@
       method="POST"
     >
       <div class="form-group mb-2">
-          <div class="question" for="question-label">Question
-          </div>
-          <textarea
+        <div class="question" for="question-label">Question</div>
+        <textarea
           class="form-control-1 question-input"
           type="text"
           name="questionInput"
           placeholder="Enter your question."
-          ></textarea>
-        <br>
+        ></textarea>
+        <br />
+
         <div class="answer" for="answer-label">Answer</div>
         <textarea
           class="form-control-2 answer-input"
@@ -50,6 +49,7 @@
           name="answerInput"
           placeholder="Enter your answer (all lower cases)."
         ></textarea>
+
         <div class="btn">
           <button type="submit" class="create_btn">Submit</button>
         </div>
@@ -57,9 +57,13 @@
       </div>
     </form>
   </body>
+
   <div class="copyright">
     <footer>
-      <span>&#169; 2022 MWM Quiz. All Rights Reserved | Made by Moon, Will, Mike at LHL</span>
+      <span
+        >&#169; 2022 MWM Quiz. All Rights Reserved | Made by Moon, Will, Mike at
+        LHL</span
+      >
     </footer>
   </div>
 </html>
